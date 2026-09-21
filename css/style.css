@@ -19,13 +19,13 @@ footer {
   padding: 20px;
 }
 
-/* Шапка и подвал — светло-серый фон. */
+/* Шапка и подвал — светло-розовый фон. */
 header {
-  background-color: #f2f2f2;
+  background-color: #f6dada;
 }
 
 footer {
-  background-color: #f2f2f2;
+  background-color: #ebd4d4;
 }
 
 /* Ограничиваем ширину содержимого шапки. */
@@ -53,7 +53,7 @@ footer {
 }
 
 .site-nav__list a {
-  color: #0057b8;
+  color: #af1957;
   text-decoration: none;
 }
 
@@ -66,7 +66,7 @@ footer {
   max-width: 1100px;
   margin: 0 auto 32px;
   padding: 32px 20px;
-  background-color: #eef5ff;
+  background-color: #f0cfda;
   border-radius: 12px;
 }
 
@@ -84,9 +84,9 @@ footer {
 .product-card {
   margin-bottom: 16px;
   padding: 16px;
-  border: 1px solid #dddddd;
+  border: 1px solid #d98181;
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: #eea5a5;
 }
 
 .product-card h3 {
@@ -98,13 +98,21 @@ footer {
   display: inline-block;
   padding: 10px 16px;
   color: #ffffff;
-  background-color: #0057b8;
+  background-color: #e83f99;
   text-decoration: none;
+  border: none;
   border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
 }
 
 .button:hover {
-  background-color: #003f86;
+  background-color: #f7108f;
+}
+
+/* Кнопка «Заказать» в карточке — небольшой отступ сверху. */
+.product-card__button {
+  margin-top: 8px;
 }
 
 /* Дополнительный информационный блок. */
@@ -112,6 +120,85 @@ footer {
   max-width: 1100px;
   margin: 0 auto 32px;
   padding: 16px;
-  border-left: 4px solid #0057b8;
+  border-left: 4px solid #cc85a4;
   background-color: #f7f7f7;
+}
+
+/* ---------- Модальное окно с формой ---------- */
+
+.order-dialog {
+  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+}
+
+.order-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.order-dialog h2 {
+  margin-top: 0;
+}
+
+/* Поля формы */
+#order-form p {
+  margin: 0 0 12px;
+}
+
+#order-form label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+#order-form input,
+#order-form select,
+#order-form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font: inherit;
+}
+
+#order-form input[type="checkbox"] {
+  width: auto;
+  margin-right: 6px;
+}
+
+/* Кнопки формы */
+#order-form button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+}
+
+#order-form button[type="submit"] {
+  background-color: #e83f99;
+  color: #ffffff;
+}
+
+#order-form button[type="submit"]:hover {
+  background-color: #f7108f;
+}
+
+#order-form button[type="button"] {
+  background-color: #f0cfda;
+  color: #222222;
+}
+
+#order-form button[type="button"]:hover {
+  background-color: #e6b8c8;
+}
+
+/* Сообщение об успешной отправке */
+.success-message {
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 12px;
+  background-color: #eefaf0;
+  border-left: 4px solid #168a2f;
 }
