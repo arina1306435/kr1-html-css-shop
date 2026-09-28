@@ -2,15 +2,16 @@
    1. Переменные проекта
    =================================== */
 :root {
-  /* Основные цвета проекта */
+  /* Основные цвета проекта — розово-малиновая палитра из ПЗ №3 */
   --color-bg: #ffffff;
   --color-text: #222222;
   --color-muted: #666666;
-  --color-primary: #0057b8;
-  --color-primary-dark: #003f86;
-  --color-border: #dddddd;
-  --color-surface: #f7f7f7;
-  --color-surface-accent: #eef5ff;
+  --color-primary: #af1957;
+  --color-primary-dark: #8a1445;
+  --color-border: #d98181;
+  --color-surface: #f6dada;
+  --color-surface-accent: #f0cfda;
+  --color-card-bg: #eea5a5;
   --color-danger: #b00020;
   --color-success: #168a2f;
   --color-success-bg: #eefaf0;
@@ -159,7 +160,7 @@ a:focus-visible {
   padding: var(--space-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  background-color: var(--color-bg);
+  background-color: var(--color-card-bg);  
 }
 
 .product-card:hover {
