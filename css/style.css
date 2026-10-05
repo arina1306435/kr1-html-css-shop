@@ -100,7 +100,7 @@ a:focus-visible {
 }
 
 /* ===================================
-   4. Шапка — Flexbox + sticky
+   4. Шапка и меню — Flexbox
    =================================== */
 .site-header {
   background-color: var(--color-surface);
@@ -128,24 +128,31 @@ a:focus-visible {
   text-decoration: none;
 }
 
+/* Меню — Flexbox */
 .site-nav__list {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: var(--space-md);
   padding: 0;
   margin: 0;
   list-style: none;
-  flex-wrap: wrap;
 }
 .site-nav__item {
   list-style: none;
 }
 .site-nav__link {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
   color: var(--color-primary);
-  padding: var(--space-xs) var(--space-sm);
+  text-decoration: none;
   border-radius: var(--radius-sm);
 }
 .site-nav__link:hover {
-  color: var(--color-primary-dark);
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  text-decoration: none;
 }
 .site-nav__link--active {
   font-weight: bold;
@@ -180,43 +187,45 @@ a:focus-visible {
 }
 
 /* ===================================
-   6. Карточки — Grid + позиционирование
+   6. Сетка карточек — Grid
    =================================== */
-.product-grid {
+.products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: var(--space-md);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
 }
 
+/* Карточка — Flexbox */
 .product-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
   padding: var(--space-md);
-  padding-top: var(--space-lg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   background-color: var(--color-card-bg);
-  display: flex;
-  flex-direction: column;
 }
 .product-card:hover {
   border-color: var(--color-primary);
 }
 .product-card__title { margin-top: 0; }
 .product-card__description {
-  margin-bottom: var(--space-sm);
+  margin-bottom: 0;
   flex-grow: 1;
 }
 .product-card__price {
   font-weight: bold;
-  margin-bottom: var(--space-sm);
 }
 .product-card__button {
+  margin-top: auto;
   align-self: flex-start;
 }
 .product-card--discount {
   border-width: 2px;
 }
 
+/* Бейджи — absolute */
 .product-card__badge {
   position: absolute;
   top: var(--space-sm);
@@ -228,18 +237,66 @@ a:focus-visible {
   background-color: var(--color-primary);
   color: var(--color-white);
 }
-.product-card__badge--new {
-  background-color: var(--color-success);
+.product-card__badge--new { background-color: var(--color-success); }
+.product-card__badge--discount { background-color: var(--color-danger); }
+.product-card__badge--hit { background-color: var(--color-primary); }
+
+/* ===================================
+   7. Страница каталога — Grid «фильтры + товары»
+   =================================== */
+.catalog-layout {
+  max-width: var(--container-width);
+  margin: 0 auto var(--space-xl);
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-areas: "filters products";
+  gap: var(--space-lg);
 }
-.product-card__badge--discount {
-  background-color: var(--color-danger);
+
+.catalog-filters {
+  grid-area: filters;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
 }
-.product-card__badge--hit {
-  background-color: var(--color-primary);
+
+.catalog-filters__title {
+  margin-top: 0;
+}
+
+.catalog-products {
+  grid-area: products;
+}
+
+/* Форма фильтров */
+.filters-form {
+  display: grid;
+  gap: var(--space-md);
+}
+.filters-form__group {
+  margin: 0;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+.filters-form__legend {
+  font-weight: 700;
+}
+.filters-form__label {
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+.filters-form__input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font: inherit;
 }
 
 /* ===================================
-   7. Aside и подвал
+   8. Aside и подвал
    =================================== */
 .aside-info {
   max-width: var(--container-width);
@@ -261,7 +318,7 @@ a:focus-visible {
 }
 
 /* ===================================
-   8. Модальное окно и форма
+   9. Модальное окно и форма
    =================================== */
 .order-dialog {
   width: min(100% - 32px, 560px);
@@ -328,7 +385,7 @@ a:focus-visible {
 }
 
 /* ===================================
-   9. Хлебные крошки и якоря
+   10. Хлебные крошки и якоря
    =================================== */
 .breadcrumbs {
   max-width: var(--container-width);
