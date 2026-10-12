@@ -395,11 +395,11 @@ a:focus-visible {
   color: var(--color-muted);
 }
 
-.breadcrumbs a {
-  color: var(--color-primary);
+.breadcrumbs__link {
+  color: var(--color-primary); 
 }
 
-.breadcrumbs span::before {
+.breadcrumbs__current::before {
   content: " / ";
   color: var(--color-muted);
 }
