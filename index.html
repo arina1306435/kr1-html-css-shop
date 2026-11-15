@@ -3,159 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ShopProject — учебный интернет-магазин: каталог товаров, оформление заявки, контакты.">
-  <title>Главная — ShopProject</title>
+  <meta name="description" content="Зеленый дом — магазин премиальных комнатных растений.">
+  <title>Зеленый дом — Главная</title>
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/main.js" defer></script>
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
   <header class="site-header">
-    <div class="site-header__inner">
-      <a class="site-header__logo" href="index.html">ShopProject</a>
-      <nav class="site-nav" aria-label="Основная навигация">
+    <div class="container site-header__inner">
+      <a href="index.html" class="site-logo">ЗЕЛЕНЫЙ ДОМ</a>
+      <nav class="site-nav">
         <ul class="site-nav__list">
-          <li class="site-nav__item"><a class="site-nav__link site-nav__link--active" href="index.html">Главная</a></li>
-          <li class="site-nav__item"><a class="site-nav__link" href="catalog.html">Каталог</a></li>
-          <li class="site-nav__item"><a class="site-nav__link" href="contacts.html">Контакты</a></li>
-          <li class="site-nav__item"><a class="site-nav__link" href="index.html#advantages">Преимущества</a></li>
-          <li class="site-nav__item"><a class="site-nav__link" href="index.html#popular">Популярные товары</a></li>
-          <li class="site-nav__item"><a class="site-nav__link" href="index.html#contacts">Обратная связь</a></li>
+          <li><a href="index.html" class="site-nav__link active">Главная</a></li>
+          <li><a href="catalog.html" class="site-nav__link">Каталог</a></li>
+          <li><a href="product.html" class="site-nav__link">Товар</a></li>
+          <li><a href="order.html" class="site-nav__link">Заявка</a></li>
+          <li><a href="contacts.html" class="site-nav__link">Контакты</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
-
-    <section class="hero">
-      <h1 class="hero__title">Учебный интернет-магазин</h1>
-      <p class="hero__text">
-        Это стартовая страница учебного frontend-проекта.
-        В дальнейшем на её основе будет разработан многостраничный сайт.
-      </p>
-      <a class="button" href="#popular">Перейти к товарам</a>
+    <section class="hero container">
+      <div class="hero__content">
+        <h1 class="hero__title">Озелени свой дом с любовью</h1>
+        <p class="hero__text">Редкие и популярные комнатные растения с бережной доставкой до двери.</p>
+        <a href="catalog.html" class="btn">Перейти в каталог</a>
+      </div>
+      <div class="hero__image">
+        <img src="images/plant-1.webp" alt="Растение" class="img-fluid">
+      </div>
     </section>
 
-    <section class="section" id="advantages">
-      <h2 class="section__title">Преимущества проекта</h2>
-      <ul class="advantages-list">
-        <li class="advantages-list__item">понятная HTML-структура;</li>
-        <li class="advantages-list__item">семантические блоки страницы;</li>
-        <li class="advantages-list__item">подключение внешнего CSS-файла;</li>
-        <li class="advantages-list__item">подготовка к многостраничному сайту.</li>
-      </ul>
-    </section>
-
-    <section class="section" id="popular">
-      <h2 class="section__title">Популярные товары</h2>
-
+    <section class="section container">
+      <h2 class="section__title">Популярные растения</h2>
       <div class="products-grid">
-
+        
         <article class="product-card">
-          <img class="product-card__image" src="images/product-1.jpg" alt="Товар 1">
-          <h3 class="product-card__title">Товар 1</h3>
-          <p class="product-card__description">Краткое описание учебного товара.</p>
-          <p class="product-card__price">1000 руб.</p>
-          <button class="button product-card__button" type="button" data-product="Товар 1">
-            Заказать
-          </button>
-        </article>
-
-        <article class="product-card product-card--discount">
-          <img class="product-card__image" src="images/product-2.jpg" alt="Товар 2">
-          <h3 class="product-card__title">Товар 2</h3>
-          <p class="product-card__description">Краткое описание учебного товара.</p>
-          <p class="product-card__price">1500 руб.</p>
-          <button class="button product-card__button" type="button" data-product="Товар 2">
-            Заказать
-          </button>
+          <img src="images/монстера1.webp" alt="Монстера" class="product-card__img">
+          <div class="product-card__body">
+            <h3 class="product-card__title">Монстера</h3>
+            <p class="product-card__desc">Крупное тропическое растение.</p>
+            <p class="product-card__price">1 500 руб.</p>
+            <a href="product.html" class="btn btn--outline">Подробнее</a>
+          </div>
         </article>
 
         <article class="product-card">
-          <img class="product-card__image" src="images/product-3.jpg" alt="Товар 3">
-          <span class="product-card__badge product-card__badge--hit">Хит</span>
-          <h3 class="product-card__title">Товар 3</h3>
-          <p class="product-card__description">Краткое описание учебного товара.</p>
-          <p class="product-card__price">2000 руб.</p>
-          <button class="button product-card__button" type="button" data-product="Товар 3">
-            Заказать
-          </button>
+          <img src="images/plant-2.webp" alt="Фикус" class="product-card__img">
+          <div class="product-card__body">
+            <h3 class="product-card__title">Фикус</h3>
+            <p class="product-card__desc">Неприхотливое дерево для дома.</p>
+            <p class="product-card__price">1 200 руб.</p>
+            <a href="product.html" class="btn btn--outline">Подробнее</a>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="images/plant-3.webp" alt="Суккулент" class="product-card__img">
+          <div class="product-card__body">
+            <h3 class="product-card__title">Суккулент</h3>
+            <p class="product-card__desc">Не требует частого полива.</p>
+            <p class="product-card__price">400 руб.</p>
+            <a href="product.html" class="btn btn--outline">Подробнее</a>
+          </div>
         </article>
 
       </div>
     </section>
-
-    <aside class="aside-info">
-      <h2 class="aside-info__title">Информация для студентов</h2>
-      <p class="aside-info__text">
-        Проект развивается: на следующих занятиях появятся
-        дополнительные страницы, Flex/Grid, БЭМ и адаптивность.
-      </p>
-    </aside>
-
   </main>
 
-  <dialog class="order-dialog" id="order-dialog">
-    <h2 class="order-dialog__title">Оформление заявки</h2>
-
-    <form class="order-form" id="order-form" action="#" method="post" novalidate>
-
-      <input id="selected-product" name="selected-product" type="hidden">
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-name">Имя</label>
-        <input class="order-form__input" id="order-name" name="name" type="text" required>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="site-logo text-white">ЗЕЛЕНЫЙ ДОМ</a>
+          <p class="footer-desc">Магазин премиальных растений с заботой о каждом листочке.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Меню</h4>
+          <ul class="footer-list">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="order.html">Заявка</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Контакты</h4>
+          <ul class="footer-list">
+            <li>Москва, ул. Ботаническая, 10</li>
+            <li>+7 (495) 123-45-67</li>
+            <li>hello@zelenydom.ru</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Остались вопросы?</h4>
+          <a href="order.html" class="btn btn--white">Задать вопрос</a>
+        </div>
       </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-email">E-mail</label>
-        <input class="order-form__input" id="order-email" name="email" type="email" required>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Зеленый дом. Все права защищены.</p>
       </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-phone">Телефон</label>
-        <input class="order-form__input" id="order-phone" name="phone" type="tel" required>
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-topic">Тема заявки</label>
-        <select class="order-form__select" id="order-topic" name="topic" required>
-          <option value="">Выберите тему</option>
-          <option value="product">Заказ товара</option>
-          <option value="consultation">Консультация</option>
-          <option value="delivery">Доставка</option>
-        </select>
-      </div>
-
-      <div class="order-form__field">
-        <label class="order-form__label" for="order-comment">Комментарий</label>
-        <textarea class="order-form__textarea" id="order-comment" name="comment" rows="3"></textarea>
-      </div>
-
-      <div class="order-form__field order-form__field--checkbox">
-        <label class="order-form__label order-form__label--checkbox">
-          <input id="order-agreement" name="agreement" type="checkbox" required>
-          Я согласен на обработку данных
-        </label>
-      </div>
-
-      <div class="order-form__actions">
-        <button class="button button--secondary" type="button" id="close-order-dialog">Закрыть</button>
-        <button class="button" type="submit">Отправить</button>
-      </div>
-
-    </form>
-  </dialog>
-
-  <p class="success-message" id="success-message" hidden>
-    Форма успешно отправлена!
-  </p>
-
-  <footer class="site-footer" id="contacts">
-    <p class="site-footer__text">2026 Учебный проект. Все права защищены.</p>
-    <p class="site-footer__text">Дисциплина: фронтенд и бэкенд разработка</p>
+    </div>
   </footer>
-  <a href="#" class="scroll-top" aria-label="Наверх">↑</a>
+
 </body>
 </html>
