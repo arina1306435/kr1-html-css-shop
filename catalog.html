@@ -20,8 +20,19 @@
       <nav class="site-nav">
         <ul class="site-nav__list">
           <li><a href="index.html" class="site-nav__link">Главная</a></li>
-          <li><a href="catalog.html" class="site-nav__link active" aria-current="page">Каталог</a></li>
+          <li class="site-nav__item site-nav__item--dropdown">
+            <a href="catalog.html" class="site-nav__link site-nav__link--dropdown active" aria-current="page" aria-haspopup="true" aria-expanded="false">
+              Каталог
+              <span class="site-nav__caret" aria-hidden="true">▾</span>
+            </a>
+            <ul class="site-nav__dropdown">
+              <li><a href="catalog.html#flowers" class="site-nav__dropdown-link">Комнатные цветы</a></li>
+              <li><a href="catalog.html#succulents" class="site-nav__dropdown-link">Суккуленты и кактусы</a></li>
+              <li><a href="catalog.html#palms" class="site-nav__dropdown-link">Пальмы и крупномеры</a></li>
+            </ul>
+          </li>
           <li><a href="product.html" class="site-nav__link">Товар</a></li>
+          <li><a href="delivery.html" class="site-nav__link">Доставка</a></li>
           <li><a href="about.html" class="site-nav__link">О нас</a></li>
           <li><a href="contacts.html" class="site-nav__link">Контакты</a></li>
         </ul>
@@ -34,9 +45,9 @@
       <a href="index.html">Главная</a> <span>/</span> Каталог
     </nav>
     <h1 class="section__title">Каталог растений</h1>
-    
+
     <div class="catalog-layout">
-      
+
       <aside class="catalog-filters">
         <h2>Категории</h2>
         <ul class="filter-list">
@@ -51,7 +62,7 @@
         <div id="flowers" class="catalog-category" style="margin-bottom: 60px;">
           <h2 class="category-title">Комнатные цветы</h2>
           <div class="products-grid">
-            
+
             <article class="product-card">
               <div class="product-card__badge">Хит</div>
               <img src="images/монстера2.webp" alt="Монстера" class="product-card__img" loading="lazy">
@@ -91,7 +102,7 @@
         <div id="succulents" class="catalog-category" style="margin-bottom: 60px;">
           <h2 class="category-title">Суккуленты и кактусы</h2>
           <div class="products-grid">
-            
+
             <article class="product-card">
               <div class="product-card__badge product-card__badge--new">Новинка</div>
               <img src="images/суккулент.jpg" alt="Суккулент" class="product-card__img" loading="lazy">
@@ -130,7 +141,7 @@
         <div id="palms" class="catalog-category">
           <h2 class="category-title">Пальмы и крупномеры</h2>
           <div class="products-grid">
-            
+
             <article class="product-card">
               <img src="images/фикуслирата.jpg" alt="Фикус Лирата" class="product-card__img" loading="lazy">
               <div class="product-card__body">
@@ -164,7 +175,6 @@
           </div>
         </div>
 
-        <!-- Состояние пусто (скрыто по умолчанию) -->
         <div class="empty-state" id="empty-state" hidden>
           <div class="empty-state__icon">🌵</div>
           <h2 class="empty-state__title">Упс! Ничего не найдено</h2>
@@ -191,6 +201,7 @@
           <ul class="footer-list">
             <li><a href="index.html">Главная</a></li>
             <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="delivery.html">Доставка</a></li>
             <li><a href="about.html">О нас</a></li>
             <li><a href="contacts.html">Контакты</a></li>
           </ul>
