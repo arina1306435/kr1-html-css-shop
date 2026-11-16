@@ -21,7 +21,7 @@
           <li><a href="index.html" class="site-nav__link">Главная</a></li>
           <li><a href="catalog.html" class="site-nav__link">Каталог</a></li>
           <li><a href="product.html" class="site-nav__link">Товар</a></li>
-          <li><a href="order.html" class="site-nav__link">Заявка</a></li>
+          <li><a href="about.html" class="site-nav__link">О нас</a></li>
           <li><a href="contacts.html" class="site-nav__link active">Контакты</a></li>
         </ul>
       </nav>
@@ -31,44 +31,72 @@
   <main class="container section">
     <h1 class="section__title">Контакты</h1>
     
-    <div class="contacts-layout">
-      <div class="contacts-info">
-        <p><strong>Адрес оранжереи:</strong><br>г. Москва, ул. Ботаническая, д. 10</p>
-        <p><strong>Телефон:</strong><br>+7 (495) 123-45-67</p>
-        <p><strong>Режим работы:</strong><br>Ежедневно с 10:00 до 21:00</p>
-        <p>Приезжайте к нам в оранжерею, чтобы выбрать растение вживую!</p>
-        <a href="order.html" class="btn btn--outline" style="margin-top: 20px;">Оставить заявку онлайн</a>
-      </div>
-      <div class="contacts-map">
-        <iframe src="https://yandex.ru/map-widget/v1/?ll=37.658470%2C55.748312&z=17&text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%91%D0%BE%D1%82%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%2C%2010&mode=search" width="100%" height="400" frameborder="0" allowfullscreen="true"></iframe>
-      </div>
-    </div>
-            <section class="section container">
-      <h2 class="section__title">Часто задаваемые вопросы</h2>
-      <div class="faq-grid">
+    <div class="contacts-wrapper">
+      
+      <!-- ЛЕВАЯ КОЛОНКА -->
+      <div class="contacts-left">
         
-        <div class="faq-item">
-          <h3>Как выбрать растение для новичка?</h3>
-          <p>Обратите внимание на сансевиерию, суккуленты или фикус. Они неприхотливы, любят редкий полив и отлично подходят для темных углов.</p>
-        </div>
+        <!-- ЕДИНАЯ КАРТОЧКА (Контакты + Карта) -->
+        <div class="contacts-card">
+          
+          <div class="contacts-info">
+            <p><strong>Адрес оранжереи:</strong><br>г. Москва, ул. Ботаническая, д. 10</p>
+            <p><strong>Телефон:</strong><br>+7 (495) 123-45-67</p>
+            <p><strong>Режим работы:</strong><br>Ежедневно с 10:00 до 21:00</p>
+            <p>Приезжайте к нам в оранжерею, чтобы выбрать растение вживую!</p>
+            
+            <div class="messengers">
+              <p><strong>Напишите нам:</strong></p>
+              <a href="https://t.me/zelenydom" class="btn btn--outline btn--sm" target="_blank">Telegram</a>
+              <a href="https://wa.me/79991234567" class="btn btn--outline btn--sm" target="_blank">WhatsApp</a>
+            </div>
+          </div>
 
-        <div class="faq-item">
-          <h3>Что делать, если растение пришло поврежденным?</h3>
-          <p>Сфотографируйте повреждения и напишите нам. В течение 14 дней мы бесплатно заменим растение или вернем деньги.</p>
-        </div>
-
-        <div class="faq-item">
-          <h3>Нужно ли пересаживать растение сразу после покупки?</h3>
-          <p>Не обязательно. Дайте растению 1-2 недели на адаптацию. Если горшок стал тесным, пересадите его в емкость на 2-3 см больше.</p>
-        </div>
-
-        <div class="faq-item">
-          <h3>Вы доставляете растения в другие города?</h3>
-          <p>Да, мы отправляем растения по всей России бережной почтой. Стоимость и сроки зависят от региона.</p>
+          <div class="contacts-map">
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=37.658470%2C55.748312&z=17&text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%91%D0%BE%D1%82%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%2C%2010&mode=search" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
+          </div>
+          
         </div>
 
       </div>
-    </section>
+
+      <!-- ПРАВАЯ КОЛОНКА (Форма заявки) -->
+      <div class="contacts-form-wrapper">
+        <h2 class="order-dialog__title" style="text-align: left; margin-bottom: 20px;">Оформление заявки</h2>
+        
+        <form class="order-form order-form--page" id="contact-form">
+          <div class="order-form__group">
+            <label class="order-form__label" for="contact-name">Ваше имя</label>
+            <input class="order-form__input" id="contact-name" type="text" required>
+          </div>
+
+          <div class="order-form__group">
+            <label class="order-form__label" for="contact-phone">Телефон</label>
+            <input class="order-form__input" id="contact-phone" type="tel" required>
+          </div>
+
+          <div class="order-form__group order-form__group--wide">
+            <label class="order-form__label" for="contact-plant">Какое растение вас интересует?</label>
+            <select class="order-form__select" id="contact-plant">
+              <option>Монстера</option>
+              <option>Фикус</option>
+              <option>Суккулент</option>
+              <option>Другое</option>
+            </select>
+          </div>
+
+          <div class="order-form__group order-form__group--wide">
+            <label class="order-form__label" for="contact-comment">Комментарий</label>
+            <textarea class="order-form__textarea" id="contact-comment" rows="4"></textarea>
+          </div>
+
+          <div class="order-form__group order-form__group--wide">
+            <button type="submit" class="btn btn--primary" style="width: 100%;">Отправить заявку</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -86,7 +114,7 @@
           <ul class="footer-list">
             <li><a href="index.html">Главная</a></li>
             <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="order.html">Заявка</a></li>
+            <li><a href="about.html">О нас</a></li>
             <li><a href="contacts.html">Контакты</a></li>
           </ul>
         </div>
@@ -100,7 +128,7 @@
         </div>
         <div class="footer-col">
           <h4>Остались вопросы?</h4>
-          <a href="order.html" class="btn btn--white">Задать вопрос</a>
+          <a href="contacts.html" class="btn btn--white">Задать вопрос</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -108,8 +136,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- Кнопка Наверх -->
   <a href="#" class="scroll-top" id="scrollTop" aria-label="Наверх">
-    <img src="images/penguin.png" alt="Наверх">
+    <img src="images/листик.png" alt="" class="scroll-top__img" aria-hidden="true">
   </a>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

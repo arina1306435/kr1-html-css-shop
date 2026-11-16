@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Каталог растений магазина Зеленый дом.">
+  <link rel="icon" href="images/logo.png" type="image/png">
   <title>Каталог — Зеленый дом</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
@@ -13,15 +14,15 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <a href="index.html" class="site-logo">
-        <img src="images/logo.png" alt="Логотип" class="logo-img">
+        <img src="images/logo.png" alt="Логотип Зеленый дом" class="logo-img">
         ЗЕЛЕНЫЙ ДОМ
       </a>
       <nav class="site-nav">
         <ul class="site-nav__list">
           <li><a href="index.html" class="site-nav__link">Главная</a></li>
-          <li><a href="catalog.html" class="site-nav__link active">Каталог</a></li>
+          <li><a href="catalog.html" class="site-nav__link active" aria-current="page">Каталог</a></li>
           <li><a href="product.html" class="site-nav__link">Товар</a></li>
-          <li><a href="order.html" class="site-nav__link">Заявка</a></li>
+          <li><a href="about.html" class="site-nav__link">О нас</a></li>
           <li><a href="contacts.html" class="site-nav__link">Контакты</a></li>
         </ul>
       </nav>
@@ -53,7 +54,8 @@
             
             <article class="product-card">
               <div class="product-card__badge">Хит</div>
-              <img src="images/монстера2.webp" alt="Монстера" class="product-card__img">
+              <img src="images/монстера2.webp" alt="Монстера" class="product-card__img" loading="lazy">
+              <span class="product-card__pet">🐾 Pet-Friendly</span>
               <div class="product-card__body">
                 <h3 class="product-card__title">Монстера</h3>
                 <p class="product-card__desc">Крупное тропическое растение.</p>
@@ -63,7 +65,7 @@
             </article>
 
             <article class="product-card">
-              <img src="images/фикусбендж.webp" alt="Фикус" class="product-card__img">
+              <img src="images/фикусбендж.webp" alt="Фикус" class="product-card__img" loading="lazy">
               <span class="product-card__pet">🐾 Pet-Friendly</span>
               <div class="product-card__body">
                 <h3 class="product-card__title">Фикус Бенджамина</h3>
@@ -74,7 +76,7 @@
             </article>
 
             <article class="product-card">
-              <img src="images/пальмаарекка.webp" alt="Пальма Арека" class="product-card__img">
+              <img src="images/пальмаарекка.webp" alt="Пальма Арека" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Пальма Арека</h3>
                 <p class="product-card__desc">Создает тропический уголок.</p>
@@ -82,16 +84,6 @@
                 <a href="product.html" class="btn btn--outline">Подробнее</a>
               </div>
             </article>
-
-            <!-- <article class="product-card">
-              <img src="images/спатифиллум.jpg" alt="Спатифиллум" class="product-card__img">
-              <div class="product-card__body">
-                <h3 class="product-card__title">Спатифиллум</h3>
-                <p class="product-card__desc">Женское счастье. Любит тень.</p>
-                <p class="product-card__price">800 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
-              </div>
-            </article> -->
 
           </div>
         </div>
@@ -102,7 +94,7 @@
             
             <article class="product-card">
               <div class="product-card__badge product-card__badge--new">Новинка</div>
-              <img src="images/суккулент.jpg" alt="Суккулент" class="product-card__img">
+              <img src="images/суккулент.jpg" alt="Суккулент" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Суккулент</h3>
                 <p class="product-card__desc">Маленький, не требует полива.</p>
@@ -112,7 +104,7 @@
             </article>
 
             <article class="product-card">
-              <img src="images/кактус.webp" alt="Кактус" class="product-card__img">
+              <img src="images/кактус.webp" alt="Кактус" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Кактус</h3>
                 <p class="product-card__desc">Колючий, но очень милый.</p>
@@ -122,7 +114,7 @@
             </article>
 
             <article class="product-card">
-              <img src="images/сансевиерия.webp" alt="Сансевиерия" class="product-card__img">
+              <img src="images/сансевиерия.webp" alt="Сансевиерия" class="product-card__img" loading="lazy">
               <span class="product-card__pet">🐾 Pet-Friendly</span>
               <div class="product-card__body">
                 <h3 class="product-card__title">Сансевиерия</h3>
@@ -132,16 +124,6 @@
               </div>
             </article>
 
-            <!-- <article class="product-card">
-              <img src="images/алоэ.jpg" alt="Алоэ" class="product-card__img">
-              <div class="product-card__body">
-                <h3 class="product-card__title">Алоэ Вера</h3>
-                <p class="product-card__desc">Лечебное растение.</p>
-                <p class="product-card__price">500 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
-              </div>
-            </article> -->
-
           </div>
         </div>
 
@@ -150,8 +132,7 @@
           <div class="products-grid">
             
             <article class="product-card">
-              <img src="images/фикуслирата.jpg" alt="Фикус Лирата" class="product-card__img">
-              <span class="product-card__pet">🐾 Pet-Friendly</span>
+              <img src="images/фикуслирата.jpg" alt="Фикус Лирата" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Фикус Лирата</h3>
                 <p class="product-card__desc">Эффектное дерево с крупными листьями.</p>
@@ -161,7 +142,7 @@
             </article>
 
             <article class="product-card">
-              <img src="images/юкка.jpg" alt="Юкка" class="product-card__img">
+              <img src="images/юкка.jpg" alt="Юкка" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Юкка слоновая</h3>
                 <p class="product-card__desc">Стильное растение для офиса.</p>
@@ -171,8 +152,7 @@
             </article>
 
             <article class="product-card">
-              <img src="images/драцена.jpg" alt="Драцена" class="product-card__img">
-              <span class="product-card__pet">🐾 Pet-Friendly</span>
+              <img src="images/драцена.jpg" alt="Драцена" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Драцена</h3>
                 <p class="product-card__desc">Дерево счастья. Неприхотлива.</p>
@@ -184,6 +164,14 @@
           </div>
         </div>
 
+        <!-- Состояние пусто (скрыто по умолчанию) -->
+        <div class="empty-state" id="empty-state" hidden>
+          <div class="empty-state__icon">🌵</div>
+          <h2 class="empty-state__title">Упс! Ничего не найдено</h2>
+          <p class="empty-state__text">По вашему запросу нет растений. Попробуйте изменить фильтры или посмотрите другие категории.</p>
+          <button type="button" class="btn btn--outline" onclick="document.getElementById('empty-state').hidden = true;">Сбросить фильтры</button>
+        </div>
+
       </section>
     </div>
   </main>
@@ -193,7 +181,7 @@
       <div class="footer-grid">
         <div class="footer-col">
           <a href="index.html" class="site-logo">
-            <img src="images/logo.png" alt="Логотип" class="logo-img">
+            <img src="images/logo.png" alt="Логотип Зеленый дом" class="logo-img">
             ЗЕЛЕНЫЙ ДОМ
           </a>
           <p class="footer-desc">Магазин премиальных растений с заботой о каждом листочке.</p>
@@ -203,7 +191,7 @@
           <ul class="footer-list">
             <li><a href="index.html">Главная</a></li>
             <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="order.html">Заявка</a></li>
+            <li><a href="about.html">О нас</a></li>
             <li><a href="contacts.html">Контакты</a></li>
           </ul>
         </div>
@@ -217,7 +205,7 @@
         </div>
         <div class="footer-col">
           <h4>Остались вопросы?</h4>
-          <a href="order.html" class="btn btn--white">Задать вопрос</a>
+          <a href="contacts.html" class="btn btn--white">Задать вопрос</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -225,8 +213,11 @@
       </div>
     </div>
   </footer>
+
   <a href="#" class="scroll-top" id="scrollTop" aria-label="Наверх">
-    <img src="images/penguin.png" alt="Наверх">
+    <img src="images/листик.png" alt="" class="scroll-top__img" aria-hidden="true">
   </a>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
