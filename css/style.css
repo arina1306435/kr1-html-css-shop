@@ -8,7 +8,6 @@ body {
   line-height: 1.6;
   background-color: #ffffff; 
   
-  /* Делаем фон бледным с помощью градиента */
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
     url('../images/паттерн.jpg'); 
@@ -272,15 +271,15 @@ h1, h2, h3, h4 {
   grid-template-columns: repeat(4, 1fr); 
   gap: 40px; 
   margin-bottom: 40px; 
-  align-items: start; /* Выравниваем колонки по верхнему краю */
+  align-items: start; 
 }
 
 .site-footer .footer-col h4 { 
   color: #ffffff; 
   font-family: 'Playfair Display', serif;
   font-size: 20px;
-  margin-top: 0; /* Убираем отступ сверху */
-  margin-bottom: 25px; /* Чуть больше отступа снизу */
+  margin-top: 0;
+  margin-bottom: 25px; 
 }
 
 .footer-list { list-style: none; padding: 0; margin: 0; }
@@ -332,21 +331,20 @@ h1, h2, h3, h4 {
 }
 
 .feature-card {
-  background: #ffffff; /* Чистый белый фон */
+  background: #ffffff; 
   padding: 40px 30px;
   border-radius: 12px;
   text-align: center;
-  border: 1px solid #e0e0e0; /* Легкая серая рамка */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Выраженная тень для объема */
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); 
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .feature-card:hover {
-  transform: translateY(-8px); /* Карточка приподнимается */
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Тень становится глубже */
+  transform: translateY(-8px); 
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); 
 }
 
-/* Текст внутри */
 .feature-card h3 {
   margin-top: 0;
   font-size: 22px;
@@ -357,27 +355,26 @@ h1, h2, h3, h4 {
   color: #555;
   margin: 0;
 }
-/* --- Блок Подписка --- */
 .subscribe-block {
-  background-color: #f4f7f4 !important; /* Нежный светло-зеленый фон */
+  background-color: #f4f7f4 !important; 
   padding: 40px 30px; 
   border-radius: 12px; 
   text-align: center;
-  color: #333 !important; /* Темный текст для контраста */
-  border: 1px solid #d1dcd1; /* Мягкая рамка */
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Аккуратная тень */
+  color: #333 !important; 
+  border: 1px solid #d1dcd1;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
   max-width: 800px; 
   margin: 60px auto; 
 }
 
 .subscribe-block h2 {
-  color: #1a3c1a !important; /* Темно-зеленый заголовок */
+  color: #1a3c1a !important; 
   margin-bottom: 10px;
   font-size: 28px;
 }
 
 .subscribe-block p {
-  color: #555 !important; /* Серый текст */
+  color: #555 !important; 
   margin-bottom: 25px; 
   font-size: 16px; 
 }
@@ -394,7 +391,7 @@ h1, h2, h3, h4 {
   flex: 1;
   padding: 12px 16px; 
   border-radius: 6px;
-  border: 1px solid #ccc; /* Рамка для поля ввода */
+  border: 1px solid #ccc;
   font-size: 15px;
   font-family: inherit;
   background: #ffffff;
@@ -403,8 +400,8 @@ h1, h2, h3, h4 {
 .subscribe-form .btn {
   padding: 12px 24px; 
   font-size: 13px;
-  background-color: #1a3c1a !important; /* Темно-зеленая кнопка */
-  color: #ffffff !important; /* Белый текст */
+  background-color: #1a3c1a !important; 
+  color: #ffffff !important; 
   border: none;
 }
 
@@ -412,7 +409,6 @@ h1, h2, h3, h4 {
   background-color: #2e5e2e !important;
 }
 
-/* Адаптивность для формы подписки */
 @media (max-width: 768px) {
   .subscribe-form {
     flex-direction: column;
@@ -422,5 +418,19 @@ h1, h2, h3, h4 {
   display: flex;
   gap: 60px;
   align-items: center;
-  margin: 80px 0; /* Отступы 80px сверху и снизу */
+  margin: 80px 0; 
+}
+.filter-list label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #555;
+  font-size: 16px;
+}
+.filter-list input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #1a3c1a;
+  cursor: pointer;
 }
