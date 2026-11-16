@@ -9,9 +9,7 @@ const selectedProductInput = document.getElementById('selected-product');
 orderButtons.forEach((button) => {
   button.addEventListener('click', () => {
     const productName = button.dataset.product;
-
     selectedProductInput.value = productName;
-
     dialog.showModal();
   });
 });
@@ -27,15 +25,12 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
 
   if (!form.checkValidity()) {
-
     form.reportValidity();
     return;
   }
 
   successMessage.hidden = false;
-
   form.reset();
-
   dialog.close();
 });
 
