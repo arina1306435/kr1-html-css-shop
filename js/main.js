@@ -1,6 +1,5 @@
 const dialog = document.getElementById('order-dialog');
 
-
 const orderButtons = document.querySelectorAll('.product-card__button');
 
 const closeButton = document.getElementById('close-order-dialog');
@@ -35,9 +34,17 @@ form.addEventListener('submit', (event) => {
 
   successMessage.hidden = false;
 
-
   form.reset();
 
-
   dialog.close();
+});
+
+const scrollTopBtn = document.getElementById('scrollTop');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    scrollTopBtn.classList.add('show');
+  } else {
+    scrollTopBtn.classList.remove('show');
+  }
 });

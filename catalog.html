@@ -32,86 +32,157 @@
     <h1 class="section__title">Каталог растений</h1>
     
     <div class="catalog-layout">
+      
       <aside class="catalog-filters">
-        <h2>Фильтры</h2>
+        <h2>Категории</h2>
         <ul class="filter-list">
-          <li><label><input type="checkbox" checked> Все растения</label></li>
-          <li><label><input type="checkbox"> Комнатные цветы</label></li>
-          <li><label><input type="checkbox"> Суккуленты</label></li>
-          <li><label><input type="checkbox"> Кактусы</label></li>
-          <li><label><input type="checkbox"> Кашпо и горшки</label></li>
+          <li><a href="#flowers">Комнатные цветы</a></li>
+          <li><a href="#succulents">Суккуленты и кактусы</a></li>
+          <li><a href="#palms">Пальмы и крупномеры</a></li>
         </ul>
-                <button class="btn" style="width: 100%; margin-top: 20px;">Применить</button>
       </aside>
 
       <section class="catalog-products">
-        <div class="products-grid">
-          
-          <article class="product-card">
-            <div class="product-card__badge">Хит</div>
-            <img src="images/монстера2.webp" alt="Монстера" class="product-card__img">
-            <div class="product-card__body">
-              <h3 class="product-card__title">Монстера</h3>
-              <p class="product-card__desc">Крупное тропическое растение.</p>
-              <p class="product-card__price">1 500 руб.</p>
-              <a href="product.html" class="btn btn--outline">Подробнее</a>
-            </div>
-          </article>
 
-          <article class="product-card">
-            <img src="images/фикусбендж.webp" alt="Фикус" class="product-card__img">
-            <div class="product-card__body">
-              <h3 class="product-card__title">Фикус Бенджамина</h3>
-              <p class="product-card__desc">Неприхотливое дерево для дома.</p>
-              <p class="product-card__price">1 200 руб.</p>
-              <a href="product.html" class="btn btn--outline">Подробнее</a>
-            </div>
-          </article>
+        <div id="flowers" class="catalog-category" style="margin-bottom: 60px;">
+          <h2 class="category-title">Комнатные цветы</h2>
+          <div class="products-grid">
+            
+            <article class="product-card">
+              <div class="product-card__badge">Хит</div>
+              <img src="images/монстера2.webp" alt="Монстера" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Монстера</h3>
+                <p class="product-card__desc">Крупное тропическое растение.</p>
+                <p class="product-card__price">1 500 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article>
 
-          <article class="product-card">
-            <div class="product-card__badge product-card__badge--new">Новинка</div>
-            <img src="images/суккулент.jpg" alt="Суккулент" class="product-card__img">
-            <div class="product-card__body">
-              <h3 class="product-card__title">Суккулент</h3>
-              <p class="product-card__desc">Маленький, не требует полива.</p>
-              <p class="product-card__price">400 руб.</p>
-              <a href="product.html" class="btn btn--outline">Подробнее</a>
-            </div>
-          </article>
+            <article class="product-card">
+              <img src="images/фикусбендж.webp" alt="Фикус" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Фикус Бенджамина</h3>
+                <p class="product-card__desc">Неприхотливое дерево для дома.</p>
+                <p class="product-card__price">1 200 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article>
 
-          <article class="product-card">
-            <img src="images/кактус.webp" alt="Кактус" class="product-card__img">
-            <div class="product-card__body">
-              <h3 class="product-card__title">Кактус</h3>
-              <p class="product-card__desc">Колючий, но очень милый.</p>
-              <p class="product-card__price">300 руб.</p>
-              <a href="product.html" class="btn btn--outline">Подробнее</a>
-            </div>
-          </article>
+            <article class="product-card">
+              <img src="images/пальмаарекка.webp" alt="Пальма Арека" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Пальма Арека</h3>
+                <p class="product-card__desc">Создает тропический уголок.</p>
+                <p class="product-card__price">2 500 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article>
 
-          <article class="product-card">
-            <img src="images/сансевиерия.webp" alt="Сансевиерия" class="product-card__img">
-            <div class="product-card__body">
-              <h3 class="product-card__title">Сансевиерия</h3>
-              <p class="product-card__desc">Щучий хвост. Очищает воздух.</p>
-              <p class="product-card__price">900 руб.</p>
-              <a href="product.html" class="btn btn--outline">Подробнее</a>
-            </div>
-          </article>
+            <!-- <article class="product-card">
+              <img src="images/спатифиллум.jpg" alt="Спатифиллум" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Спатифиллум</h3>
+                <p class="product-card__desc">Женское счастье. Любит тень.</p>
+                <p class="product-card__price">800 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article> -->
 
-          <article class="product-card">
-            <img src="images/пальмаарекка.webp" alt="Пальма Арека" class="product-card__img">
-            <div class="product-card__body">
-              <h3 class="product-card__title">Пальма Арека</h3>
-              <p class="product-card__desc">Создает тропический уголок.</p>
-              <p class="product-card__price">2 500 руб.</p>
-              <a href="product.html" class="btn btn--outline">Подробнее</a>
-            </div>
-          </article>
-
+          </div>
         </div>
+
+        <div id="succulents" class="catalog-category" style="margin-bottom: 60px;">
+          <h2 class="category-title">Суккуленты и кактусы</h2>
+          <div class="products-grid">
+            
+            <article class="product-card">
+              <div class="product-card__badge product-card__badge--new">Новинка</div>
+              <img src="images/суккулент.jpg" alt="Суккулент" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Суккулент</h3>
+                <p class="product-card__desc">Маленький, не требует полива.</p>
+                <p class="product-card__price">400 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <img src="images/кактус.webp" alt="Кактус" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Кактус</h3>
+                <p class="product-card__desc">Колючий, но очень милый.</p>
+                <p class="product-card__price">300 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <img src="images/сансевиерия.webp" alt="Сансевиерия" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Сансевиерия</h3>
+                <p class="product-card__desc">Щучий хвост. Очищает воздух.</p>
+                <p class="product-card__price">900 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article>
+
+            <!-- <article class="product-card">
+              <img src="images/алоэ.jpg" alt="Алоэ" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Алоэ Вера</h3>
+                <p class="product-card__desc">Лечебное растение.</p>
+                <p class="product-card__price">500 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article> -->
+
+          </div>
+        </div>
+
+        <div id="palms" class="catalog-category">
+          <h2 class="category-title">Пальмы и крупномеры</h2>
+          <div class="products-grid">
+            
+            <article class="product-card">
+              <img src="images/фикуслирата.jpg" alt="Фикус Лирата" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Фикус Лирата</h3>
+                <p class="product-card__desc">Эффектное дерево с крупными листьями.</p>
+                <p class="product-card__price">3 500 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <img src="images/юкка.jpg" alt="Юкка" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Юкка слоновая</h3>
+                <p class="product-card__desc">Стильное растение для офиса.</p>
+                <p class="product-card__price">4 200 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article>
+
+            <article class="product-card">
+              <img src="images/драцена.jpg" alt="Драцена" class="product-card__img">
+              <div class="product-card__body">
+                <h3 class="product-card__title">Драцена</h3>
+                <p class="product-card__desc">Дерево счастья. Неприхотлива.</p>
+                <p class="product-card__price">1 800 руб.</p>
+                <a href="product.html" class="btn btn--outline">Подробнее</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
       </section>
     </div>
+          <!-- Кнопка Наверх -->
+  <a href="#" class="scroll-top" id="scrollTop" aria-label="Наверх">
+    <img src="images/листик.png" alt="Наверх" style="width: 24px; height: 24px; object-fit: cover;">
+  </a>
   </main>
 
   <footer class="site-footer">
