@@ -7,7 +7,12 @@ body {
   color: #333;
   line-height: 1.6;
   background-color: #ffffff; 
-  background-image: url('../images/паттерн.jpg'); 
+  
+  /* Делаем фон бледным с помощью градиента */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), 
+    url('../images/паттерн.jpg'); 
+    
   background-repeat: repeat; 
   background-size: 600px;
 }
@@ -124,11 +129,9 @@ h1, h2, h3, h4 {
   text-align: center;
   font-size: 42px;
   margin-bottom: 60px;
-  background: rgba(255, 255, 255, 0.9);
-  display: table;
-  margin-inline: auto;
-  padding: 10px 30px;
-  border-radius: 8px;
+  /* Убрали белый фон */
+  display: block; 
+  padding: 0;
 }
 
 /* --- КАРТОЧКИ ТОВАРОВ --- */
@@ -268,14 +271,16 @@ h1, h2, h3, h4 {
   display: grid; 
   grid-template-columns: repeat(4, 1fr); 
   gap: 40px; 
-  margin-bottom: 60px; 
+  margin-bottom: 40px; 
+  align-items: start; /* Выравниваем колонки по верхнему краю */
 }
 
 .site-footer .footer-col h4 { 
   color: #ffffff; 
   font-family: 'Playfair Display', serif;
   font-size: 20px;
-  margin-bottom: 20px;
+  margin-top: 0; /* Убираем отступ сверху */
+  margin-bottom: 25px; /* Чуть больше отступа снизу */
 }
 
 .footer-list { list-style: none; padding: 0; margin: 0; }
@@ -319,4 +324,36 @@ h1, h2, h3, h4 {
   font-size: 14px; 
   color: #888;
   margin-top: 40px;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.feature-card {
+  background: #ffffff; /* Чистый белый фон */
+  padding: 40px 30px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #e0e0e0; /* Легкая серая рамка */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Выраженная тень для объема */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px); /* Карточка приподнимается */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Тень становится глубже */
+}
+
+/* Текст внутри */
+.feature-card h3 {
+  margin-top: 0;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.feature-card p {
+  color: #555;
+  margin: 0;
 }
