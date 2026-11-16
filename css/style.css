@@ -642,3 +642,27 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .faq-item { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 4px solid #1a3c1a; }
 .faq-item h3 { margin-top: 0; font-size: 20px; margin-bottom: 15px; color: #1a3c1a; }
 .faq-item p { margin: 0; color: #444; font-size: 15px; }
+/* Блок с видео */
+.video-wrapper {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9; /* Горизонтальный формат */
+  margin-inline: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  background: #000;
+}
+
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Заполняет весь блок без черных полос */
+  display: block;
+}
