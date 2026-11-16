@@ -539,3 +539,41 @@ h1, h2, h3, h4 {
 .scroll-top:hover img {
   filter: brightness(0) invert(1);
 }
+.product-card__pet {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: #e8efe8;
+  color: #1a3c1a;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 3;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.faq-item {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border-left: 4px solid #1a3c1a;
+}
+.faq-item h3 {
+  margin-top: 0;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #1a3c1a;
+}
+.faq-item p {
+  margin: 0;
+  color: #555;
+  font-size: 15px;
+}
