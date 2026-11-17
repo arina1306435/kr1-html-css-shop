@@ -21,9 +21,8 @@
         <ul class="site-nav__list">
           <li><a href="index.html" class="site-nav__link">Главная</a></li>
           <li class="site-nav__item site-nav__item--dropdown">
-            <a href="catalog.html" class="site-nav__link site-nav__link--dropdown active" aria-current="page" aria-haspopup="true" aria-expanded="false">
-              Каталог
-              <span class="site-nav__caret" aria-hidden="true">▾</span>
+            <a href="catalog.html" class="site-nav__link site-nav__link--dropdown active" aria-current="page">
+              Каталог <span class="site-nav__caret" aria-hidden="true">▾</span>
             </a>
             <ul class="site-nav__dropdown">
               <li><a href="catalog.html#flowers" class="site-nav__dropdown-link">Комнатные цветы</a></li>
@@ -31,8 +30,6 @@
               <li><a href="catalog.html#palms" class="site-nav__dropdown-link">Пальмы и крупномеры</a></li>
             </ul>
           </li>
-          <li><a href="product.html" class="site-nav__link">Товар</a></li>
-          <li><a href="delivery.html" class="site-nav__link">Доставка</a></li>
           <li><a href="about.html" class="site-nav__link">О нас</a></li>
           <li><a href="contacts.html" class="site-nav__link">Контакты</a></li>
         </ul>
@@ -41,13 +38,10 @@
   </header>
 
   <main class="container section">
-    <nav class="breadcrumbs" aria-label="Хлебные крошки">
-      <a href="index.html">Главная</a> <span>/</span> Каталог
-    </nav>
+    <nav class="breadcrumbs"><a href="index.html">Главная</a> <span>/</span> Каталог</nav>
     <h1 class="section__title">Каталог растений</h1>
 
     <div class="catalog-layout">
-
       <aside class="catalog-filters">
         <h2>Категории</h2>
         <ul class="filter-list">
@@ -58,12 +52,13 @@
       </aside>
 
       <section class="catalog-products">
-
-        <div id="flowers" class="catalog-category" style="margin-bottom: 60px;">
+        <!-- Категория 1: Комнатные цветы -->
+        <div id="flowers" class="catalog-category" style="margin-bottom: 50px;">
           <h2 class="category-title">Комнатные цветы</h2>
           <div class="products-grid">
-
-            <article class="product-card">
+            
+            <!-- Товар 1 -->
+            <article class="product-card" data-title="Монстера" data-price="1 500 руб." data-img="images/монстера2.webp" data-desc="Крупное тропическое растение с большими резными листьями. Идеально для гостиной или офиса. Очищает воздух и создает тропическую атмосферу." data-sku="PL-001">
               <div class="product-card__badge">Хит</div>
               <img src="images/монстера2.webp" alt="Монстера" class="product-card__img" loading="lazy">
               <span class="product-card__pet">🐾 Pet-Friendly</span>
@@ -71,115 +66,118 @@
                 <h3 class="product-card__title">Монстера</h3>
                 <p class="product-card__desc">Крупное тропическое растение.</p>
                 <p class="product-card__price">1 500 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
+                <button type="button" class="btn btn--outline product-card__more-btn">Подробнее</button>
               </div>
             </article>
 
-            <article class="product-card">
+            <!-- Товар 2 -->
+            <article class="product-card" data-title="Фикус Бенджамина" data-price="1 200 руб." data-img="images/фикусбендж.webp" data-desc="Неприхотливое дерево для дома. Очищает воздух и радует глаз круглый год. Отлично подходит для начинающих." data-sku="PL-002">
               <img src="images/фикусбендж.webp" alt="Фикус" class="product-card__img" loading="lazy">
               <span class="product-card__pet">🐾 Pet-Friendly</span>
               <div class="product-card__body">
                 <h3 class="product-card__title">Фикус Бенджамина</h3>
                 <p class="product-card__desc">Неприхотливое дерево для дома.</p>
                 <p class="product-card__price">1 200 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
+                <button type="button" class="btn btn--outline product-card__more-btn">Подробнее</button>
               </div>
             </article>
 
-            <article class="product-card">
+            <!-- Товар 3 -->
+            <article class="product-card" data-title="Пальма Арека" data-price="2 500 руб." data-img="images/пальмаарекка.webp" data-desc="Создает тропический уголок в вашем доме. Любит свет и влажность. Вырастает до внушительных размеров." data-sku="PL-003">
               <img src="images/пальмаарекка.webp" alt="Пальма Арека" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Пальма Арека</h3>
                 <p class="product-card__desc">Создает тропический уголок.</p>
                 <p class="product-card__price">2 500 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
+                <button type="button" class="btn btn--outline product-card__more-btn">Подробнее</button>
               </div>
             </article>
 
           </div>
         </div>
 
-        <div id="succulents" class="catalog-category" style="margin-bottom: 60px;">
+        <!-- Категория 2: Суккуленты и кактусы -->
+        <div id="succulents" class="catalog-category" style="margin-bottom: 50px;">
           <h2 class="category-title">Суккуленты и кактусы</h2>
           <div class="products-grid">
-
-            <article class="product-card">
+            
+            <!-- Товар 4 -->
+            <article class="product-card" data-title="Суккулент" data-price="400 руб." data-img="images/суккулент.jpg" data-desc="Маленький, не требует частого полива. Идеально для занятых людей и тех, кто часто уезжает в командировки." data-sku="PL-004">
               <div class="product-card__badge product-card__badge--new">Новинка</div>
               <img src="images/суккулент.jpg" alt="Суккулент" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Суккулент</h3>
                 <p class="product-card__desc">Маленький, не требует полива.</p>
                 <p class="product-card__price">400 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
+                <button type="button" class="btn btn--outline product-card__more-btn">Подробнее</button>
               </div>
             </article>
 
-            <article class="product-card">
+            <!-- Товар 5 -->
+            <article class="product-card" data-title="Кактус" data-price="300 руб." data-img="images/кактус.webp" data-desc="Колючий, но очень милый. Прекрасно смотрится на рабочем столе и не требует много внимания." data-sku="PL-005">
               <img src="images/кактус.webp" alt="Кактус" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Кактус</h3>
                 <p class="product-card__desc">Колючий, но очень милый.</p>
                 <p class="product-card__price">300 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
+                <button type="button" class="btn btn--outline product-card__more-btn">Подробнее</button>
               </div>
             </article>
 
-            <article class="product-card">
+            <!-- Товар 6 -->
+            <article class="product-card" data-title="Сансевиерия" data-price="900 руб." data-img="images/сансевиерия.webp" data-desc="Щучий хвост. Отлично очищает воздух и очень неприхотлива. Выдерживает даже длительную засуху и недостаток света." data-sku="PL-006">
               <img src="images/сансевиерия.webp" alt="Сансевиерия" class="product-card__img" loading="lazy">
               <span class="product-card__pet">🐾 Pet-Friendly</span>
               <div class="product-card__body">
                 <h3 class="product-card__title">Сансевиерия</h3>
                 <p class="product-card__desc">Щучий хвост. Очищает воздух.</p>
                 <p class="product-card__price">900 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
+                <button type="button" class="btn btn--outline product-card__more-btn">Подробнее</button>
               </div>
             </article>
 
           </div>
         </div>
 
+        <!-- Категория 3: Пальмы и крупномеры -->
         <div id="palms" class="catalog-category">
           <h2 class="category-title">Пальмы и крупномеры</h2>
           <div class="products-grid">
-
-            <article class="product-card">
+            
+            <!-- Товар 7 -->
+            <article class="product-card" data-title="Фикус Лирата" data-price="3 500 руб." data-img="images/фикуслирата.jpg" data-desc="Эффектное дерево с крупными листьями. Станет ярким акцентом в любом интерьере. Любит яркий рассеянный свет." data-sku="PL-007">
               <img src="images/фикуслирата.jpg" alt="Фикус Лирата" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Фикус Лирата</h3>
                 <p class="product-card__desc">Эффектное дерево с крупными листьями.</p>
                 <p class="product-card__price">3 500 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
+                <button type="button" class="btn btn--outline product-card__more-btn">Подробнее</button>
               </div>
             </article>
 
-            <article class="product-card">
+            <!-- Товар 8 -->
+            <article class="product-card" data-title="Юкка слоновая" data-price="4 200 руб." data-img="images/юкка.jpg" data-desc="Стильное растение для офиса или просторной гостиной. Отлично переносит сухой воздух и не требует частого полива." data-sku="PL-008">
               <img src="images/юкка.jpg" alt="Юкка" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Юкка слоновая</h3>
                 <p class="product-card__desc">Стильное растение для офиса.</p>
                 <p class="product-card__price">4 200 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
+                <button type="button" class="btn btn--outline product-card__more-btn">Подробнее</button>
               </div>
             </article>
 
-            <article class="product-card">
+            <!-- Товар 9 -->
+            <article class="product-card" data-title="Драцена" data-price="1 800 руб." data-img="images/драцена.jpg" data-desc="Дерево счастья. Неприхотлива и отлично вписывается в любой интерьер. Считается талисманом удачи." data-sku="PL-009">
               <img src="images/драцена.jpg" alt="Драцена" class="product-card__img" loading="lazy">
               <div class="product-card__body">
                 <h3 class="product-card__title">Драцена</h3>
                 <p class="product-card__desc">Дерево счастья. Неприхотлива.</p>
                 <p class="product-card__price">1 800 руб.</p>
-                <a href="product.html" class="btn btn--outline">Подробнее</a>
+                <button type="button" class="btn btn--outline product-card__more-btn">Подробнее</button>
               </div>
             </article>
 
           </div>
-        </div>
-
-        <div class="empty-state" id="empty-state" hidden>
-          <div class="empty-state__icon">🌵</div>
-          <h2 class="empty-state__title">Упс! Ничего не найдено</h2>
-          <p class="empty-state__text">По вашему запросу нет растений. Попробуйте изменить фильтры или посмотрите другие категории.</p>
-          <button type="button" class="btn btn--outline" onclick="document.getElementById('empty-state').hidden = true;">Сбросить фильтры</button>
         </div>
 
       </section>
@@ -197,11 +195,10 @@
           <p class="footer-desc">Магазин премиальных растений с заботой о каждом листочке.</p>
         </div>
         <div class="footer-col">
-          <h4>Меню</h4>
+          <h4>Разделы</h4>
           <ul class="footer-list">
             <li><a href="index.html">Главная</a></li>
             <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="delivery.html">Доставка</a></li>
             <li><a href="about.html">О нас</a></li>
             <li><a href="contacts.html">Контакты</a></li>
           </ul>
@@ -209,9 +206,9 @@
         <div class="footer-col">
           <h4>Контакты</h4>
           <ul class="footer-list">
-            <li>Москва, ул. Ботаническая, 10</li>
-            <li>+7 (495) 123-45-67</li>
-            <li>hello@zelenydom.ru</li>
+            <li class="footer-contact"><span class="footer-contact__icon" aria-hidden="true">🕒</span> <span>10:00 до 21:00</span></li>
+            <li class="footer-contact"><span class="footer-contact__icon" aria-hidden="true">📞</span> <span><a href="tel:+74951234567">+7 (495) 123-45-67</a></span></li>
+            <li class="footer-contact"><span class="footer-contact__icon" aria-hidden="true">✉️</span> <span><a href="mailto:hello@zelenydom.ru">hello@zelenydom.ru</a></span></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -228,6 +225,92 @@
   <a href="#" class="scroll-top" id="scrollTop" aria-label="Наверх">
     <img src="images/листик.png" alt="" class="scroll-top__img" aria-hidden="true">
   </a>
+
+  <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
+  <dialog class="product-dialog" id="product-dialog">
+    <button class="modal-close" id="close-product-dialog" type="button" aria-label="Закрыть">&times;</button>
+    <div class="product-dialog__inner">
+      <img src="" alt="" class="product-dialog__img" id="pd-img">
+      <div class="product-dialog__content">
+        <h2 class="product-dialog__title" id="pd-title">Название</h2>
+        <p class="product-dialog__sku" id="pd-sku">Артикул: PL-000</p>
+        <p class="product-dialog__price" id="pd-price">0 руб.</p>
+        <p class="product-dialog__desc" id="pd-desc">Описание...</p>
+        <ul class="product-dialog__specs">
+          <li><strong>Освещение:</strong> Яркий рассеянный свет</li>
+          <li><strong>Полив:</strong> Умеренный</li>
+          <li><strong>Высота:</strong> Зависит от возраста</li>
+        </ul>
+        <button type="button" class="btn product-dialog__btn" id="pd-order-btn">Оформить заявку</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- МОДАЛЬНОЕ ОКНО ЗАЯВКИ -->
+  <dialog class="order-dialog" id="order-dialog">
+    <button class="modal-close" id="close-order-dialog" type="button" aria-label="Закрыть">&times;</button>
+    <h2 class="order-dialog__title">Оформление заявки</h2>
+    
+    <form class="order-form" id="order-form" novalidate>
+      <input type="hidden" id="order-product" value="Общая заявка">
+
+      <div class="order-form__group">
+        <label class="order-form__label" for="order-name">Ваше имя <span class="req">*</span></label>
+        <input class="order-form__input" id="order-name" type="text" required autocomplete="name" placeholder="Иван">
+      </div>
+      <div class="order-form__group">
+        <label class="order-form__label" for="order-phone">Телефон <span class="req">*</span></label>
+        <input class="order-form__input" id="order-phone" type="tel" required autocomplete="tel" placeholder="+7 (___) ___-__-__" maxlength="18">
+      </div>
+      
+      <div class="order-form__group order-form__group--wide">
+        <label class="order-form__label" for="order-interest">Что вас интересует?</label>
+        <select class="order-form__select" id="order-interest">
+          <option>Монстера</option>
+          <option>Фикус Бенджамина</option>
+          <option>Пальма Арека</option>
+          <option>Суккулент</option>
+          <option>Кактус</option>
+          <option>Сансевиерия</option>
+          <option>Фикус Лирата</option>
+          <option>Юкка слоновая</option>
+          <option>Драцена</option>
+          <option>Другое растение</option>
+          <option>Доставка / Оплата</option>
+        </select>
+      </div>
+
+      <div class="order-form__group order-form__group--wide">
+        <label class="order-form__label" for="order-time">Удобное время звонка</label>
+        <select class="order-form__select" id="order-time">
+          <option value="any">Любое время</option>
+          <option value="morning">Утро (9:00–12:00)</option>
+          <option value="day">День (12:00–17:00)</option>
+          <option value="evening">Вечер (17:00–21:00)</option>
+        </select>
+      </div>
+
+      <div class="order-form__group order-form__group--wide">
+        <label class="order-form__checkbox">
+          <input type="checkbox" id="order-consent" required>
+          <span>Согласен на обработку персональных данных <span class="req">*</span></span>
+        </label>
+      </div>
+      <div class="order-form__group order-form__group--wide">
+        <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
+      </div>
+      <p class="order-form__note">* — обязательные поля.</p>
+    </form>
+  </dialog>
+
+  <!-- ОКНО УСПЕХА -->
+  <dialog class="success-dialog" id="success-dialog">
+    <button class="modal-close" id="close-success-dialog" type="button" aria-label="Закрыть">&times;</button>
+    <div class="success-dialog__icon" aria-hidden="true">🌿</div>
+    <h2 class="success-dialog__title">Спасибо за заявку!</h2>
+    <p class="success-dialog__text">Мы свяжемся с вами в течение 24 часов. А пока — подготовили <strong>инструкцию по уходу</strong> за вашим растением.</p>
+    <button type="button" class="btn success-dialog__btn" id="close-success-btn">Отлично!</button>
+  </dialog>
 
   <script src="js/main.js"></script>
 </body>

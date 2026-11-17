@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Контакты магазина Зеленый дом.">
+  <meta name="description" content="Контакты и доставка магазина Зеленый дом.">
   <title>Контакты — Зеленый дом</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
@@ -13,7 +13,7 @@
   <header class="site-header">
     <div class="container site-header__inner">
       <a href="index.html" class="site-logo">
-        <img src="images/logo.png" alt="Логотип" class="logo-img">
+        <img src="images/logo.png" alt="Логотип Зеленый дом" class="logo-img">
         ЗЕЛЕНЫЙ ДОМ
       </a>
       <nav class="site-nav">
@@ -30,8 +30,6 @@
               <li><a href="catalog.html#palms" class="site-nav__dropdown-link">Пальмы и крупномеры</a></li>
             </ul>
           </li>
-          <li><a href="product.html" class="site-nav__link">Товар</a></li>
-          <li><a href="delivery.html" class="site-nav__link">Доставка</a></li>
           <li><a href="about.html" class="site-nav__link">О нас</a></li>
           <li><a href="contacts.html" class="site-nav__link active" aria-current="page">Контакты</a></li>
         </ul>
@@ -41,48 +39,36 @@
 
   <main class="container section">
     <h1 class="section__title">Контакты</h1>
-
     <div class="contacts-wrapper">
-
       <div class="contacts-left">
-
         <div class="contacts-card">
-
           <div class="contacts-info">
             <p><strong>Адрес оранжереи:</strong><br>г. Москва, ул. Ботаническая, д. 10</p>
             <p><strong>Телефон:</strong><br>+7 (495) 123-45-67</p>
             <p><strong>Режим работы:</strong><br>Ежедневно с 10:00 до 21:00</p>
             <p>Приезжайте к нам в оранжерею, чтобы выбрать растение вживую!</p>
-
             <div class="messengers">
               <p><strong>Напишите нам:</strong></p>
               <a href="https://t.me/zelenydom" class="btn btn--outline btn--sm" target="_blank">Telegram</a>
               <a href="https://wa.me/79991234567" class="btn btn--outline btn--sm" target="_blank">WhatsApp</a>
             </div>
           </div>
-
           <div class="contacts-map">
             <iframe src="https://yandex.ru/map-widget/v1/?ll=37.658470%2C55.748312&z=17&text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%91%D0%BE%D1%82%D0%B0%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%2C%2010&mode=search" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
           </div>
-
         </div>
-
       </div>
-
       <div class="contacts-form-wrapper">
         <h2 class="order-dialog__title" style="text-align: left; margin-bottom: 20px;">Оформление заявки</h2>
-
         <form class="order-form order-form--page" id="contact-form">
           <div class="order-form__group">
             <label class="order-form__label" for="contact-name">Ваше имя</label>
             <input class="order-form__input" id="contact-name" type="text" required>
           </div>
-
           <div class="order-form__group">
             <label class="order-form__label" for="contact-phone">Телефон</label>
             <input class="order-form__input" id="contact-phone" type="tel" required>
           </div>
-
           <div class="order-form__group order-form__group--wide">
             <label class="order-form__label" for="contact-plant">Какое растение вас интересует?</label>
             <select class="order-form__select" id="contact-plant">
@@ -92,19 +78,82 @@
               <option>Другое</option>
             </select>
           </div>
-
           <div class="order-form__group order-form__group--wide">
             <label class="order-form__label" for="contact-comment">Комментарий</label>
             <textarea class="order-form__textarea" id="contact-comment" rows="4"></textarea>
           </div>
-
           <div class="order-form__group order-form__group--wide">
             <button type="submit" class="btn btn--primary" style="width: 100%;">Отправить заявку</button>
           </div>
         </form>
       </div>
-
     </div>
+
+    <!-- Перенесенный блок Доставки -->
+    <section class="delivery-on-contacts">
+      <h2 class="section__title">Доставка и оплата</h2>
+      <div class="delivery-features">
+        <div class="delivery-feature">
+          <div class="delivery-feature__icon" aria-hidden="true">📦</div>
+          <h3 class="delivery-feature__title">Бережная упаковка</h3>
+          <p class="delivery-feature__text">Каждое растение фиксируется в горшке, листья защищены мягким материалом, корни — термоупаковкой зимой.</p>
+        </div>
+        <div class="delivery-feature">
+          <div class="delivery-feature__icon" aria-hidden="true">🚚</div>
+          <h3 class="delivery-feature__title">Курьер по Москве</h3>
+          <p class="delivery-feature__text">Доставим в день заказа или на следующий день. Курьер привезёт растение в целости.</p>
+        </div>
+        <div class="delivery-feature">
+          <div class="delivery-feature__icon" aria-hidden="true">🌍</div>
+          <h3 class="delivery-feature__title">По всей России</h3>
+          <p class="delivery-feature__text">Отправляем транспортными компаниями в жёсткой упаковке с вентиляцией.</p>
+        </div>
+      </div>
+
+      <div class="delivery-section">
+        <h2 class="delivery-section__title">Способы доставки</h2>
+        <div class="table-wrapper">
+          <table class="product-table">
+            <thead>
+              <tr><th>Способ</th><th>Сроки</th><th>Стоимость</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Самовывоз из оранжереи</td><td>В день заказа</td><td>Бесплатно</td></tr>
+              <tr><td>Курьер по Москве (в пределах МКАД)</td><td>1–2 дня</td><td>390 ₽</td></tr>
+              <tr><td>Курьер по Москве (за МКАД)</td><td>1–3 дня</td><td>от 590 ₽</td></tr>
+              <tr><td>Доставка по России (СДЭК / Почта)</td><td>3–7 дней</td><td>от 450 ₽</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="delivery-note">Бесплатная доставка по Москве при заказе от 5 000 ₽.</p>
+      </div>
+
+      <div class="delivery-section">
+        <h2 class="delivery-section__title">Способы оплаты</h2>
+        <div class="payment-grid">
+          <div class="payment-card">
+            <div class="payment-card__icon" aria-hidden="true">💳</div>
+            <h3 class="payment-card__title">Банковской картой</h3>
+            <p class="payment-card__text">Visa, Mastercard, МИР. Онлайн или курьеру при получении.</p>
+          </div>
+          <div class="payment-card">
+            <div class="payment-card__icon" aria-hidden="true">📱</div>
+            <h3 class="payment-card__title">СБП</h3>
+            <p class="payment-card__text">Оплата по QR-коду через приложение любого банка.</p>
+          </div>
+          <div class="payment-card">
+            <div class="payment-card__icon" aria-hidden="true">💵</div>
+            <h3 class="payment-card__title">Наличными</h3>
+            <p class="payment-card__text">Курьеру или в оранжерее при самовывозе.</p>
+          </div>
+          <div class="payment-card">
+            <div class="payment-card__icon" aria-hidden="true">🏢</div>
+            <h3 class="payment-card__title">Для юрлиц</h3>
+            <p class="payment-card__text">Оплата по счёту. Все закрывающие документы.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -112,17 +161,16 @@
       <div class="footer-grid">
         <div class="footer-col">
           <a href="index.html" class="site-logo">
-            <img src="images/logo.png" alt="Логотип" class="logo-img">
+            <img src="images/logo.png" alt="Логотип Зеленый дом" class="logo-img">
             ЗЕЛЕНЫЙ ДОМ
           </a>
           <p class="footer-desc">Магазин премиальных растений с заботой о каждом листочке.</p>
         </div>
         <div class="footer-col">
-          <h4>Меню</h4>
+          <h4>Разделы</h4>
           <ul class="footer-list">
             <li><a href="index.html">Главная</a></li>
             <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="delivery.html">Доставка</a></li>
             <li><a href="about.html">О нас</a></li>
             <li><a href="contacts.html">Контакты</a></li>
           </ul>
@@ -130,14 +178,19 @@
         <div class="footer-col">
           <h4>Контакты</h4>
           <ul class="footer-list">
-            <li>Москва, ул. Ботаническая, 10</li>
-            <li>+7 (495) 123-45-67</li>
-            <li>hello@zelenydom.ru</li>
+            <li class="footer-contact">
+              <span class="footer-contact__icon" aria-hidden="true">🕒</span>
+              <span>Ежедневно с 10:00 до 21:00</span>
+            </li>
+            <li class="footer-contact">
+              <span class="footer-contact__icon" aria-hidden="true">📞</span>
+              <span><a href="tel:+74951234567">+7 (495) 123-45-67</a></span>
+            </li>
+            <li class="footer-contact">
+              <span class="footer-contact__icon" aria-hidden="true">✉️</span>
+              <span><a href="mailto:hello@zelenydom.ru">hello@zelenydom.ru</a></span>
+            </li>
           </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Остались вопросы?</h4>
-          <a href="contacts.html" class="btn btn--white">Задать вопрос</a>
         </div>
       </div>
       <div class="footer-bottom">
