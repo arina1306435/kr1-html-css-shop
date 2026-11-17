@@ -120,10 +120,33 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 .modal-close:hover { color: #1a3c1a; }
 
 /* Окно товара (бывшая страница товара) */
-.product-dialog { max-width: 800px; width: 100%; background: #fff; }
-.product-dialog__inner { display: flex; gap: 30px; padding: 30px; }
-.product-dialog__img { flex: 1; border-radius: 8px; object-fit: cover; width: 100%; aspect-ratio: 1/1; }
-.product-dialog__content { flex: 1.2; display: flex; flex-direction: column; }
+.product-dialog { 
+  max-width: 800px; 
+  width: 90%; 
+  background: #fff; 
+}
+
+.product-dialog__inner { 
+  display: flex; 
+  gap: 30px; 
+  padding: 30px; 
+  align-items: flex-start; 
+}
+
+.product-dialog__img { 
+  flex: 0 0 45%; 
+  border-radius: 8px; 
+  object-fit: contain; 
+  width: 100%; 
+  max-height: 400px; 
+  /* aspect-ratio: 4/3;  */
+}
+
+.product-dialog__content { 
+  flex: 1; 
+  display: flex; 
+  flex-direction: column; 
+}
 .product-dialog__title { font-size: 32px; margin: 0 0 10px; }
 .product-dialog__sku { color: #666; font-size: 13px; text-transform: uppercase; margin-bottom: 15px; }
 .product-dialog__price { font-size: 24px; font-weight: bold; color: #1a3c1a; margin-bottom: 15px; }
@@ -348,3 +371,63 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   background: #d1dcd1; cursor: pointer; transition: background 0.3s; padding: 0;
 }
 .slider__dot.is-active { background: #1a3c1a; }
+/* === УЛУЧШЕННАЯ ФОРМА НА КОНТАКТАХ === */
+.contacts-form-wrapper { 
+  background: #ffffff; 
+  padding: 40px; 
+  border-radius: 12px; 
+  border: 1px solid #d1dcd1; 
+  box-shadow: 0 15px 40px rgba(26, 60, 26, 0.08); 
+  position: relative;
+  overflow: hidden;
+}
+
+/* Декоративная полоса сверху */
+.contacts-form-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: #1a3c1a;
+}
+
+.contact-form-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.contact-form-title {
+  font-size: 28px;
+  margin: 0 0 10px;
+  color: #1a3c1a;
+}
+
+.contact-form-subtitle {
+  font-size: 15px;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Делаем инпуты чуть больше и приятнее */
+.order-form--page .order-form__input,
+.order-form--page .order-form__select,
+.order-form--page .order-form__textarea {
+  padding: 14px 18px;
+  background: #f9fbf9;
+  border: 1px solid #c0d0c0;
+}
+
+.order-form--page .order-form__input:focus,
+.order-form--page .order-form__select:focus,
+.order-form--page .order-form__textarea:focus {
+  background: #ffffff;
+}
+
+.order-form--page .btn {
+  padding: 16px;
+  font-size: 15px;
+  margin-top: 10px;
+}

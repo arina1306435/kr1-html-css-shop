@@ -24,7 +24,7 @@ body { overflow-x: hidden; }
   .site-nav__dropdown-link { padding: 8px 15px; text-align: center; }
 
   .product-dialog__inner { flex-direction: column; padding: 20px; gap: 20px; }
-  .product-dialog__img { aspect-ratio: 16/9; }
+  .product-dialog__img { flex: none; max-height: 250px; }
 }
 
 @media (max-width: 576px) {

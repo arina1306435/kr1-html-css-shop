@@ -69,45 +69,75 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDots();
   }
 
-  // --- РАБОТА С МОДАЛЬНЫМИ ОКНАМИ ---
+  // --- МОДАЛЬНЫЕ ОКНА ---
   const productDialog = document.getElementById('product-dialog');
   const orderDialog = document.getElementById('order-dialog');
   const successDialog = document.getElementById('success-dialog');
   
   let currentProductName = "Общая заявка";
 
-  // Функция открытия карточки товара
-  document.querySelectorAll('.product-card').forEach(card => {
+  // 1. Открытие окна товара (в каталоге) при клике на карточку
+  document.querySelectorAll('.products-grid .product-card').forEach(card => {
     card.addEventListener('click', (e) => {
-      // Срабатывает только если нажали на кнопку "Подробнее"
-      if (e.target.classList.contains('product-card__more-btn')) {
-        // Читаем data-атрибуты из карточки
-        const title = card.getAttribute('data-title');
-        const price = card.getAttribute('data-price');
-        const img = card.getAttribute('data-img');
-        const desc = card.getAttribute('data-desc');
-        const sku = card.getAttribute('data-sku');
+      // Если это кнопка "Заказать" внутри каталога, пропускаем (пусть обрабатывается ниже)
+      if (e.target.classList.contains('product-card__button')) return;
 
-        // Проверка на всякий случай (если атрибуты есть)
-        if (title) document.getElementById('pd-title').textContent = title;
-        if (price) document.getElementById('pd-price').textContent = price;
-        if (img) document.getElementById('pd-img').src = img;
-        if (desc) document.getElementById('pd-desc').textContent = desc;
-        if (sku) document.getElementById('pd-sku').textContent = 'Артикул: ' + sku;
-        
-        // Запоминаем имя текущего товара
-        currentProductName = title;
-        
-        // Открываем окно
-        if (productDialog) productDialog.showModal();
-      }
+      // Берем данные из карточки
+      const title = card.getAttribute('data-title') || 'Растение';
+      const price = card.getAttribute('data-price') || 'Уточняйте';
+      const img = card.getAttribute('data-img') || '';
+      const desc = card.getAttribute('data-desc') || 'Описание временно недоступно.';
+      const sku = card.getAttribute('data-sku') || '---';
+
+      // Вставляем в окно
+      const pdTitle = document.getElementById('pd-title');
+      const pdPrice = document.getElementById('pd-price');
+      const pdImg = document.getElementById('pd-img');
+      const pdDesc = document.getElementById('pd-desc');
+      const pdSku = document.getElementById('pd-sku');
+
+      if (pdTitle) pdTitle.textContent = title;
+      if (pdPrice) pdPrice.textContent = price;
+      if (pdImg) pdImg.src = img;
+      if (pdDesc) pdDesc.textContent = desc;
+      if (pdSku) pdSku.textContent = 'Артикул: ' + sku;
+      
+      currentProductName = title;
+      
+      if (productDialog) productDialog.showModal();
     });
   });
 
-  // Закрытие окна товара
-  document.getElementById('close-product-dialog')?.addEventListener('click', () => {
-    if (productDialog) productDialog.close();
+  // 2. Кнопки "Заказать" в слайдере на главной
+  document.querySelectorAll('.slider .product-card__button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentProductName = btn.getAttribute('data-product') || "Растение";
+      
+      const hiddenInput = document.getElementById('order-product');
+      if (hiddenInput) hiddenInput.value = currentProductName;
+      
+      const select = document.getElementById('order-interest');
+      if (select) {
+        let found = false;
+        for (let option of select.options) {
+          if (option.value === currentProductName || option.text === currentProductName) {
+            select.value = option.value;
+            found = true;
+            break;
+          }
+        }
+        if (!found) select.value = "Другое растение";
+      }
+      if (orderDialog) orderDialog.showModal();
+    });
   });
+
+  // Закрытие окон
+  document.getElementById('close-product-dialog')?.addEventListener('click', () => productDialog.close());
+  document.getElementById('close-order-dialog')?.addEventListener('click', () => orderDialog.close());
+  document.getElementById('close-success-dialog')?.addEventListener('click', () => successDialog.close());
+  document.getElementById('close-success-btn')?.addEventListener('click', () => successDialog.close());
 
   // Кнопка "Оформить заявку" внутри окна товара
   document.getElementById('pd-order-btn')?.addEventListener('click', () => {
@@ -116,7 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const hiddenInput = document.getElementById('order-product');
     if (hiddenInput) hiddenInput.value = currentProductName;
     
-    // Подставляем название в селект
     const select = document.getElementById('order-interest');
     if (select) {
       for (let option of select.options) {
@@ -126,16 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-    
     if (orderDialog) orderDialog.showModal();
   });
 
-  // Закрытие окна заявки
-  document.getElementById('close-order-dialog')?.addEventListener('click', () => {
-    if (orderDialog) orderDialog.close();
-  });
-
-  // Валидация и отправка формы
+  // Валидация и отправка (для модалки на главной/каталоге)
   const form = document.getElementById('order-form');
   if (form) {
     const nameInput = document.getElementById('order-name');
@@ -156,17 +179,12 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.removeAttribute('aria-invalid');
       });
     }
-    if (nameInput) nameInput.addEventListener('input', () => nameInput.removeAttribute('aria-invalid'));
-    if (consentInput) consentInput.addEventListener('change', () => consentInput.closest('.order-form__checkbox')?.removeAttribute('aria-invalid'));
-
+    
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       let isValid = true;
       if (nameInput && nameInput.value.trim().length < 2) { nameInput.setAttribute('aria-invalid', 'true'); isValid = false; }
-      if (phoneInput) {
-        const digits = phoneInput.value.replace(/\D/g, '');
-        if (digits.length < 11) { phoneInput.setAttribute('aria-invalid', 'true'); isValid = false; }
-      }
+      if (phoneInput && phoneInput.value.replace(/\D/g, '').length < 11) { phoneInput.setAttribute('aria-invalid', 'true'); isValid = false; }
       if (consentInput && !consentInput.checked) { consentInput.closest('.order-form__checkbox')?.setAttribute('aria-invalid', 'true'); isValid = false; }
       if (!isValid) return;
 
@@ -175,12 +193,4 @@ document.addEventListener('DOMContentLoaded', () => {
       if (successDialog) successDialog.showModal();
     });
   }
-  
-  // Закрытие окна успеха
-  document.getElementById('close-success-dialog')?.addEventListener('click', () => {
-    if (successDialog) successDialog.close();
-  });
-  document.getElementById('close-success-btn')?.addEventListener('click', () => {
-    if (successDialog) successDialog.close();
-  });
 });
