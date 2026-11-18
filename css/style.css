@@ -6,15 +6,14 @@ body {
   margin: 0;
   color: #333;
   line-height: 1.6;
-  background-color: #ffffff;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('../images/паттерн.jpg');
-  background-repeat: repeat;
-  background-size: 600px;
+  background-color: #f7f9f7; 
+  background-image: linear-gradient(rgba(247, 249, 247, 0.92), rgba(247, 249, 247, 0.92)), url('../images/паттерн2.jpg');
 }
+
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Под новую высоту шапки */
+  scroll-padding-top: 80px; 
 }
 
 h1, h2, h3, h4 {
@@ -32,24 +31,45 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-/* === ШАПКА (УМЕНЬШЕНА) === */
+/* === ШАПКА === */
 .site-header {
   position: sticky; top: 0; z-index: 1000;
-  background: #e8efe8; border-bottom: 1px solid #d1dcd1;
-  box-shadow: 0 2px 8px rgba(26, 60, 26, 0.06);
+  background: rgba(255, 255, 255, 0.98); 
+  border-bottom: 1px solid #e0e8e0;
+  box-shadow: 0 4px 20px rgba(26, 60, 26, 0.05);
 }
 
 .site-header__inner {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 10px 20px; min-height: 65px; /* Уменьшили высоту */
+  padding: 10px 20px; min-height: 65px; 
 }
 
 .site-logo { display: flex; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #1a3c1a; text-decoration: none; letter-spacing: 1px; }
-.logo-img { height: 35px; width: auto; object-fit: contain; } /* Уменьшили логотип */
+.logo-img { height: 35px; width: auto; object-fit: contain; } 
 
 .site-nav__list { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; }
 .site-nav__link { text-decoration: none; color: #1a3c1a; font-weight: 500; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
-.site-nav__link:hover, .site-nav__link.active { color: #d4a373; }
+.site-nav__link {
+  position: relative;
+  padding-bottom: 5px;
+}
+.site-nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #d4a373;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+.site-nav__link:hover::after, .site-nav__link.active::after {
+  transform: scaleX(1);
+}
+.site-nav__link:hover, .site-nav__link.active { 
+  color: #d4a373; 
+}
 
 /* Выпадающее меню */
 .site-nav__item--dropdown { position: relative; }
@@ -85,8 +105,45 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .hero__image img { border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
 .img-fluid { max-width: 100%; height: auto; object-fit: cover; }
 
-.section__title { text-align: center; font-size: 38px; margin-bottom: 50px; display: block; padding: 0; position: relative; }
-.section__title::after { content: ''; display: block; width: 60px; height: 3px; background-color: #d4a373; margin: 15px auto 0; }
+/* === ГЛАВНЫЕ ЗАГОЛОВКИ СЕКЦИЙ === */
+.section__title {
+  text-align: center;
+  font-size: 38px;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: #1a3c1a;
+  font-family: 'Playfair Display', serif;
+}
+
+.section__title::before {
+  content: '✿';
+  color: #d4a373;
+  font-size: 24px;
+  font-style: normal;
+}
+
+.section__title::after {
+  content: '✿';
+  color: #d4a373;
+  font-size: 24px;
+  font-style: normal;
+}
+@media (max-width: 768px) {
+  .section__title {
+    font-size: 28px;
+    gap: 10px;
+    flex-wrap: wrap; 
+  }
+  
+  .section__title::before,
+  .section__title::after {
+    width: 40px;
+  }
+}
+
 .breadcrumbs { font-size: 14px; color: #666; margin-bottom: 20px; }
 .breadcrumbs a { color: #1a3c1a; text-decoration: none; }
 
@@ -119,7 +176,7 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 .modal-close { position: absolute; top: 15px; right: 15px; background: transparent; border: none; font-size: 28px; line-height: 1; color: #666; cursor: pointer; z-index: 10; transition: color 0.3s; }
 .modal-close:hover { color: #1a3c1a; }
 
-/* Окно товара (бывшая страница товара) */
+
 .product-dialog { 
   max-width: 800px; 
   width: 90%; 
@@ -173,6 +230,33 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 .order-form__checkbox[aria-invalid="true"] { color: #d9534f; }
 .order-form__note { grid-column: 1 / -1; font-size: 12px; color: #888; margin: 0; text-align: center; }
 
+/* === О НАС === */
+.about-block { 
+  display: flex; 
+  gap: 50px; 
+  align-items: center; 
+  margin: 40px 0 80px; 
+}
+
+.about-block__image { 
+  flex: 0 0 45%; 
+  max-width: 45%;
+  border-radius: 12px;
+}
+
+.about-block__image img {
+  object-fit: contain; 
+  box-shadow: 0 15px 35px rgba(26, 60, 26, 0.15);
+}
+
+.about-block__content { 
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+    text-align: center;
+}
+
 /* === КОНТАКТЫ === */
 .contacts-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
 .contacts-left { display: flex; flex-direction: column; }
@@ -206,8 +290,9 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 .product-table th { background: #1a3c1a; color: white; padding: 15px; text-align: left; font-weight: 400; font-size: 14px; }
 .product-table td { padding: 15px; border-bottom: 1px solid #eee; color: #444; font-size: 14px; }
 
-/* === ПОДВАЛ (ВЫРОВНЕН И ЦЕНТРИРОВАН) === */
-.site-footer { background-color: #1a3c1a; color: #e0e0e0; padding: 60px 0 20px; margin-top: 60px; }
+/* === ПОДВАЛ === */
+.site-footer { background-color: #122b12; color: #e0e0e0; padding: 60px 0 20px; margin-top: 60px; }
+.site-footer .footer-col h4 {color: #d4a373; }
 .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 30px; margin-bottom: 40px; align-items: start; }
 .footer-col { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; }
 .site-footer .site-logo { color: #ffffff; display: inline-flex; align-items: center; gap: 10px; font-size: 22px; white-space: nowrap; margin-bottom: 15px; }
@@ -250,6 +335,9 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s, box-shadow 0.3s;
   border-top: 4px solid #1a3c1a;
+  border: 1px solid #e8efe8;
+  border-top: 4px solid #d4a373; 
+  box-shadow: 0 15px 35px rgba(26, 60, 26, 0.06);
 }
 
 .feature-card:hover { 
@@ -288,6 +376,7 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   transition: transform 0.3s, box-shadow 0.3s; 
   display: flex; 
   flex-direction: column;
+  text-align: center;
 }
 
 .tip-card:hover { 
@@ -295,7 +384,12 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12); 
 }
 
-.tip-card__icon { font-size: 36px; margin-bottom: 15px; }
+.tip-card__icon { 
+  font-size: 36px; 
+  margin-bottom: 15px; 
+  text-align: center; 
+  width: 100%;        
+}
 .tip-card__title { font-size: 22px; margin: 0 0 12px; color: #1a3c1a; }
 .tip-card__text { color: #444; font-size: 15px; margin: 0 0 20px; flex-grow: 1; }
 
@@ -308,6 +402,7 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   align-self: flex-start; 
   padding-bottom: 2px; 
   transition: color 0.3s; 
+  align-self: center;
 }
 
 .tip-card__link:hover { color: #d4a373; }
@@ -322,7 +417,7 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 /* === СЛАЙДЕР === */
 .slider { 
   position: relative; 
-  padding: 0 50px; /* Отступы для стрелок */
+  padding: 0 50px; 
   max-width: 100%;
   overflow: hidden; 
 }
@@ -338,13 +433,11 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   will-change: transform; 
 }
 
-/* Жестко задаем ширину карточки в слайдере (3 штуки в ряд) */
 .slider__slide { 
   flex: 0 0 calc((100% - 60px) / 3); 
   min-width: 0; 
 }
 
-/* Фиксируем высоту картинки в карточке, чтобы она не растягивалась */
 .slider__slide .product-card__img {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -371,7 +464,7 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   background: #d1dcd1; cursor: pointer; transition: background 0.3s; padding: 0;
 }
 .slider__dot.is-active { background: #1a3c1a; }
-/* === УЛУЧШЕННАЯ ФОРМА НА КОНТАКТАХ === */
+/* === УЛУЧШЕННАЯ ФОРМА === */
 .contacts-form-wrapper { 
   background: #ffffff; 
   padding: 40px; 
@@ -382,7 +475,6 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   overflow: hidden;
 }
 
-/* Декоративная полоса сверху */
 .contacts-form-wrapper::before {
   content: '';
   position: absolute;
@@ -411,7 +503,6 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   line-height: 1.5;
 }
 
-/* Делаем инпуты чуть больше и приятнее */
 .order-form--page .order-form__input,
 .order-form--page .order-form__select,
 .order-form--page .order-form__textarea {
@@ -430,4 +521,59 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   padding: 16px;
   font-size: 15px;
   margin-top: 10px;
+}
+/* === КОНТРАСТНЫЕ СЕКЦИИ === */
+.section {
+  padding: 60px 0;
+  width: 100%;
+}
+
+.section:nth-of-type(even) {
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) inset; 
+}
+
+/* === СТИЛИ ДЛЯ МЕССЕНДЖЕРОВ === */
+.messengers-list {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.messenger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.messenger-btn svg {
+  flex-shrink: 0;
+}
+
+/* Telegram */
+.messenger-btn--tg {
+  background-color: #e3f2fd;
+  color: #007bb5;
+}
+.messenger-btn--tg:hover {
+  background-color: #007bb5;
+  color: #ffffff;
+}
+
+/* WhatsApp */
+.messenger-btn--wa {
+  background-color: #e8f5e9;
+  color: #1e8e3e;
+}
+.messenger-btn--wa:hover {
+  background-color: #1e8e3e;
+  color: #ffffff;
 }
