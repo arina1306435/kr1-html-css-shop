@@ -901,3 +901,57 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 
 /* Сдвигаем кнопку "Наверх" */
 .scroll-top { bottom: 30px; }
+/* === КНОПКА "НАВЕРХ" === */
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background-color: #e8efe8; /* Светло-зеленый */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(26, 60, 26, 0.2);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  
+  /* Изначально скрыта (появится при скролле) */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+}
+
+/* Класс, который добавляет JS при прокрутке */
+.scroll-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top:hover {
+  background-color: #1a3c1a;
+  transform: translateY(-5px);
+}
+
+.scroll-top__img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+.scroll-top:hover .scroll-top__img {
+  filter: brightness(0) invert(1); /* Белый листик при наведении */
+}
+
+/* Отодвигаем стрелку, чтобы она не наезжала на виджет чата */
+/* У виджета чата bottom: 90px, значит стрелка должна быть ниже */
+.scroll-top {
+  bottom: 30px; 
+}
+.chat-widget {
+  bottom: 100px; /* Поднимаем чат выше стрелки */
+}
