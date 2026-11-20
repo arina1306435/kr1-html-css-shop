@@ -194,3 +194,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+// === АНИМАЦИЯ ЦИФР ===
+const counters = document.querySelectorAll('.counter');
+
+const animateCounter = (counter) => {
+  const target = +counter.getAttribute('data-target');
+  const suffix = counter.getAttribute('data-suffix') || '';
+  const duration = 2000; // 2 секунды
+  let startTime = null;
+
+  const step = (timestamp) => {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const current = Math.floor(progress * target);
+    counter.textContent = current + suffix;
+
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      counter.textContent = target + suffix; // Финальное значение
+    }
+  };
+
+  window.requestAnimationFrame(step);
+};
+
+if (counters.length > 0) {
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target); // Анимируем только один раз
+      }
+    });
+  }, { threshold: 0.5 }); // Начинаем, когда элемент виден на 50%
+
+  counters.forEach(counter => observer.observe(counter));
+}
+// === ВИДЖЕТ ЧАТА ===
+const toggleChatBtn = document.getElementById('toggle-chat');
+const closeChatBtn = document.getElementById('close-chat');
+const chatWindow = document.querySelector('.chat-widget__window');
+
+if (toggleChatBtn && chatWindow) {
+  toggleChatBtn.addEventListener('click', () => {
+    chatWindow.classList.toggle('is-active');
+  });
+}
+
+if (closeChatBtn) {
+  closeChatBtn.addEventListener('click', () => {
+    chatWindow.classList.remove('is-active');
+  });
+}
