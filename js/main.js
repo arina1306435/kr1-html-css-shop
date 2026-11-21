@@ -76,20 +76,17 @@ document.addEventListener('DOMContentLoaded', () => {
   
   let currentProductName = "Общая заявка";
 
-  // 1. Открытие окна товара (в каталоге) при клике на карточку
+  // 1. Открытие окна товара (в каталоге)
   document.querySelectorAll('.products-grid .product-card').forEach(card => {
     card.addEventListener('click', (e) => {
-      // Если это кнопка "Заказать" внутри каталога, пропускаем (пусть обрабатывается ниже)
       if (e.target.classList.contains('product-card__button')) return;
 
-      // Берем данные из карточки
       const title = card.getAttribute('data-title') || 'Растение';
       const price = card.getAttribute('data-price') || 'Уточняйте';
       const img = card.getAttribute('data-img') || '';
       const desc = card.getAttribute('data-desc') || 'Описание временно недоступно.';
       const sku = card.getAttribute('data-sku') || '---';
 
-      // Вставляем в окно
       const pdTitle = document.getElementById('pd-title');
       const pdPrice = document.getElementById('pd-price');
       const pdImg = document.getElementById('pd-img');
@@ -193,57 +190,140 @@ document.addEventListener('DOMContentLoaded', () => {
       if (successDialog) successDialog.showModal();
     });
   }
-});
-// === АНИМАЦИЯ ЦИФР ===
-const counters = document.querySelectorAll('.counter');
 
-const animateCounter = (counter) => {
-  const target = +counter.getAttribute('data-target');
-  const suffix = counter.getAttribute('data-suffix') || '';
-  const duration = 2000; // 2 секунды
-  let startTime = null;
+  // === ВИДЖЕТ ЧАТА (УМНЫЙ ДИАЛОГ) ===
+  const toggleChatBtn = document.getElementById('toggle-chat');
+  const closeChatBtn = document.getElementById('close-chat');
+  const chatWindow = document.getElementById('chat-window');
+  const chatForm = document.getElementById('chat-form');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatChips = document.getElementById('chat-chips');
 
-  const step = (timestamp) => {
-    if (!startTime) startTime = timestamp;
-    const progress = Math.min((timestamp - startTime) / duration, 1);
-    const current = Math.floor(progress * target);
-    counter.textContent = current + suffix;
+  if (toggleChatBtn && chatWindow) {
+    toggleChatBtn.addEventListener('click', () => chatWindow.classList.toggle('is-active'));
+  }
+  if (closeChatBtn) {
+    closeChatBtn.addEventListener('click', () => chatWindow.classList.remove('is-active'));
+  }
 
-    if (progress < 1) {
-      window.requestAnimationFrame(step);
-    } else {
-      counter.textContent = target + suffix; // Финальное значение
-    }
+  const addMessage = (text, sender = 'bot') => {
+    const msg = document.createElement('div');
+    msg.className = `chat-widget__message ${sender}-message`;
+    msg.textContent = text;
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
   };
 
-  window.requestAnimationFrame(step);
-};
+  const chatScript = {
+    start: [
+      { text: "Как оформить заказ?", next: "order" },
+      { text: "Доставка", next: "delivery" },
+      { text: "Возврат", next: "return" },
+      { text: "Контакты", next: "contacts" }
+    ],
+    order: [
+      { text: "Сколько ждать доставку?", next: "delivery" },
+      { text: "Способы оплаты", next: "payment" },
+      { text: "В начало", next: "start" }
+    ],
+    delivery: [
+      { text: "Сколько стоит?", next: "delivery_price" },
+      { text: "Есть ли самовывоз?", next: "pickup" },
+      { text: "В начало", next: "start" }
+    ],
+    return: [
+      { text: "Условия возврата", next: "return_rules" },
+      { text: "В начало", next: "start" }
+    ],
+    contacts: [
+      { text: "Адрес оранжереи", next: "address" },
+      { text: "Написать в Telegram", action: "link", url: "https://t.me/zelenydom" },
+      { text: "В начало", next: "start" }
+    ],
+    payment: [
+      { text: "Оплата картой", next: "pay_card" },
+      { text: "Оплата при получении", next: "pay_cash" },
+      { text: "В начало", next: "start" }
+    ],
+    delivery_price: [
+      { text: "По Москве", next: "price_msk" },
+      { text: "По России", next: "price_ru" },
+      { text: "В начало", next: "start" }
+    ]
+  };
 
-if (counters.length > 0) {
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        observer.unobserve(entry.target); // Анимируем только один раз
-      }
+  const botAnswers = {
+    order: "Выберите растение в каталоге, нажмите «Заказать» и оставьте свои контакты. Мы позвоним для подтверждения.",
+    delivery: "Мы доставляем по Москве курьером за 1–2 дня, по России — СДЭК или Почтой.",
+    return: "Гарантия приживаемости — 14 дней. Если растение погибло, заменим бесплатно.",
+    contacts: "Наш адрес: Москва, ул. Ботаническая, 10. Телефон: +7 (495) 123-45-67.",
+    payment: "Принимаем карты (Visa/Mastercard/МИР), СБП, наличные курьеру или оплату по счёту.",
+    delivery_price: "По Москве (МКАД) — 390 ₽. При заказе от 5000 ₽ — бесплатно. По России — от 450 ₽.",
+    pickup: "Да, можно забрать самостоятельно по адресу: ул. Ботаническая, 10. Ежедневно с 10:00 до 21:00.",
+    return_rules: "Растение должно быть в оригинальном горшке. Пришлите фото, и мы оформим замену.",
+    address: "📍 г. Москва, ул. Ботаническая, д. 10. Ждем вас ежедневно с 10:00 до 21:00!",
+    pay_card: "Оплата онлайн на сайте или курьеру при получении (терминал).",
+    pay_cash: "Наличными курьеру или в оранжерее при самовывозе.",
+    price_msk: "По Москве (в пределах МКАД) — 390 ₽. За МКАД — от 590 ₽.",
+    price_ru: "Отправляем СДЭК и Почтой России. Стоимость рассчитывается индивидуально от 450 ₽."
+  };
+
+  const renderChips = (step) => {
+    if (!chatChips) return;
+    chatChips.innerHTML = ''; 
+    const options = chatScript[step] || chatScript.start;
+
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'chat-chip';
+      btn.textContent = opt.text;
+      
+      btn.addEventListener('click', () => {
+        chatChips.innerHTML = ''; 
+        addMessage(opt.text, 'user');
+
+        if (opt.action === 'link') {
+          setTimeout(() => {
+            addMessage("Переходим по ссылке...", 'bot');
+            window.open(opt.url, '_blank');
+            renderChips('contacts'); 
+          }, 600);
+          return;
+        }
+
+        setTimeout(() => {
+          const answer = botAnswers[opt.next];
+          if (answer) addMessage(answer, 'bot');
+          if (chatScript[opt.next]) renderChips(opt.next);
+          else renderChips('start');
+        }, 800);
+      });
+
+      chatChips.appendChild(btn);
     });
-  }, { threshold: 0.5 }); // Начинаем, когда элемент виден на 50%
+  };
 
-  counters.forEach(counter => observer.observe(counter));
-}
-// === ВИДЖЕТ ЧАТА ===
-const toggleChatBtn = document.getElementById('toggle-chat');
-const closeChatBtn = document.getElementById('close-chat');
-const chatWindow = document.querySelector('.chat-widget__window');
+  // Запускаем чат
+  if (chatMessages && chatChips) {
+    chatMessages.innerHTML = '<div class="chat-widget__message">Привет! Я Анна, флорист. Чем могу помочь?</div>';
+    renderChips('start');
+  }
 
-if (toggleChatBtn && chatWindow) {
-  toggleChatBtn.addEventListener('click', () => {
-    chatWindow.classList.toggle('is-active');
-  });
-}
+  if (chatForm) {
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = chatForm.querySelector('.chat-widget__input');
+      const text = input.value.trim();
+      if (!text) return;
 
-if (closeChatBtn) {
-  closeChatBtn.addEventListener('click', () => {
-    chatWindow.classList.remove('is-active');
-  });
-}
+      addMessage(text, 'user');
+      input.value = '';
+      chatChips.innerHTML = '';
+
+      setTimeout(() => {
+        addMessage('Спасибо за сообщение! Я передам его нашему флористу. А пока вы можете выбрать один из частых вопросов ниже.', 'bot');
+        renderChips('start'); 
+      }, 1000);
+    });
+  }
+});

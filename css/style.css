@@ -269,8 +269,8 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   font-size: 16px;
   color: #444;
   margin-bottom: 15px;
-  text-align: left; /* Выравниваем по левому краю */
-  display: block; /* Убираем флекс, который ломал верстку */
+  text-align: left;
+  display: block; 
 }
 
 .contacts-info p strong {
@@ -330,26 +330,24 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 .footer-contact__icon { font-size: 16px; }
 .site-footer .btn--white { margin-top: 5px; }
 .site-footer .footer-bottom { border-top: 1px solid #2e5e2e; padding-top: 20px; text-align: center; font-size: 13px; color: #b0c4b0; }
-/* Выравнивание только колонки с контактами */
 .footer-col--contacts {
   align-items: flex-start !important;
   text-align: left;
 }
 
 .footer-col--contacts h4 {
-  text-align: left; /* Заголовок тоже слева */
+  text-align: left; 
   width: 100%;
 }
 
 .footer-col--contacts .footer-list {
-  align-items: flex-start; /* Элементы списка слева */
+  align-items: flex-start; 
 }
 
 .footer-col--contacts .footer-contact {
   justify-content: flex-start;
 }
 
-/* Иконки соцсетей в футере */
 .footer-socials {
   display: flex;
   gap: 15px;
@@ -432,10 +430,9 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   transition: transform 0.3s, box-shadow 0.3s; 
   display: flex; 
   flex-direction: column;
-  align-items: center; /* Центрируем всё внутри карточки */
-  text-align: center; /* Центрируем текст */
+  align-items: center; 
+  text-align: center; 
 }
-
 
 .tip-card:hover { 
   transform: translateY(-6px); 
@@ -465,7 +462,7 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   border-bottom: 1px solid #d4a373; 
   padding-bottom: 2px; 
   transition: color 0.3s; 
-  margin-top: auto; /* Прижимает ссылку к низу */
+  margin-top: auto; 
 }
 
 .tip-card__link:hover { color: #d4a373; }
@@ -646,13 +643,11 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   display: block;
   margin-bottom: 5px;
 }
-/* Убираем синий цвет и подчеркивание у ссылок в контактах */
 .contact-item a {
-  color: #444 !important; /* Цвет как у обычного текста */
+  color: #444 !important; 
   transition: color 0.3s;
 }
 
-/* При наведении мышки делаем их фирменного зеленого цвета */
 .contact-item a:hover {
   color: #d4a373 !important; 
 }
@@ -660,10 +655,10 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 
 /* 1. Полезные советы */
 .tip-card__icon {
-  background: transparent !important; /* Убираем серый круг */
+  background: transparent !important; 
   width: auto !important;
   height: auto !important;
-  font-size: 56px !important; /* Делаем иконку большой */
+  font-size: 56px !important; 
   line-height: 1 !important;
   margin-bottom: 25px !important;
 }
@@ -671,15 +666,14 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 /* 2. Доставка и оплата */
 .delivery-feature__icon,
 .payment-card__icon {
-  background: transparent !important; /* Убираем серый круг */
+  background: transparent !important; 
   width: auto !important;
   height: auto !important;
-  font-size: 48px !important; /* Делаем иконку большой */
+  font-size: 48px !important; 
   line-height: 1 !important;
   margin-bottom: 20px !important;
 }
 
-/* Оставляем кружочки только в блоке "Почему выбирают нас" (там SVG-иконки) */
 .feature-icon {
   display: inline-flex;
   align-items: center;
@@ -704,39 +698,7 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 .contact-item p a:hover {
   color: #d4a373 !important; 
 }
-/* === ВИДЖЕТ ЧАТА === */
-.chat-widget {
-  position: fixed;
-  bottom: 90px; /* Чуть выше кнопки "Наверх" */
-  right: 30px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-/* Сама кнопка */
-.chat-widget__toggle {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: #1a3c1a;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(26, 60, 26, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s, background-color 0.3s;
-}
-.chat-widget__toggle:hover {
-  background-color: #d4a373;
-  transform: scale(1.05);
-}
-
-/* Окно чата */
-/* === ПРОФЕССИОНАЛЬНЫЙ ВИДЖЕТ ЧАТА === */
+/* === ПРОФЕССИОНАЛЬНЫЙ ВИДЖЕТ ЧАТА (Светлая шапка) === */
 .chat-widget {
   position: fixed;
   bottom: 90px;
@@ -748,16 +710,16 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   font-family: 'Inter', sans-serif;
 }
 
-/* Кнопка с пульсацией */
+/* Кнопка открытия (Золотая) */
 .chat-widget__toggle {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #1a3c1a;
+  background-color: #d4a373; /* Золотой цвет */
   color: #fff;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(26, 60, 26, 0.3);
+  box-shadow: 0 4px 15px rgba(212, 163, 115, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -765,166 +727,259 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
   position: relative;
 }
 .chat-widget__toggle:hover {
-  background-color: #d4a373;
+  background-color: #c29262;
   transform: scale(1.05);
 }
-
-/* Пульсация */
 .chat-widget__toggle::after {
   content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(26, 60, 26, 0.4);
+  box-shadow: 0 0 0 0 rgba(212, 163, 115, 0.5);
   animation: pulse 2s infinite;
 }
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(26, 60, 26, 0.4); }
-  70% { box-shadow: 0 0 0 15px rgba(26, 60, 26, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(26, 60, 26, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(212, 163, 115, 0.5); }
+  70% { box-shadow: 0 0 0 15px rgba(212, 163, 115, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 163, 115, 0); }
 }
 
 /* Окно чата */
 .chat-widget__window {
-  background: #fff;
-  width: 320px;
-  border-radius: 16px;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  background: #f9f6f0; /* Светлый фон */
+  width: 340px;
+  border-radius: 12px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
   margin-bottom: 15px;
   overflow: hidden;
   display: none;
-  border: 1px solid #e8efe8;
+  border: 1px solid #e8e0d5;
   transform-origin: bottom right;
   animation: chatPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
-@keyframes chatPop {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
-}
-.chat-widget__window.is-active { display: block; }
+.chat-widget__window.is-active { display: flex; flex-direction: column; }
 
-/* Шапка чата */
+/* === ШАПКА ЧАТА (ИСПРАВЛЕННАЯ) === */
 .chat-widget__header {
-  background: #f4f7f4;
-  padding: 20px;
-  border-bottom: 1px solid #e8efe8;
+  background: #e8efe8;
+  padding: 15px 20px;
   position: relative;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #d1dcd1;
+  flex-shrink: 0;
 }
+
 .chat-widget__header-top {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
+  width: 100%;
 }
+
 .chat-widget__avatar {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex-shrink: 0;
 }
+
 .chat-widget__header h4 {
-  margin: 0 0 2px;
+  margin: 0 0 4px;
   font-size: 16px;
   color: #1a3c1a;
   font-family: 'Playfair Display', serif;
 }
+
+/* Статус онлайн */
 .chat-widget__header p {
   margin: 0;
-  font-size: 12px;
+  font-size: 13px;
   color: #555;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
+
 .chat-widget__online {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background: #2e5e2e;
+  background: #2e5e2e; 
   border-radius: 50%;
 }
 
+/* Кнопка закрытия (крестик) */
 .chat-widget__close {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: none;
+  background: transparent;
   border: none;
-  font-size: 22px;
-  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
   color: #888;
+  cursor: pointer;
+  padding: 0;
   transition: color 0.2s;
+  box-shadow: none; 
+  width: auto;
+  height: auto;
 }
-.chat-widget__close:hover { color: #1a3c1a; }
 
+.chat-widget__close:hover {
+  color: #1a3c1a;
+}
 /* Тело чата */
 .chat-widget__body {
-  padding: 20px;
-}
-.chat-widget__message {
-  background: #f4f7f4;
-  padding: 12px 15px;
-  border-radius: 12px;
-  border-bottom-left-radius: 4px; /* Эффект "хвостика" сообщения */
-  font-size: 13px;
-  color: #444;
-  line-height: 1.5;
-  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 350px; 
+  overflow: hidden; 
 }
 
-/* Кнопки (теперь с рамкой, а не сплошным фоном) */
-.chat-widget__btn {
+.chat-widget__messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+}
+
+.chat-widget__message {
+  background: #ffffff;
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  max-width: 90%;
+  align-self: flex-start;
+}
+
+.chat-widget__message.user-message {
+  background: #d4a373; 
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 0;
+}
+
+.chat-widget__message.bot-message {
+  border-bottom-left-radius: 0;
+}
+
+/* Чипсы */
+.chat-widget__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.chat-chip {
+  background: transparent;
+  border: 1px solid #5c7753; 
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.chat-chip:hover {
+  background: #5c7753;
+  color: #fff;
+}
+
+/* Зона ввода (прижата к низу) */
+.chat-widget__input-area {
+  display: flex;
+  gap: 10px;
+  padding: 15px 20px;
+  background: #f9f6f0;
+  border-top: 1px solid #e8e0d5;
+  flex-shrink: 0; /* Не сжимается */
+}
+
+.chat-widget__input {
+  flex-grow: 1;
+  border: 1px solid #d1dcd1;
+  padding: 10px 15px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+  border-radius: 6px;
+  transition: border-color 0.2s;
+}
+
+.chat-widget__input:focus {
+  border-color: #5c7753; 
+}
+
+.chat-widget__send {
+  background: #5c7753; 
+  color: white;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 10px;
-  transition: all 0.3s;
-  border: 1px solid #d1dcd1;
-  color: #1a3c1a;
-  background: #ffffff;
+  transition: background 0.2s;
+  flex-shrink: 0;
 }
-.chat-widget__btn:hover {
-  border-color: #1a3c1a;
-  background: #f9fbf9;
-}
-/* Если хотите сохранить цвета брендов, можно оставить их, но сделать прозрачнее */
-.chat-widget__btn svg { color: #1a3c1a; }
 
-/* Сдвигаем кнопку "Наверх" */
+.chat-widget__send:hover {
+  background: #4a6143; 
+}
+.chat-widget__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 20px 15px 20px; 
+  background: #f9f6f0; 
+}
+
+.chat-widget__message {
+  animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-widget__messages {
+  padding: 20px 20px 0 20px;
+}
+
 .scroll-top { bottom: 30px; }
 /* === КНОПКА "НАВЕРХ" === */
 .scroll-top {
   position: fixed;
-  bottom: 30px;
+  bottom: 30px; /* Чуть ниже */
   right: 30px;
-  width: 50px;
-  height: 50px;
-  background-color: #e8efe8; /* Светло-зеленый */
+  width: 60px;  /* Сделали такого же размера, как чат */
+  height: 60px;
+  background-color: #e8efe8;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 1000;
   box-shadow: 0 4px 15px rgba(26, 60, 26, 0.2);
   transition: all 0.3s ease;
   text-decoration: none;
-  
-  /* Изначально скрыта (появится при скролле) */
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
 }
 
-/* Класс, который добавляет JS при прокрутке */
 .scroll-top.show {
   opacity: 1;
   visibility: visible;
@@ -937,21 +992,19 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 }
 
 .scroll-top__img {
-  width: 28px;
-  height: 28px;
+  width: 32px; /* Чуть увеличили листик внутри */
+  height: 32px;
   object-fit: contain;
   transition: filter 0.3s ease;
 }
 
 .scroll-top:hover .scroll-top__img {
-  filter: brightness(0) invert(1); /* Белый листик при наведении */
+  filter: brightness(0) invert(1);
 }
 
-/* Отодвигаем стрелку, чтобы она не наезжала на виджет чата */
-/* У виджета чата bottom: 90px, значит стрелка должна быть ниже */
 .scroll-top {
   bottom: 30px; 
 }
 .chat-widget {
-  bottom: 100px; /* Поднимаем чат выше стрелки */
+  bottom: 100px; 
 }
