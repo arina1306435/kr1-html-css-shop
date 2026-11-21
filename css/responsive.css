@@ -41,3 +41,14 @@ body { overflow-x: hidden; }
   .slider { padding: 0 30px; } 
   .slider__slide { flex: 0 0 100%; } /* 1 карточка */
 }
+@media (max-width: 576px) {
+  .chat-widget {
+    left: 15px;
+    bottom: 15px;
+  }
+  
+  .chat-widget__window {
+    width: calc(100vw - 30px); /* Окно занимает почти всю ширину экрана */
+    max-width: 340px;
+  }
+}
