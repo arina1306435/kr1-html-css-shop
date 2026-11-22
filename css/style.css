@@ -1003,4 +1003,3 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 .scroll-top:hover .scroll-top__img {
   filter: brightness(0) invert(1);
 }
-
