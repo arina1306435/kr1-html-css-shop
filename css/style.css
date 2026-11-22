@@ -1018,3 +1018,26 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 .scroll-top:hover .scroll-top__img {
   filter: brightness(0) invert(1);
 }
+/* Обертка для видео */
+.video-wrapper {
+  margin: 20px auto 40px;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  background: #000;
+}
+
+/* Само видео */
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
