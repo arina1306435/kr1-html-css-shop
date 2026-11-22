@@ -1,4 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+  // ==========================================
+  // ПРАКТИКА 15: Функции и расчеты
+  // ==========================================
+  
+  // 1. Функция форматирования цены
+  function formatPrice(amount) {
+    return amount.toLocaleString('ru-RU') + ' ₽';
+  }
+
+  // 2. Функция расчета скидки
+  function calculateDiscount(price, discountPercent) {
+    const discount = (price * discountPercent) / 100;
+    const result = price - discount;
+    return {
+      original: formatPrice(price),
+      discount: formatPrice(discount),
+      final: formatPrice(result)
+    };
+  }
+
+  // 3. Функция определения статуса товара
+  function getProductStatus(inStock, stockCount) {
+    if (inStock && stockCount > 3) return "В наличии (много)";
+    if (inStock && stockCount > 0) return "В наличии (мало)";
+    if (!inStock || stockCount === 0) return "Нет в наличии";
+    return "Уточняйте у менеджера";
+  }
+
+  // 4. Функция формирования краткого описания
+  function getShortDescription(text, maxLength) {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + "...";
+  }
+
+  // ВЫВОД В КОНСОЛЬ
+  console.log("--- СТАРТ ПРАКТИКИ 15 ---");
+  if (typeof shopName !== 'undefined' && typeof product !== 'undefined') {
+    console.log(`Магазин: ${shopName}`);
+    console.log("Данные товара:", product);
+
+    if (isHolidaySale) {
+      const discountInfo = calculateDiscount(product.price, product.discountPercent);
+      console.log(`Скидка: ${discountInfo.discount}, Итоговая цена: ${discountInfo.final}`);
+    }
+
+    console.log(`Статус: ${getProductStatus(product.isAvailable, product.stockCount)}`);
+    console.log(`Краткое описание: ${getShortDescription(product.description, 40)}`);
+  }
+  console.log("--- КОНЕЦ ПРАКТИКИ 15 ---");
+
+  // ВЫВОД СООБЩЕНИЯ НА СТРАНИЦУ
+  const messageElement = document.getElementById('js-message');
+  if (messageElement && typeof shopName !== 'undefined' && typeof product !== 'undefined') {
+    messageElement.textContent = `В магазине "${shopName}" доступно ${product.stockCount} шт. товара "${product.title}".`;
+  }
+
+  // ==========================================
+  // ОСНОВНАЯ ЛОГИКА САЙТА
+  // ==========================================
+
   // Кнопка наверх
   const scrollTopBtn = document.getElementById('scrollTop');
   if (scrollTopBtn) {
@@ -192,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === ВИДЖЕТ ЧАТА (УМНЫЙ ДИАЛОГ) ===
+  // === ВИДЖЕТ ЧАТА ===
   const toggleChatBtn = document.getElementById('toggle-chat');
   const closeChatBtn = document.getElementById('close-chat');
   const chatWindow = document.getElementById('chat-window');
@@ -327,13 +388,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1000);
     });
   }
-    // === АНИМАЦИЯ ЦИФР ===
+
+  // === АНИМАЦИЯ ЦИФР ===
   const counters = document.querySelectorAll('.counter');
 
   const animateCounter = (counter) => {
     const target = +counter.getAttribute('data-target');
     const suffix = counter.getAttribute('data-suffix') || '';
-    const duration = 2000; // 2 секунды
+    const duration = 2000;
     let startTime = null;
 
     const step = (timestamp) => {
@@ -345,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (progress < 1) {
         window.requestAnimationFrame(step);
       } else {
-        counter.textContent = target + suffix; // Финальное значение
+        counter.textContent = target + suffix;
       }
     };
 
@@ -357,11 +419,12 @@ document.addEventListener('DOMContentLoaded', () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           animateCounter(entry.target);
-          observer.unobserve(entry.target); // Анимируем только один раз
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.5 }); // Начинаем, когда элемент виден на 50%
+    }, { threshold: 0.5 });
 
     counters.forEach(counter => observer.observe(counter));
   }
+
 });
