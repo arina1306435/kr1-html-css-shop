@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dot = document.createElement('button');
         dot.className = 'slider__dot' + (i === currentIndex ? ' is-active' : '');
         dot.type = 'button';
+        dot.setAttribute('aria-label', `Перейти к слайду ${i + 1}`); 
         dot.addEventListener('click', () => goTo(i));
         dotsContainer.appendChild(dot);
       }

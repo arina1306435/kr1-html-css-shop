@@ -520,8 +520,23 @@ dialog::backdrop { background: rgba(26, 60, 26, 0.6); backdrop-filter: blur(3px)
 /* Точки навигации */
 .slider__dots { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
 .slider__dot {
-  width: 10px; height: 10px; border-radius: 50%; border: none;
-  background: #d1dcd1; cursor: pointer; transition: background 0.3s; padding: 0;
+  width: 12px; 
+  height: 12px; 
+  border-radius: 50%; 
+  border: none;
+  background: #d1dcd1; 
+  cursor: pointer; 
+  transition: background 0.3s; 
+  padding: 0;
+  margin: 0 6px; /* Расстояние между точками */
+  position: relative;
+}
+
+/* Делаем невидимую область вокруг точки больше для пальцев */
+.slider__dot::after {
+  content: '';
+  position: absolute;
+  top: -10px; left: -10px; right: -10px; bottom: -10px;
 }
 .slider__dot.is-active { background: #1a3c1a; }
 /* === УЛУЧШЕННАЯ ФОРМА === */
