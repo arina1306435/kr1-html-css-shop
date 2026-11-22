@@ -49,11 +49,23 @@ document.addEventListener('DOMContentLoaded', () => {
       price.className = 'product-card__price';
       price.textContent = formatPrice(product.price);
 
+      // ... внутри цикла items.forEach(product => { ...
+
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'btn btn--outline';
-      btn.textContent = product.isAvailable ? 'Подробнее' : 'Нет в наличии';
+      btn.className = 'btn btn--outline add-to-cart-btn'; // Добавили класс
+      btn.textContent = product.isAvailable ? 'В корзину' : 'Нет в наличии'; // Поменяли текст
       if (!product.isAvailable) btn.disabled = true;
+
+      // Обработчик добавления в корзину
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Чтобы не открывалась модалка при клике на кнопку
+        if (window.addToCart) {
+            window.addToCart(product);
+        }
+      });
+
+      // ... дальше сборка body.append(title, desc, price, btn); ...
 
       // --- ЛОГИКА ОТКРЫТИЯ МОДАЛКИ ---
       // Добавляем обработчик на всю карточку (или только на кнопку)
