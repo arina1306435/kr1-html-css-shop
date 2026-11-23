@@ -20,6 +20,8 @@ body { overflow-x: hidden; }
   .delivery-features, .payment-grid { grid-template-columns: 1fr; }
 
   .slider__slide { flex: 0 0 calc((100% - 30px) / 2); }
+
+  .features-grid, .tips-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ============================================
@@ -31,72 +33,73 @@ body { overflow-x: hidden; }
   .section__title { font-size: 28px; gap: 10px; flex-wrap: wrap; }
   .section__title::before, .section__title::after { font-size: 18px; }
 
-  /* ---------- ШАПКА ---------- */
+  /* ---------- ШАПКА: две строки ---------- */
+  /* 1-я строка: логотип + (Войти, корзина)  2-я строка: меню */
   .site-header__inner {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 8px 16px;
-    padding: 10px 16px;
+    gap: 0 16px;
+    padding: 8px 16px 6px;
   }
 
-  .site-logo { order: 1; font-size: 20px; gap: 8px; }
+  .site-logo { order: 1; font-size: 19px; gap: 8px; }
   .logo-img { width: 28px; height: auto; }
 
-  /* Группа кнопок: аккаунт + корзина рядом, справа */
-  .header-actions { order: 2; margin-left: auto; }
+  .header-actions {
+    order: 2;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
 
-  /* Меню — второй строкой */
-  .site-nav { order: 3; width: 100%; }
+  .header-account-btn {
+    padding: 6px 10px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    min-height: 0;
+    line-height: 1.2;
+    border-radius: 4px;
+  }
+
+  .site-nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
 
   .site-nav__list {
     display: flex;
-    gap: 4px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px;
+    flex-wrap: wrap;
+    gap: 2px 14px;
+    padding: 4px 0;
+    overflow: visible;
   }
-  .site-nav__list::-webkit-scrollbar { display: none; }
 
   .site-nav__link { font-size: 14px; padding: 8px 10px; white-space: nowrap; }
 
-  /* Дропдаун карточкой поверх контента */
+  /* Дропдаун «Каталог»: карточка поверх контента */
   .site-nav__item--dropdown { position: relative; }
 
   .site-nav__dropdown {
     position: absolute;
     top: 100%;
     left: 0;
-    right: auto;
-    transform: translateY(6px);
+    transform: translateY(4px);
+    display: none;
+    opacity: 0;
+    visibility: hidden;
     min-width: 220px;
     background: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    opacity: 0;
-    visibility: hidden;
-    display: none;
     padding: 6px 0;
     margin: 0;
-    z-index: 100;
+    z-index: 200;
   }
 
   .site-nav__item--dropdown.is-open .site-nav__dropdown {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(6px);
-  }
-
-  .site-nav__item--dropdown:hover .site-nav__dropdown {
-    display: none;
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  .site-nav__item--dropdown.is-open:hover .site-nav__dropdown {
     display: block;
     opacity: 1;
     visibility: visible;
@@ -108,13 +111,6 @@ body { overflow-x: hidden; }
     font-size: 14px;
     white-space: nowrap;
     text-align: left;
-  }
-
-  /* Кнопка «Войти» компактнее */
-  .header-account-btn {
-    padding: 8px 10px;
-    font-size: 11px;
-    min-height: 44px;
   }
 
   /* ---------- HERO ---------- */
@@ -145,17 +141,10 @@ body { overflow-x: hidden; }
     display: block;
     border-radius: 12px;
   }
-  .about-block__content {
-    width: 100%;
-    text-align: center;
-    padding: 0;
-  }
+  .about-block__content { width: 100%; text-align: center; padding: 0; }
 
   /* ---------- КОНТАКТЫ ---------- */
-  .contacts-wrapper {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
+  .contacts-wrapper { grid-template-columns: 1fr; gap: 24px; }
   .contacts-form-wrapper { padding: 24px 20px; }
 
   .contact-form input,
@@ -264,26 +253,23 @@ body { overflow-x: hidden; }
     margin: auto;
   }
 }
-/* ============================================================
-   ФИКС: мобильная шапка и тач-hover
-   ============================================================ */
 
-/* Кнопка «Войти» — компактная, вровень с логотипом */
-@media (max-width: 768px) {
-  .header-account-btn {
-    padding: 6px 10px;
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    min-height: 0;
-    line-height: 1.2;
-    border-radius: 4px;
-  }
-}
-
-/* На сенсорных экранах hover не «залипает»:
-   подчёркивание и перекраска — только у активного пункта */
+/* ============================================
+   СЕНСОРНЫЕ ЭКРАНЫ: hover не «залипает»
+   (подчёркивание и цвет — только у активного пункта)
+   ============================================ */
 @media (hover: none) {
   .site-nav__link:hover::after { transform: scaleX(0); }
   .site-nav__link:hover { color: #1a3c1a; }
   .site-nav__item--dropdown:hover .site-nav__caret { transform: rotate(0deg); }
+  .site-nav__item--dropdown:hover .site-nav__dropdown {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+  .site-nav__item--dropdown.is-open:hover .site-nav__dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
 }
