@@ -1,161 +1,229 @@
+// ============================================================
+// catalog.js — логика каталога: рендер, поиск, фильтр, сортировка,
+// пустое состояние, модальное окно товара, переход к заявке
+// ============================================================
+
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('products-container');
-  if (!container) return; // Если мы не на странице каталога — выходим
+  const grid = document.getElementById('products-container');
+  if (!grid || typeof products === 'undefined') return; // каталог есть не на всех страницах
 
   const searchInput = document.getElementById('search-input');
   const filterSelect = document.getElementById('filter-select');
   const sortSelect = document.getElementById('sort-select');
-  const countDisplay = document.getElementById('products-count');
+  const countEl = document.getElementById('products-count');
   const emptyState = document.getElementById('empty-state');
-  
-  // Функция форматирования цены
-  const formatPrice = (price) => price.toLocaleString('ru-RU') + ' ₽';
+  const resetBtn = document.getElementById('reset-filters');
 
-  // Главная функция рендера
-  function renderProducts(items) {
-    container.innerHTML = ''; 
-    
-    if (items.length === 0) {
-      emptyState.hidden = false;
-      countDisplay.textContent = 'Найдено товаров: 0';
-      return;
-    } else {
-      emptyState.hidden = true;
-    }
+  // --- Элементы модального окна товара ---
+  const productDialog = document.getElementById('product-dialog');
+  const closeProductDialog = document.getElementById('close-product-dialog');
+  const pdImg = document.getElementById('pd-img');
+  const pdTitle = document.getElementById('pd-title');
+  const pdSku = document.getElementById('pd-sku');
+  const pdPrice = document.getElementById('pd-price');
+  const pdDesc = document.getElementById('pd-desc');
+  const pdOrderBtn = document.getElementById('pd-order-btn');
 
-    countDisplay.textContent = `Найдено товаров: ${items.length}`;
+  // --- Элементы модального окна заявки ---
+  const orderDialog = document.getElementById('order-dialog');
+  const closeOrderDialog = document.getElementById('close-order-dialog');
+  const orderProductInput = document.getElementById('order-product');
 
-    items.forEach(product => {
-      const card = document.createElement('article');
-      card.className = 'product-card';
+  let currentProduct = null;
 
-      const img = document.createElement('img');
-      img.src = product.image;
-      img.alt = product.title;
-      img.className = 'product-card__img';
-      
-      const body = document.createElement('div');
-      body.className = 'product-card__body';
+  // ============================================================
+  // 1. ФОРМАТИРОВАНИЕ ЦЕНЫ
+  // ============================================================
 
-      const title = document.createElement('h3');
-      title.className = 'product-card__title';
-      title.textContent = product.title;
-
-      const desc = document.createElement('p');
-      desc.className = 'product-card__desc';
-      desc.textContent = product.desc;
-
-      const price = document.createElement('p');
-      price.className = 'product-card__price';
-      price.textContent = formatPrice(product.price);
-
-      // ... внутри цикла items.forEach(product => { ...
-
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'btn btn--outline add-to-cart-btn'; // Добавили класс
-      btn.textContent = product.isAvailable ? 'В корзину' : 'Нет в наличии'; // Поменяли текст
-      if (!product.isAvailable) btn.disabled = true;
-
-      // Обработчик добавления в корзину
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Чтобы не открывалась модалка при клике на кнопку
-        if (window.addToCart) {
-            window.addToCart(product);
-        }
-      });
-
-      // ... дальше сборка body.append(title, desc, price, btn); ...
-
-      // --- ЛОГИКА ОТКРЫТИЯ МОДАЛКИ ---
-      // Добавляем обработчик на всю карточку (или только на кнопку)
-      card.addEventListener('click', (e) => {
-        // Если кнопка заблокирована, ничего не делаем
-        if (!product.isAvailable) return;
-
-        const pdTitle = document.getElementById('pd-title');
-        const pdPrice = document.getElementById('pd-price');
-        const pdImg = document.getElementById('pd-img');
-        const pdDesc = document.getElementById('pd-desc');
-        const pdSku = document.getElementById('pd-sku');
-        const productDialog = document.getElementById('product-dialog');
-
-        if (pdTitle) pdTitle.textContent = product.title;
-        if (pdPrice) pdPrice.textContent = formatPrice(product.price);
-        if (pdImg) pdImg.src = product.image;
-        if (pdDesc) pdDesc.textContent = product.desc;
-        if (pdSku) pdSku.textContent = 'Артикул: PL-' + String(product.id).padStart(3, '0');
-        
-        // Передаем название в кнопку "Оформить заявку" внутри модалки
-        const orderBtn = document.getElementById('pd-order-btn');
-        if (orderBtn) {
-            // Удаляем старые обработчики, чтобы не дублировались
-            const newOrderBtn = orderBtn.cloneNode(true);
-            orderBtn.parentNode.replaceChild(newOrderBtn, orderBtn);
-            newOrderBtn.addEventListener('click', () => {
-                document.getElementById('product-dialog').close();
-                
-                // Открываем окно заявки и подставляем товар
-                const orderDialog = document.getElementById('order-dialog');
-                const orderProductInput = document.getElementById('order-product');
-                const orderInterestSelect = document.getElementById('order-interest');
-                
-                if (orderProductInput) orderProductInput.value = product.title;
-                if (orderInterestSelect) {
-                    for (let option of orderInterestSelect.options) {
-                        if (option.value === product.title || option.text === product.title) {
-                            orderInterestSelect.value = option.value;
-                            break;
-                        }
-                    }
-                }
-                if (orderDialog) orderDialog.showModal();
-            });
-        }
-
-        if (productDialog) productDialog.showModal();
-      });
-
-      // Сборка
-      body.append(title, desc, price, btn);
-      card.append(img, body);
-      container.append(card);
-    });
+  function formatPrice(value) {
+    return new Intl.NumberFormat('ru-RU').format(value) + ' руб.';
   }
-  // Фильтрация и сортировка
-  function updateCatalog() {
-    let filtered = [...products]; // Копия массива!
 
-    // Поиск
-    if (searchInput && searchInput.value) {
-      const query = searchInput.value.toLowerCase();
-      filtered = filtered.filter(p => p.title.toLowerCase().includes(query));
+  // ============================================================
+  // 2. РЕНДЕР КАРТОЧКИ ТОВАРА
+  // ============================================================
+
+  function createCard(product) {
+    const card = document.createElement('article');
+    card.className = 'product-card';
+
+    const img = document.createElement('img');
+    img.src = product.image;
+    img.alt = product.alt || product.title; // описательный alt из data.js
+    img.className = 'product-card__img';
+    img.loading = 'lazy';
+
+    const body = document.createElement('div');
+    body.className = 'product-card__body';
+
+    const title = document.createElement('h3');
+    title.className = 'product-card__title';
+    title.textContent = product.title;
+
+    const desc = document.createElement('p');
+    desc.className = 'product-card__desc';
+    desc.textContent = product.desc;
+
+    const price = document.createElement('p');
+    price.className = 'product-card__price';
+    price.textContent = formatPrice(product.price);
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn btn--outline product-card__button';
+    btn.textContent = 'Заказать';
+    btn.setAttribute('aria-label', 'Заказать ' + product.title);
+    btn.addEventListener('click', () => openProductDialog(product));
+
+    body.appendChild(title);
+    body.appendChild(desc);
+    body.appendChild(price);
+    body.appendChild(btn);
+
+    card.appendChild(img);
+    card.appendChild(body);
+
+    // Клик по всей карточке тоже открывает модалку товара
+    card.addEventListener('click', (e) => {
+      if (e.target === btn) return;
+      openProductDialog(product);
+    });
+
+    return card;
+  }
+
+  // ============================================================
+  // 3. ФИЛЬТРАЦИЯ, ПОИСК И СОРТИРОВКА
+  // ============================================================
+
+  function getFilteredProducts() {
+    let list = products.slice();
+
+    // Фильтр по категории (select)
+    const category = filterSelect ? filterSelect.value : 'all';
+    if (category && category !== 'all') {
+      list = list.filter(p => p.category === category);
     }
 
-    // Фильтр
-    if (filterSelect && filterSelect.value !== 'all') {
-      filtered = filtered.filter(p => p.category === filterSelect.value);
+    // Поиск по названию и описанию
+    const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+    if (query) {
+      list = list.filter(p =>
+        p.title.toLowerCase().includes(query) ||
+        (p.desc || '').toLowerCase().includes(query)
+      );
     }
 
     // Сортировка
-    if (sortSelect) {
-      if (sortSelect.value === 'price-asc') {
-        filtered.sort((a, b) => a.price - b.price);
-      } else if (sortSelect.value === 'price-desc') {
-        filtered.sort((a, b) => b.price - a.price);
-      } else if (sortSelect.value === 'name') {
-        filtered.sort((a, b) => a.title.localeCompare(b.title));
-      }
-    }
+    const sort = sortSelect ? sortSelect.value : 'default';
+    if (sort === 'price-asc') list.sort((a, b) => a.price - b.price);
+    else if (sort === 'price-desc') list.sort((a, b) => b.price - a.price);
+    else if (sort === 'name') list.sort((a, b) => a.title.localeCompare(b.title, 'ru'));
 
-    renderProducts(filtered);
+    return list;
   }
 
-  // Слушатели событий
-  if (searchInput) searchInput.addEventListener('input', updateCatalog);
-  if (filterSelect) filterSelect.addEventListener('change', updateCatalog);
-  if (sortSelect) sortSelect.addEventListener('change', updateCatalog);
+  function render() {
+    const list = getFilteredProducts();
 
-  // Первый рендер
-  updateCatalog();
+    grid.innerHTML = '';
+    list.forEach(product => grid.appendChild(createCard(product)));
+
+    if (countEl) {
+      countEl.textContent = 'Найдено товаров: ' + list.length;
+    }
+
+    if (emptyState) {
+      emptyState.hidden = list.length > 0;
+    }
+  }
+
+  // ============================================================
+  // 4. МОДАЛЬНОЕ ОКНО ТОВАРА
+  // ============================================================
+
+  function openProductDialog(product) {
+    currentProduct = product;
+
+    if (pdImg) {
+      pdImg.src = product.image;
+      pdImg.alt = product.alt || product.title;
+    }
+    if (pdTitle) pdTitle.textContent = product.title;
+    if (pdSku) pdSku.textContent = 'Артикул: ' + (product.sku || 'PL-' + String(product.id).padStart(3, '0'));
+    if (pdPrice) pdPrice.textContent = formatPrice(product.price);
+    if (pdDesc) pdDesc.textContent = product.desc;
+
+    if (productDialog && typeof productDialog.showModal === 'function') {
+      productDialog.showModal();
+    }
+  }
+
+  if (closeProductDialog) {
+    closeProductDialog.addEventListener('click', () => {
+      if (productDialog) productDialog.close();
+    });
+  }
+
+  // Кнопка «Оформить заявку» в модалке товара:
+  // подставляем название товара в заявку и открываем форму
+  if (pdOrderBtn) {
+    pdOrderBtn.addEventListener('click', () => {
+      if (orderProductInput && currentProduct) {
+        orderProductInput.value = currentProduct.title;
+        const interest = document.getElementById('order-interest');
+        if (interest) interest.value = currentProduct.title;
+      }
+      if (productDialog) productDialog.close();
+      if (orderDialog && typeof orderDialog.showModal === 'function') {
+        orderDialog.showModal();
+      }
+    });
+  }
+
+  if (closeOrderDialog) {
+    closeOrderDialog.addEventListener('click', () => {
+      if (orderDialog) orderDialog.close();
+    });
+  }
+
+  // ============================================================
+  // 5. СОБЫТИЯ ФИЛЬТРОВ
+  // ============================================================
+
+  if (searchInput) searchInput.addEventListener('input', render);
+  if (filterSelect) filterSelect.addEventListener('change', render);
+  if (sortSelect) sortSelect.addEventListener('change', render);
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      if (filterSelect) filterSelect.value = 'all';
+      if (sortSelect) sortSelect.value = 'default';
+      render();
+      if (searchInput) searchInput.focus();
+    });
+  }
+
+  // Фильтрация по ссылке из боковой панели (#flowers, #succulents, #palms)
+  function applyHashFilter() {
+    if (!filterSelect) return;
+    const hash = window.location.hash.replace('#', '');
+    const valid = ['flowers', 'succulents', 'palms'];
+    if (valid.includes(hash)) {
+      filterSelect.value = hash;
+    }
+  }
+
+  window.addEventListener('hashchange', () => {
+    applyHashFilter();
+    render();
+  });
+
+  // ============================================================
+  // 6. СТАРТ
+  // ============================================================
+
+  applyHashFilter();
+  render();
 });

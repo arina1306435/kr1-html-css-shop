@@ -3,24 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // ПРАКТИКА 15: Функции и расчеты
   // ==========================================
-  
-  // 1. Функция форматирования цены
+
   function formatPrice(amount) {
     return amount.toLocaleString('ru-RU') + ' ₽';
   }
 
-  // 2. Функция расчета скидки
   function calculateDiscount(price, discountPercent) {
     const discount = (price * discountPercent) / 100;
-    const result = price - discount;
     return {
       original: formatPrice(price),
       discount: formatPrice(discount),
-      final: formatPrice(result)
+      final: formatPrice(price - discount)
     };
   }
 
-  // 3. Функция определения статуса товара
   function getProductStatus(inStock, stockCount) {
     if (inStock && stockCount > 3) return "В наличии (много)";
     if (inStock && stockCount > 0) return "В наличии (мало)";
@@ -28,13 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return "Уточняйте у менеджера";
   }
 
-  // 4. Функция формирования краткого описания
   function getShortDescription(text, maxLength) {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
   }
 
-  // ВЫВОД В КОНСОЛЬ
   console.log("--- СТАРТ ПРАКТИКИ 15 ---");
   if (typeof shopName !== 'undefined' && typeof product !== 'undefined') {
     console.log(`Магазин: ${shopName}`);
@@ -50,17 +44,41 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   console.log("--- КОНЕЦ ПРАКТИКИ 15 ---");
 
-  // ВЫВОД СООБЩЕНИЯ НА СТРАНИЦУ
   const messageElement = document.getElementById('js-message');
   if (messageElement && typeof shopName !== 'undefined' && typeof product !== 'undefined') {
     messageElement.textContent = `В магазине "${shopName}" доступно ${product.stockCount} шт. товара "${product.title}".`;
   }
 
   // ==========================================
-  // ОСНОВНАЯ ЛОГИКА САЙТА
+  // МАСКА ТЕЛЕФОНА (#order-phone и все .phone-input)
+  // На странице контактов маску вешает validation.js на #contact-phone
   // ==========================================
 
-  // Кнопка наверх
+  function attachPhoneMask(input) {
+    if (!input) return;
+    input.addEventListener('input', () => {
+      let digits = input.value.replace(/\D/g, '');
+      if (!digits) { input.value = ''; return; }
+      if (digits.startsWith('8')) digits = '7' + digits.slice(1);
+      if (!digits.startsWith('7')) digits = '7' + digits;
+      digits = digits.slice(0, 11);
+
+      let res = '+7';
+      if (digits.length > 1) res += ' (' + digits.slice(1, 4);
+      if (digits.length >= 5) res += ') ' + digits.slice(4, 7);
+      if (digits.length >= 8) res += '-' + digits.slice(7, 9);
+      if (digits.length >= 10) res += '-' + digits.slice(9, 11);
+      input.value = res;
+    });
+  }
+
+  document.querySelectorAll('.phone-input').forEach(attachPhoneMask);
+  attachPhoneMask(document.getElementById('order-phone'));
+
+  // ==========================================
+  // КНОПКА НАВЕРХ
+  // ==========================================
+
   const scrollTopBtn = document.getElementById('scrollTop');
   if (scrollTopBtn) {
     window.addEventListener('scroll', () => {
@@ -73,9 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Меню
-  const dropdownItems = document.querySelectorAll('.site-nav__item--dropdown');
-  dropdownItems.forEach((item) => {
+  // ==========================================
+  // ВЫПАДАЮЩЕЕ МЕНЮ (мобильная версия)
+  // ==========================================
+
+  document.querySelectorAll('.site-nav__item--dropdown').forEach((item) => {
     const trigger = item.querySelector('.site-nav__link--dropdown');
     if (!trigger) return;
     trigger.addEventListener('click', (e) => {
@@ -87,344 +107,295 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Слайдер
+  // ==========================================
+  // СЛАЙДЕР ПОПУЛЯРНЫХ РАСТЕНИЙ
+  // ==========================================
+
   const track = document.getElementById('slider-track');
   const dotsContainer = document.getElementById('slider-dots');
   if (track && dotsContainer) {
     const slides = Array.from(track.children);
     let currentIndex = 0;
-    let slidesPerView = 3;
+    let autoplayTimer = null;
+
+    // Стрелки из разметки index.html
+    const prevBtn = document.querySelector('.slider__arrow--prev');
+    const nextBtn = document.querySelector('.slider__arrow--next');
+
     const updateSlidesPerView = () => {
-      if (window.innerWidth <= 576) slidesPerView = 1;
-      else if (window.innerWidth <= 992) slidesPerView = 2;
-      else slidesPerView = 3;
+      if (window.innerWidth <= 576) return 1;
+      if (window.innerWidth <= 992) return 2;
+      return 3;
     };
-    const maxIndex = () => Math.max(0, slides.length - slidesPerView);
+
+    const maxIndex = () => Math.max(0, slides.length - updateSlidesPerView());
+
     const renderDots = () => {
       dotsContainer.innerHTML = '';
       for (let i = 0; i <= maxIndex(); i++) {
         const dot = document.createElement('button');
         dot.className = 'slider__dot' + (i === currentIndex ? ' is-active' : '');
         dot.type = 'button';
-        dot.setAttribute('aria-label', `Перейти к слайду ${i + 1}`); 
+        dot.setAttribute('aria-label', `Перейти к слайду ${i + 1}`);
         dot.addEventListener('click', () => goTo(i));
         dotsContainer.appendChild(dot);
       }
     };
+
     const goTo = (index) => {
       currentIndex = Math.max(0, Math.min(index, maxIndex()));
       const slideWidth = slides[0].getBoundingClientRect().width;
       const gap = parseInt(getComputedStyle(track).gap) || 0;
-      track.style.transform = `translateX(-${(slideWidth + gap) * currentIndex}px)`;
-      renderDots();
+      track.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
+      dotsContainer.querySelectorAll('.slider__dot').forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === currentIndex);
+      });
     };
+
     const next = () => goTo(currentIndex >= maxIndex() ? 0 : currentIndex + 1);
     const prev = () => goTo(currentIndex <= 0 ? maxIndex() : currentIndex - 1);
-    document.querySelector('.slider__arrow--next')?.addEventListener('click', next);
-    document.querySelector('.slider__arrow--prev')?.addEventListener('click', prev);
-    let autoTimer = setInterval(next, 5000);
-    const sliderEl = document.getElementById('popular-slider');
-    sliderEl?.addEventListener('mouseenter', () => clearInterval(autoTimer));
-    sliderEl?.addEventListener('mouseleave', () => { autoTimer = setInterval(next, 5000); });
-    window.addEventListener('resize', () => { updateSlidesPerView(); goTo(0); });
-    updateSlidesPerView();
+
+    if (nextBtn) nextBtn.addEventListener('click', () => { next(); restartAutoplay(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restartAutoplay(); });
+
+    const startAutoplay = () => {
+      autoplayTimer = setInterval(next, 4000);
+    };
+    const stopAutoplay = () => clearInterval(autoplayTimer);
+    const restartAutoplay = () => { stopAutoplay(); startAutoplay(); };
+
+    const sliderRoot = track.closest('.slider') || track;
+    sliderRoot.addEventListener('mouseenter', stopAutoplay);
+    sliderRoot.addEventListener('mouseleave', startAutoplay);
+
+    window.addEventListener('resize', () => goTo(currentIndex));
+
     renderDots();
+    goTo(0);
+    startAutoplay();
   }
 
-  // --- МОДАЛЬНЫЕ ОКНА ---
-  const productDialog = document.getElementById('product-dialog');
-  const orderDialog = document.getElementById('order-dialog');
-  const successDialog = document.getElementById('success-dialog');
-  
-  let currentProductName = "Общая заявка";
+  // ==========================================
+  // СЧЁТЧИКИ НА СТРАНИЦЕ «О НАС»
+  // Селектор .counter — как в about.html,
+  // суффикс (+ / %) берётся из data-suffix.
+  // ==========================================
 
-  // 1. Открытие окна товара (в каталоге)
-  document.querySelectorAll('.products-grid .product-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-      if (e.target.classList.contains('product-card__button')) return;
+  const stats = document.querySelectorAll('.counter[data-target]');
+  if (stats.length > 0) {
+    const animateStat = (el) => {
+      const target = Number(el.dataset.target);
+      if (Number.isNaN(target)) return;
+      const suffix = el.dataset.suffix || '';
+      const duration = 1500;
+      const startTime = performance.now();
 
-      const title = card.getAttribute('data-title') || 'Растение';
-      const price = card.getAttribute('data-price') || 'Уточняйте';
-      const img = card.getAttribute('data-img') || '';
-      const desc = card.getAttribute('data-desc') || 'Описание временно недоступно.';
-      const sku = card.getAttribute('data-sku') || '---';
+      const tick = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
 
-      const pdTitle = document.getElementById('pd-title');
-      const pdPrice = document.getElementById('pd-price');
-      const pdImg = document.getElementById('pd-img');
-      const pdDesc = document.getElementById('pd-desc');
-      const pdSku = document.getElementById('pd-sku');
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateStat(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
 
-      if (pdTitle) pdTitle.textContent = title;
-      if (pdPrice) pdPrice.textContent = price;
-      if (pdImg) pdImg.src = img;
-      if (pdDesc) pdDesc.textContent = desc;
-      if (pdSku) pdSku.textContent = 'Артикул: ' + sku;
-      
-      currentProductName = title;
-      
-      if (productDialog) productDialog.showModal();
-    });
-  });
+    stats.forEach(el => observer.observe(el));
+  }
 
-  // 2. Кнопки "Заказать" в слайдере на главной
-  document.querySelectorAll('.slider .product-card__button').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      currentProductName = btn.getAttribute('data-product') || "Растение";
-      
-      const hiddenInput = document.getElementById('order-product');
-      if (hiddenInput) hiddenInput.value = currentProductName;
-      
-      const select = document.getElementById('order-interest');
-      if (select) {
-        let found = false;
-        for (let option of select.options) {
-          if (option.value === currentProductName || option.text === currentProductName) {
-            select.value = option.value;
-            found = true;
+  // ==========================================
+  // ЗАКАЗ ТОВАРА СО СЛАЙДЕРА НА ГЛАВНОЙ
+  // ==========================================
+
+  document.querySelectorAll('.slider__slide .btn, .slider__slide button').forEach((btn) => {
+    if (btn.dataset.sliderBound) return;
+    btn.dataset.sliderBound = '1';
+    btn.addEventListener('click', () => {
+      const slide = btn.closest('.slider__slide');
+      const title = slide ? slide.querySelector('h3') : null;
+      const productName = title ? title.textContent.trim() : '';
+
+      const orderDialog = document.getElementById('order-dialog');
+      const orderProductInput = document.getElementById('order-product');
+      const orderInterestSelect = document.getElementById('order-interest');
+
+      if (orderProductInput) orderProductInput.value = productName;
+      if (orderInterestSelect && productName) {
+        for (const option of orderInterestSelect.options) {
+          if (option.value === productName || option.text === productName) {
+            orderInterestSelect.value = option.value;
             break;
           }
         }
-        if (!found) select.value = "Другое растение";
       }
       if (orderDialog) orderDialog.showModal();
     });
   });
 
-  // Закрытие окон
-  document.getElementById('close-product-dialog')?.addEventListener('click', () => productDialog.close());
-  document.getElementById('close-order-dialog')?.addEventListener('click', () => orderDialog.close());
-  document.getElementById('close-success-dialog')?.addEventListener('click', () => successDialog.close());
-  document.getElementById('close-success-btn')?.addEventListener('click', () => successDialog.close());
+  // ==========================================
+  // ОФОРМЛЕНИЕ ЗАЯВКИ (модальные формы)
+  // ==========================================
 
-  // Кнопка "Оформить заявку" внутри окна товара
-  document.getElementById('pd-order-btn')?.addEventListener('click', () => {
-    if (productDialog) productDialog.close();
-    
-    const hiddenInput = document.getElementById('order-product');
-    if (hiddenInput) hiddenInput.value = currentProductName;
-    
-    const select = document.getElementById('order-interest');
-    if (select) {
-      for (let option of select.options) {
-        if (option.value === currentProductName || option.text === currentProductName) {
-          select.value = option.value;
-          break;
+  const orderDialog = document.getElementById('order-dialog');
+  const successDialog = document.getElementById('success-dialog');
+
+  if (orderDialog) {
+    const orderForm = orderDialog.querySelector('form');
+    if (orderForm) {
+      orderForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nameInput = orderForm.querySelector('input[type="text"]');
+        const phoneInput = orderForm.querySelector('input[type="tel"]');
+        const consentInput = orderForm.querySelector('input[type="checkbox"]');
+
+        let valid = true;
+
+        if (!nameInput || nameInput.value.trim().length < 2) {
+          if (nameInput) nameInput.setAttribute('aria-invalid', 'true');
+          valid = false;
+        } else {
+          nameInput.removeAttribute('aria-invalid');
         }
-      }
+
+        if (!phoneInput || phoneInput.value.replace(/\D/g, '').length !== 11) {
+          if (phoneInput) phoneInput.setAttribute('aria-invalid', 'true');
+          valid = false;
+        } else {
+          phoneInput.removeAttribute('aria-invalid');
+        }
+
+        if (consentInput && !consentInput.checked) {
+          consentInput.setAttribute('aria-invalid', 'true');
+          valid = false;
+        } else if (consentInput) {
+          consentInput.removeAttribute('aria-invalid');
+        }
+
+        if (!valid) return;
+
+        orderDialog.close();
+        if (successDialog) successDialog.showModal();
+        orderForm.reset();
+      });
     }
-    if (orderDialog) orderDialog.showModal();
+  }
+
+  // Закрытие диалогов: крестики .modal-close, как в HTML
+  document.querySelectorAll('dialog .modal-close, dialog [data-close-dialog], .dialog__close').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const dialog = btn.closest('dialog');
+      if (dialog) dialog.close();
+    });
   });
 
-  // Валидация и отправка (для модалки на главной/каталоге)
-  const form = document.getElementById('order-form');
-  if (form) {
-    const nameInput = document.getElementById('order-name');
-    const phoneInput = document.getElementById('order-phone');
-    const consentInput = document.getElementById('order-consent');
-
-    if (phoneInput) {
-      phoneInput.addEventListener('input', (e) => {
-        let digits = e.target.value.replace(/\D/g, '');
-        if (digits.startsWith('8')) digits = '7' + digits.slice(1);
-        if (!digits.startsWith('7')) digits = '7' + digits;
-        let formatted = '+7';
-        if (digits.length > 1) formatted += ' (' + digits.slice(1, 4);
-        if (digits.length >= 4) formatted += ') ' + digits.slice(4, 7);
-        if (digits.length >= 7) formatted += '-' + digits.slice(7, 9);
-        if (digits.length >= 9) formatted += '-' + digits.slice(9, 11);
-        e.target.value = formatted;
-        e.target.removeAttribute('aria-invalid');
-      });
-    }
-    
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      let isValid = true;
-      if (nameInput && nameInput.value.trim().length < 2) { nameInput.setAttribute('aria-invalid', 'true'); isValid = false; }
-      if (phoneInput && phoneInput.value.replace(/\D/g, '').length < 11) { phoneInput.setAttribute('aria-invalid', 'true'); isValid = false; }
-      if (consentInput && !consentInput.checked) { consentInput.closest('.order-form__checkbox')?.setAttribute('aria-invalid', 'true'); isValid = false; }
-      if (!isValid) return;
-
-      if (orderDialog) orderDialog.close();
-      form.reset();
-      if (successDialog) successDialog.showModal();
-    });
+  // Кнопка «Отлично!» в окне успеха
+  const closeSuccessBtn = document.getElementById('close-success-btn');
+  if (closeSuccessBtn && successDialog) {
+    closeSuccessBtn.addEventListener('click', () => successDialog.close());
   }
 
-  // === ВИДЖЕТ ЧАТА ===
-  const toggleChatBtn = document.getElementById('toggle-chat');
-  const closeChatBtn = document.getElementById('close-chat');
-  const chatWindow = document.getElementById('chat-window');
-  const chatForm = document.getElementById('chat-form');
-  const chatMessages = document.getElementById('chat-messages');
-  const chatChips = document.getElementById('chat-chips');
+  // ==========================================
+  // ЧАТ-ВИДЖЕТ «АННА, ФЛОРИСТ»
+  // ==========================================
 
-  if (toggleChatBtn && chatWindow) {
-    toggleChatBtn.addEventListener('click', () => chatWindow.classList.toggle('is-active'));
-  }
-  if (closeChatBtn) {
-    closeChatBtn.addEventListener('click', () => chatWindow.classList.remove('is-active'));
-  }
+  const chat = document.querySelector('.chat-widget');
+  if (chat) {
+    const toggleBtn = chat.querySelector('.chat-widget__toggle, .chat-widget__button');
+    const win = chat.querySelector('.chat-widget__window');
+    const closeBtn = chat.querySelector('.chat-widget__close');
+    const messages = chat.querySelector('.chat-widget__messages');
+    // Сам инпут имеет класс .chat-widget__input
+    const input = chat.querySelector('.chat-widget__input');
+    const sendBtn = chat.querySelector('.chat-widget__send');
+    const chips = chat.querySelectorAll('.chat-chip, .chat-widget__chip');
 
-  const addMessage = (text, sender = 'bot') => {
-    const msg = document.createElement('div');
-    msg.className = `chat-widget__message ${sender}-message`;
-    msg.textContent = text;
-    chatMessages.appendChild(msg);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  };
+    const botAnswers = [
+      { keys: ['доставк', 'курьер'], text: 'Доставляем по Москве в день заказа или на следующий. По России — СДЭК или Почта, 3–7 дней. При заказе от 5000 ₽ доставка по Москве бесплатная!' },
+      { keys: ['оплат', 'карт', 'сбп', 'налич'], text: 'Принимаем карты (Visa, Mastercard, МИР), СБП по QR-коду и наличные. Для юрлиц — оплата по счёту.' },
+      { keys: ['корзин'], text: 'Корзина открывается по иконке в шапке. Товары в ней сохранятся, даже если вы закроете сайт.' },
+      { keys: ['уход', 'полив', 'как ухажива'], text: 'Проверьте верхний слой почвы: если сухой на 2–3 см — пора поливать. Лучше недолить, чем перелить!' },
+      { keys: ['свет', 'куда постав', 'освещен'], text: 'Большинству растений нужен яркий рассеянный свет. Прямое солнце в полдень может обжечь листья.' },
+      { keys: ['питом', 'кот', 'собак', 'живот'], text: 'Не все растения безопасны для питомцев! В каталоге ищите значок 🐾 Pet-Friendly.' },
+      { keys: ['заказ', 'оформ'], text: 'Нажмите «В корзину» у понравившегося растения, откройте корзину и оформите заказ — мы свяжемся с вами.' },
+      { keys: ['гарант', 'вернут'], text: 'Если растение не приживется за 14 дней — заменим бесплатно.' }
+    ];
 
-  const chatScript = {
-    start: [
-      { text: "Как оформить заказ?", next: "order" },
-      { text: "Доставка", next: "delivery" },
-      { text: "Возврат", next: "return" },
-      { text: "Контакты", next: "contacts" }
-    ],
-    order: [
-      { text: "Сколько ждать доставку?", next: "delivery" },
-      { text: "Способы оплаты", next: "payment" },
-      { text: "В начало", next: "start" }
-    ],
-    delivery: [
-      { text: "Сколько стоит?", next: "delivery_price" },
-      { text: "Есть ли самовывоз?", next: "pickup" },
-      { text: "В начало", next: "start" }
-    ],
-    return: [
-      { text: "Условия возврата", next: "return_rules" },
-      { text: "В начало", next: "start" }
-    ],
-    contacts: [
-      { text: "Адрес оранжереи", next: "address" },
-      { text: "Написать в Telegram", action: "link", url: "https://t.me/zelenydom" },
-      { text: "В начало", next: "start" }
-    ],
-    payment: [
-      { text: "Оплата картой", next: "pay_card" },
-      { text: "Оплата при получении", next: "pay_cash" },
-      { text: "В начало", next: "start" }
-    ],
-    delivery_price: [
-      { text: "По Москве", next: "price_msk" },
-      { text: "По России", next: "price_ru" },
-      { text: "В начало", next: "start" }
-    ]
-  };
+    const getBotReply = (text) => {
+      const lower = text.toLowerCase();
+      const found = botAnswers.find(a => a.keys.some(k => lower.includes(k)));
+      if (found) return found.text;
 
-  const botAnswers = {
-    order: "Выберите растение в каталоге, нажмите «Заказать» и оставьте свои контакты. Мы позвоним для подтверждения.",
-    delivery: "Мы доставляем по Москве курьером за 1–2 дня, по России — СДЭК или Почтой.",
-    return: "Гарантия приживаемости — 14 дней. Если растение погибло, заменим бесплатно.",
-    contacts: "Наш адрес: Москва, ул. Ботаническая, 10. Телефон: +7 (495) 123-45-67.",
-    payment: "Принимаем карты (Visa/Mastercard/МИР), СБП, наличные курьеру или оплату по счёту.",
-    delivery_price: "По Москве (МКАД) — 390 ₽. При заказе от 5000 ₽ — бесплатно. По России — от 450 ₽.",
-    pickup: "Да, можно забрать самостоятельно по адресу: ул. Ботаническая, 10. Ежедневно с 10:00 до 21:00.",
-    return_rules: "Растение должно быть в оригинальном горшке. Пришлите фото, и мы оформим замену.",
-    address: "📍 г. Москва, ул. Ботаническая, д. 10. Ждем вас ежедневно с 10:00 до 21:00!",
-    pay_card: "Оплата онлайн на сайте или курьеру при получении (терминал).",
-    pay_cash: "Наличными курьеру или в оранжерее при самовывозе.",
-    price_msk: "По Москве (в пределах МКАД) — 390 ₽. За МКАД — от 590 ₽.",
-    price_ru: "Отправляем СДЭК и Почтой России. Стоимость рассчитывается индивидуально от 450 ₽."
-  };
-
-  const renderChips = (step) => {
-    if (!chatChips) return;
-    chatChips.innerHTML = ''; 
-    const options = chatScript[step] || chatScript.start;
-
-    options.forEach(opt => {
-      const btn = document.createElement('button');
-      btn.className = 'chat-chip';
-      btn.textContent = opt.text;
-      
-      btn.addEventListener('click', () => {
-        chatChips.innerHTML = ''; 
-        addMessage(opt.text, 'user');
-
-        if (opt.action === 'link') {
-          setTimeout(() => {
-            addMessage("Переходим по ссылке...", 'bot');
-            window.open(opt.url, '_blank');
-            renderChips('contacts'); 
-          }, 600);
-          return;
+      if (typeof products !== 'undefined') {
+        const p = products.find(pr => lower.includes(pr.title.toLowerCase().split(' ')[0]));
+        if (p) {
+          const status = p.isAvailable ? 'есть в наличии' : 'сейчас нет в наличии';
+          return `${p.title} — ${p.price.toLocaleString('ru-RU')} ₽, ${status}. ${p.desc}`;
         }
-
-        setTimeout(() => {
-          const answer = botAnswers[opt.next];
-          if (answer) addMessage(answer, 'bot');
-          if (chatScript[opt.next]) renderChips(opt.next);
-          else renderChips('start');
-        }, 800);
-      });
-
-      chatChips.appendChild(btn);
-    });
-  };
-
-  // Запускаем чат
-  if (chatMessages && chatChips) {
-    chatMessages.innerHTML = '<div class="chat-widget__message">Привет! Я Анна, флорист. Чем могу помочь?</div>';
-    renderChips('start');
-  }
-
-  if (chatForm) {
-    chatForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const input = chatForm.querySelector('.chat-widget__input');
-      const text = input.value.trim();
-      if (!text) return;
-
-      addMessage(text, 'user');
-      input.value = '';
-      chatChips.innerHTML = '';
-
-      setTimeout(() => {
-        addMessage('Спасибо за сообщение! Я передам его нашему флористу. А пока вы можете выбрать один из частых вопросов ниже.', 'bot');
-        renderChips('start'); 
-      }, 1000);
-    });
-  }
-
-  // === АНИМАЦИЯ ЦИФР ===
-  const counters = document.querySelectorAll('.counter');
-
-  const animateCounter = (counter) => {
-    const target = +counter.getAttribute('data-target');
-    const suffix = counter.getAttribute('data-suffix') || '';
-    const duration = 2000;
-    let startTime = null;
-
-    const step = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const current = Math.floor(progress * target);
-      counter.textContent = current + suffix;
-
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      } else {
-        counter.textContent = target + suffix;
       }
+      return 'Спасибо за вопрос! Уточню детали у флориста — напишите нам на hello@zelenydom.ru или позвоните +7 (495) 123-45-67.';
     };
 
-    window.requestAnimationFrame(step);
-  };
+    const addMessage = (text, isUser) => {
+      if (!messages) return;
+      const msg = document.createElement('div');
+      msg.className = isUser ? 'chat-message chat-message--user' : 'chat-message';
+      msg.textContent = text;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+    };
 
-  if (counters.length > 0) {
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          observer.unobserve(entry.target);
-        }
+    const sendMessage = () => {
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+      addMessage(text, true);
+      input.value = '';
+      setTimeout(() => addMessage(getBotReply(text), false), 500);
+    };
+
+    const openChat = () => {
+      if (win) win.classList.add('is-active');
+    };
+    const closeChat = () => {
+      if (win) win.classList.remove('is-active');
+    };
+
+    if (toggleBtn) toggleBtn.addEventListener('click', openChat);
+    if (closeBtn) closeBtn.addEventListener('click', closeChat);
+
+    if (sendBtn) sendBtn.addEventListener('click', sendMessage);
+    if (input) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); sendMessage(); }
       });
-    }, { threshold: 0.5 });
+    }
 
-    counters.forEach(counter => observer.observe(counter));
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const text = chip.textContent.trim();
+        addMessage(text, true);
+        setTimeout(() => addMessage(getBotReply(text), false), 500);
+      });
+    });
   }
 
+  // ==========================================
+  // КНОПКА «ЗАДАТЬ ВОПРОС» В ФУТЕРЕ
+  // Оживёт, если заменить в футере <a> на
+  // <button type="button" id="footer-question-btn" class="btn btn--white">
+  // ==========================================
+
+  const footerQuestionBtn = document.getElementById('footer-question-btn');
+  if (footerQuestionBtn && orderDialog) {
+    footerQuestionBtn.addEventListener('click', () => orderDialog.showModal());
+  }
 });

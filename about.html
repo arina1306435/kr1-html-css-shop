@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
+  <main id="main" class="container section">
 
   <header class="site-header">
     <div class="container site-header__inner">
@@ -45,11 +46,11 @@
     </div>
   </header>
 
-  <main class="container section">
+  <main id="main"  class="container section">
     <h1 class="section__title">О нашей оранжерее</h1>
     <div class="about-block" style="margin-top: 40px;">
       <div class="about-block__image">
-        <img src="images/greenhouse.webp" alt="Оранжерея" class="img-fluid" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        <img src="images/greenhouse.webp" alt="стеллажи с комнатными растениями в горшках" class="img-fluid" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
       </div>
       <div class="about-block__content">
         <h2 style="margin-top: 0;">Наша история</h2>
@@ -66,17 +67,17 @@
     </div>
     <div class="features-grid" style="margin-top: 60px;">
       <div class="feature-card">
-        <div class="feature-icon counter" data-target="15" data-suffix="+">0+</div>
+        <div class="feature-icon counter" data-target="15" data-suffix="+">15+</div>
         <h3>Лет опыта</h3>
         <p>Выращиваем и ухаживаем за растениями с 2011 года.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon counter" data-target="5000" data-suffix="+">0+</div>
+        <div class="feature-icon counter" data-target="5000" data-suffix="+">5000+</div>
         <h3>Довольных клиентов</h3>
         <p>Более 5000 растений уже нашли свой дом.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon counter" data-target="100" data-suffix="%">0%</div>
+        <div class="feature-icon counter" data-target="100" data-suffix="%">100%</div>
         <h3>Гарантия приживаемости</h3>
         <p>Если растение не приживется за 14 дней — заменим бесплатно.</p>
       </div>
@@ -99,30 +100,30 @@
             <li><a href="index.html">Главная</a></li>
             <li><a href="catalog.html">Каталог</a></li>
             <li><a href="about.html">О нас</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
           </ul>
         </div>
         <div class="footer-col footer-col--contacts">
           <h4>Контакты</h4>
           <ul class="footer-list">
             <li class="footer-contact">
-              <span class="footer-contact__icon">📍</span> 
+              <span class="footer-contact__icon">📍</span>
               <span>г. Москва, ул. Ботаническая, д. 10</span>
             </li>
             <li class="footer-contact">
-              <span class="footer-contact__icon">📞</span> 
+              <span class="footer-contact__icon">📞</span>
               <span><a href="tel:+74951234567">+7 (495) 123-45-67</a></span>
             </li>
             <li class="footer-contact">
-              <span class="footer-contact__icon">🕒</span> 
+              <span class="footer-contact__icon">🕒</span>
               <span>Ежедневно с 10:00 до 21:00</span>
             </li>
             <li class="footer-contact">
-              <span class="footer-contact__icon">✉️</span> 
+              <span class="footer-contact__icon">✉️</span>
               <span><a href="mailto:hello@zelenydom.ru">hello@zelenydom.ru</a></span>
             </li>
           </ul>
-          
-          <!-- Соцсети под почтой -->
+
           <div class="footer-socials">
             <a href="https://t.me/zelenydom" target="_blank" aria-label="Telegram">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
@@ -144,50 +145,68 @@
   </footer>
 
   <a href="#" class="scroll-top" id="scrollTop" aria-label="Наверх">
-    <img src="images/листик.png" alt="" class="scroll-top__img" aria-hidden="true">
+    <img src="images/leaf.png" alt="" class="scroll-top__img" aria-hidden="true">
   </a>
-    <!-- Виджет чата -->
-    <div class="chat-widget" id="chat-widget">
-      <div class="chat-widget__window" id="chat-window">
-        
-        <div class="chat-widget__header">
-          <div class="chat-widget__header-top">
-            <img src="images/флорист.jpg" alt="Флорист" class="chat-widget__avatar">
-            <div>
-              <h4>Анна, флорист</h4>
-              <p><span class="chat-widget__online"></span> Онлайн</p>
-            </div>
+
+  <!-- ВИДЖЕТ ЧАТА -->
+  <div class="chat-widget" id="chat-widget">
+    <div class="chat-widget__window" id="chat-window">
+
+      <div class="chat-widget__header">
+        <div class="chat-widget__header-top">
+          <img src="images/florist.jpg" alt="Анна — флорист магазина Зеленый дом, консультант чата поддержки" class="chat-widget__avatar">
+          <div>
+            <h4>Анна, флорист</h4>
+            <p><span class="chat-widget__online"></span> Онлайн</p>
           </div>
-          <button class="chat-widget__close" id="close-chat" aria-label="Закрыть">&times;</button>
         </div>
-
-        <div class="chat-widget__body">
-          <!-- Зона с сообщениями -->
-          <div class="chat-widget__messages" id="chat-messages">
-            <div class="chat-widget__message">
-              Привет! Добро пожаловать в «Зеленый дом». Я помогу разобраться с заказами, доставкой и нашими растениями. Что вас интересует?
-            </div>
-          </div>
-
-          <div class="chat-widget__chips" id="chat-chips"></div>
-
-          <!-- Зона ввода -->
-          <form class="chat-widget__input-area" id="chat-form">
-            <input type="text" placeholder="Напишите сообщение..." class="chat-widget__input" required>
-            <button type="submit" class="chat-widget__send" aria-label="Отправить">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-            </button>
-          </form>
-        </div>
+        <button class="chat-widget__close" id="close-chat" aria-label="Закрыть">&times;</button>
       </div>
-      
-      <button class="chat-widget__toggle" id="toggle-chat" aria-label="Открыть чат">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
-      </button>
+
+      <div class="chat-widget__body">
+        <div class="chat-widget__messages" id="chat-messages">
+          <div class="chat-widget__message">
+            Привет! Добро пожаловать в «Зеленый дом». Я помогу разобраться с заказами, доставкой и нашими растениями. Что вас интересует?
+          </div>
+        </div>
+
+        <div class="chat-widget__chips" id="chat-chips">
+          <button type="button" class="chat-chip">Доставка</button>
+          <button type="button" class="chat-chip">Оплата</button>
+          <button type="button" class="chat-chip">Уход за растениями</button>
+          <button type="button" class="chat-chip">Корзина</button>
+        </div>
+
+        <form class="chat-widget__input-area" id="chat-form">
+          <input type="text" placeholder="Напишите сообщение..." class="chat-widget__input" required>
+          <button type="submit" class="chat-widget__send" aria-label="Отправить">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </form>
+      </div>
     </div>
+
+    <button class="chat-widget__toggle" id="toggle-chat" aria-label="Открыть чат">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+    </button>
+  </div>
+
+  <!-- ВЫЕЗЖАЮЩАЯ КОРЗИНА -->
+  <div id="cart-overlay" class="cart-overlay"></div>
+  <aside id="cart-sidebar" class="cart-sidebar" aria-label="Корзина">
+    <div class="cart-sidebar__header">
+      <h2>Ваша корзина</h2>
+      <button id="close-cart" class="cart-sidebar__close" type="button" aria-label="Закрыть корзину">×</button>
+    </div>
+    <div id="cart-items-container" class="cart-sidebar__body"></div>
+    <div class="cart-sidebar__footer">
+      <p class="cart-total">Итого: <span id="cart-total-price">0 ₽</span></p>
+      <button id="checkout-btn" class="btn" style="width: 100%;">Оформить заказ</button>
+    </div>
+  </aside>
+
   <script src="js/data.js" defer></script>
-  <script src="js/catalog.js" defer></script>
-  <script src="js/validation.js" defer></script>
+  <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>
