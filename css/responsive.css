@@ -273,3 +273,126 @@ body { overflow-x: hidden; }
     visibility: visible;
   }
 }
+/* ============================================================
+   ФИКС: «Каталог» в мобильном/свёрнутом меню
+   Базовые hover/focus-within правила из style.css перебивали
+   позиционирование (translateX(-50%)) и открывали меню по наведению
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* 1. Все пункты меню одного типа — ничего не съезжает */
+  .site-nav__list .site-nav__link,
+  .site-nav__list .site-nav__link--dropdown {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* 2. Не даём базовым правилам сдвигать карточку влево */
+  .site-nav__item--dropdown:hover .site-nav__dropdown,
+  .site-nav__item--dropdown.is-open .site-nav__dropdown,
+  .site-nav__item--dropdown:focus-within .site-nav__dropdown {
+    left: 0;
+    transform: translateY(4px);
+  }
+
+  /* 3. На узком экране дропдаун работает ТОЛЬКО по тапу (is-open) */
+  .site-nav__item--dropdown:hover .site-nav__dropdown {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .site-nav__item--dropdown.is-open .site-nav__dropdown,
+  .site-nav__item--dropdown.is-open:hover .site-nav__dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+/* ============================================================
+   ДРОПДАУН НА МОБИЛЬНОМ: аккордеон вместо абсолютного меню.
+   Решает всё разом: не съезжает, не перекрывает клики,
+   не зависит от hover-правил style.css
+   ============================================================ */
+@media (max-width: 768px) {
+  .site-nav__dropdown {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: hidden !important;
+    display: none !important;
+    min-width: 0;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0 0 4px 18px;
+  }
+
+  /* Открыто только по тапу (is-open из main.js) */
+  .site-nav__item--dropdown.is-open .site-nav__dropdown {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* Наведение на телефоне/узком окне ничего не открывает */
+  .site-nav__item--dropdown:hover .site-nav__dropdown,
+  .site-nav__item--dropdown:focus-within .site-nav__dropdown {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .site-nav__dropdown-link {
+    padding: 6px 0;
+    font-size: 13px;
+    color: #5a6b5a;
+  }
+}
+/* ============================================================
+   ПРАВКИ МОБИЛЬНОЙ ВЁРСТКИ: корзина слева от «Войти»,
+   сетки 2×2 в преимуществах, футере и способах оплаты
+   ============================================================ */
+
+/* 1. Корзина слева от кнопки «Войти» */
+@media (max-width: 768px) {
+  .header-actions {
+    flex-direction: row-reverse;
+  }
+}
+
+/* 2. «Почему выбирают нас»: две карточки в ряд */
+@media (max-width: 576px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* Третья карточка (их всего три) — на всю ширину, чтобы ряд не обрывался пустотой */
+  .feature-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .feature-card { padding: 16px 12px; }
+  .feature-icon { font-size: 28px; }
+
+  /* 3. Футер: «Разделы» и «Контакты» рядом в две колонки */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 16px;
+  }
+
+  /* Логотип-колонка — на всю ширину сверху, «Остались вопросы?» — на всю снизу */
+  .footer-col:first-child,
+  .footer-col:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .footer-list { padding-left: 0; }
+
+  /* 4. «Способы оплаты»: сетка 2×2 */
+  .payment-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .payment-grid h3 { font-size: 17px; }
+}
