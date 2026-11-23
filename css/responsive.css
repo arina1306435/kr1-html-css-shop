@@ -352,23 +352,12 @@ body { overflow-x: hidden; }
    сетки 2×2 в преимуществах, футере и способах оплаты
    ============================================================ */
 
-/* 1. Корзина слева от кнопки «Войти» */
-@media (max-width: 768px) {
-  .header-actions {
-    flex-direction: row-reverse;
-  }
-}
 
 /* 2. «Почему выбирают нас»: две карточки в ряд */
 @media (max-width: 576px) {
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
-  }
-
-  /* Третья карточка (их всего три) — на всю ширину, чтобы ряд не обрывался пустотой */
-  .feature-card:last-child {
-    grid-column: 1 / -1;
   }
 
   .feature-card { padding: 16px 12px; }
@@ -395,4 +384,103 @@ body { overflow-x: hidden; }
   }
 
   .payment-grid h3 { font-size: 17px; }
+}
+
+/* ============================================================
+   МОБИЛЬНЫЕ СЕТКИ: корзина слева от «Войти», сетки 2×2
+   ============================================================ */
+
+
+@media (max-width: 576px) {
+
+  /* «Почему выбирают нас»: 4 плашки сеткой 2×2 */
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .feature-card { padding: 14px 10px; }
+  .feature-icon { font-size: 26px; }
+  .feature-card h3 { font-size: 16px; }
+  .feature-card p { font-size: 13px; }
+
+  /* Способы оплаты: тоже сетка 2×2, карточки компактнее */
+  .payment-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .payment-grid h3 { font-size: 16px; }
+  .payment-grid p { font-size: 13px; }
+
+  /* Футер: «Разделы» и «Контакты» рядом в две колонки */
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 16px;
+  }
+  .footer-col:first-child,
+  .footer-col:last-child {
+    grid-column: 1 / -1;
+  }
+}
+/* ============================================================
+   ФИНАЛЬНЫЕ ПРАВКИ
+   ============================================================ */
+
+/* Корзина слева от «Войти»: order работает, даже если
+   .header-actions не flex в базовых стилях */
+@media (max-width: 768px) {
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .header-cart-btn { order: -1; }
+}
+
+/* «Почему выбирают нас»: 4 плашки ровной сеткой 2×2 */
+@media (max-width: 576px) {
+  .feature-card:last-child {
+    grid-column: auto; /* отменяем растяжение из прошлых правок */
+  }
+}
+/* ============================================================
+   ПРАВКИ: корзина слева от «Войти», сетки 2×2 на мобильном
+   (блок должен стоять ПОСЛЕДНИМ — он перекрывает правила выше)
+   ============================================================ */
+
+/* Корзина слева от кнопки «Войти» */
+@media (max-width: 768px) {
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .header-cart-btn { order: -1; }
+}
+
+@media (max-width: 576px) {
+  /* «Почему выбирают нас»: 4 плашки сеткой 2×2 */
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
+  }
+  .feature-card { padding: 16px 10px; }
+  .feature-icon { font-size: 26px; }
+  .feature-card h3 { font-size: 16px; margin-bottom: 8px; }
+  .feature-card p { font-size: 13px; }
+
+  /* Способы оплаты: возвращаем сетку 2×2 */
+  .payment-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
+  }
+  .payment-grid h3 { font-size: 17px; }
+  .payment-grid p { font-size: 13px; }
+
+  /* «Бережная упаковка / Курьер / По России» — тоже 2×2,
+     третья карточка на всю ширину (их три) */
+  .delivery-features {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px;
+  }
+  .delivery-feature:last-child { grid-column: 1 / -1; }
 }
