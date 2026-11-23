@@ -17,8 +17,6 @@
 <body>
   <a class="skip-link" href="#main">Перейти к основному содержимому</a>
 
-  <main id="main" class="container section">
-
   <header class="site-header">
     <div class="container site-header__inner">
       <a href="index.html" class="site-logo">
@@ -42,14 +40,19 @@
           <li><a href="contacts.html" class="site-nav__link">Контакты</a></li>
         </ul>
       </nav>
-      <button class="header-cart-btn" id="open-cart" aria-label="Открыть корзину">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <path d="M16 10a4 4 0 0 1-8 0"></path>
-        </svg>
-        <span class="cart-count" id="cart-count">0</span>
-      </button>
+      <div class="header-actions">
+        <button class="header-account-btn" id="account-btn" aria-label="Войти в аккаунт">
+          <span id="account-btn-text">Войти</span>
+        </button>
+        <button class="header-cart-btn" id="open-cart" aria-label="Открыть корзину">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -57,25 +60,24 @@
     <nav class="breadcrumbs"><a href="index.html">Главная</a> <span>/</span> Каталог</nav>
     <h1 class="section__title">Каталог растений</h1>
 
-      <section class="catalog-products">
-        <div class="catalog-controls">
-          <input type="text" id="search-input" placeholder="Поиск по названию..." class="catalog-search">
-
-          <select id="filter-select" class="catalog-select">
-            <option value="all">Все категории</option>
+    <section class="catalog-products">
+      <div class="catalog-controls">
+        <input type="search" id="search-input" placeholder="Поиск по названию..." class="catalog-search" aria-label="Поиск по названию растения">
+        <div class="catalog-selects">
+          <select id="filter-select" aria-label="Фильтр по категории">
+            <option value="all">Все растения</option>
             <option value="flowers">Комнатные цветы</option>
             <option value="succulents">Суккуленты и кактусы</option>
             <option value="palms">Пальмы и крупномеры</option>
           </select>
-
-          <select id="sort-select" class="catalog-select">
+          <select id="sort-select" aria-label="Сортировка">
             <option value="default">По умолчанию</option>
-            <option value="price-asc">Сначала дешевые</option>
-            <option value="price-desc">Сначала дорогие</option>
-            <option value="name">По названию (А-Я)</option>
+            <option value="price-asc">Сначала дешевле</option>
+            <option value="price-desc">Сначала дороже</option>
+            <option value="name">По названию</option>
           </select>
         </div>
-
+      </div>
         <p id="products-count" class="products-count"></p>
 
         <div class="products-grid" id="products-container"></div>
@@ -86,8 +88,7 @@
           <p class="empty-state__text">Попробуйте изменить запрос или сбросить фильтры.</p>
           <button type="button" id="reset-filters" class="btn btn--outline">Сбросить фильтры</button>
         </div>
-      </section>
-    </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -296,11 +297,70 @@
       <button id="checkout-btn" class="btn" style="width: 100%;">Оформить заказ</button>
     </div>
   </aside>
+  <!-- МОДАЛЬНОЕ ОКНО АККАУНТА -->
+  <dialog class="account-dialog" id="account-dialog" aria-labelledby="account-dialog-title">
+    <button class="modal-close" id="close-account-dialog" type="button" aria-label="Закрыть">&times;</button>
+
+    <!-- Переключатель: вход / регистрация -->
+    <div class="account-tabs" role="tablist">
+      <button type="button" class="account-tab is-active" id="tab-login" role="tab" aria-selected="true">Вход</button>
+      <button type="button" class="account-tab" id="tab-register" role="tab" aria-selected="false">Регистрация</button>
+    </div>
+
+    <!-- ФОРМА ВХОДА -->
+    <form class="account-form" id="login-form" novalidate>
+      <h2 class="account-dialog__title" id="account-dialog-title">С возвращением!</h2>
+      <div class="account-form__group">
+        <label class="order-form__label" for="login-email">Email</label>
+        <input class="order-form__input" id="login-email" type="email" required autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="account-form__group">
+        <label class="order-form__label" for="login-password">Пароль</label>
+        <input class="order-form__input" id="login-password" type="password" required autocomplete="current-password" placeholder="Ваш пароль">
+      </div>
+      <p class="form-errors" id="login-error" hidden></p>
+      <button type="submit" class="btn" style="width: 100%;">Войти</button>
+    </form>
+
+    <!-- ФОРМА РЕГИСТРАЦИИ -->
+    <form class="account-form" id="register-form" novalidate hidden>
+      <h2 class="account-dialog__title">Создать аккаунт</h2>
+      <div class="account-form__group">
+        <label class="order-form__label" for="reg-name">Имя</label>
+        <input class="order-form__input" id="reg-name" type="text" required autocomplete="name" placeholder="Анна">
+      </div>
+      <div class="account-form__group">
+        <label class="order-form__label" for="reg-email">Email</label>
+        <input class="order-form__input" id="reg-email" type="email" required autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="account-form__group">
+        <label class="order-form__label" for="reg-password">Пароль (минимум 6 символов)</label>
+        <input class="order-form__input" id="reg-password" type="password" required minlength="6" autocomplete="new-password" placeholder="••••••">
+      </div>
+      <label class="order-form__checkbox">
+        <input type="checkbox" id="reg-consent" required>
+        <span>Согласен на обработку персональных данных <span class="req">*</span></span>
+      </label>
+      <p class="form-errors" id="register-error" hidden></p>
+      <button type="submit" class="btn" style="width: 100%;">Зарегистрироваться</button>
+    </form>
+
+    <!-- Меню вошедшего пользователя -->
+    <div class="account-panel" id="account-panel" hidden>
+      <div class="success-dialog__icon" aria-hidden="true">🌿</div>
+      <h2 class="account-dialog__title">Привет, <span id="account-name">друг</span>!</h2>
+      <p class="account-panel__email" id="account-email">you@example.com</p>
+      <p class="account-panel__text">Ваши заявки и корзина сохраняются на этом устройстве.</p>
+      <button type="button" class="btn btn--outline" id="logout-btn" style="width: 100%;">Выйти</button>
+    </div>
+  </dialog>
 
 <script src="js/data.js" defer></script>
 <script src="js/cart.js" defer></script>
 <script src="js/catalog.js" defer></script>
 <script src="js/main.js" defer></script>
 <script src="js/validation.js" defer></script>
+<script src="js/auth.js" defer></script>
+
 </body>
 </html>

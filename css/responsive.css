@@ -1,70 +1,35 @@
+/* ---------- База ---------- */
 img, video { max-width: 100%; height: auto; }
 body { overflow-x: hidden; }
 
+/* ============================================
+   ПЛАНШЕТЫ (992px и меньше)
+   ============================================ */
 @media (max-width: 992px) {
   .products-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+
   .catalog-layout { grid-template-columns: 1fr; }
   .catalog-filters { position: static; }
-  .hero, .contacts-wrapper { flex-direction: column; }
+
+  .hero { flex-direction: column; }
+  .contacts-wrapper { grid-template-columns: 1fr; }
+
   .order-form { grid-template-columns: 1fr; }
   .order-form__group--wide { grid-column: span 1; }
   .delivery-features, .payment-grid { grid-template-columns: 1fr; }
+
   .slider__slide { flex: 0 0 calc((100% - 30px) / 2); }
 }
 
-@media (max-width: 768px) {
-  .site-header__inner { flex-direction: column; gap: 15px; padding: 15px 20px; }
-  .site-nav__list { flex-wrap: wrap; justify-content: center; gap: 15px; }
-  .hero__title { font-size: 36px; }
-
-  .site-nav__dropdown { position: static; transform: none; opacity: 1; visibility: visible; box-shadow: none; border: none; padding-left: 0; margin-top: 10px; display: none; width: 100%; background: transparent; }
-  .site-nav__item--dropdown.is-open .site-nav__dropdown { display: block; }
-  .site-nav__item--dropdown:hover .site-nav__dropdown { display: none; }
-  .site-nav__item--dropdown.is-open:hover .site-nav__dropdown { display: block; }
-  .site-nav__dropdown-link { padding: 8px 15px; text-align: center; }
-
-  .product-dialog__inner { flex-direction: column; padding: 20px; gap: 20px; }
-  .product-dialog__img { flex: none; max-height: 250px; }
-
-  .video-wrapper { margin: 10px auto 20px; }
-}
-
-@media (max-width: 576px) {
-  .products-grid, .footer-grid { grid-template-columns: 1fr; }
-  .hero__title { font-size: 28px; }
-  .section__title { font-size: 26px; }
-  .order-form { padding: 0; }
-
-  .slider { padding: 0 30px; }
-  .slider__slide { flex: 0 0 100%; }
-
-  .chat-widget { left: 15px; bottom: 15px; }
-  .chat-widget__window { width: calc(100vw - 30px); max-width: 340px; }
-
-  /* Корзина на телефоне — во всю ширину, но не шире 400px */
-  .cart-sidebar { width: 100%; max-width: 400px; }
-  .cart-item { gap: 10px; }
-  .cart-item__img { width: 60px; height: 60px; }
-
-  /* Диалоги не прилипают к краям экрана */
-  .order-dialog, .product-dialog, .success-dialog {
-    width: calc(100vw - 24px);
-    max-width: 460px;
-    padding: 20px;
-  }
-
-  /* Стрелки слайдера на телефоне мешают — оставляем точки */
-  .slider__arrow { display: none; }
-}
-/* ============================================================
-   МОБИЛЬНАЯ АДАПТАЦИЯ — общий блок для всех страниц
-   ============================================================ */
-
 /* ============================================
-   1. ПЛАНШЕТЫ И ТЕЛЕФОНЫ (768px и меньше)
+   ПЛАНШЕТЫ И ТЕЛЕФОНЫ (768px и меньше)
    ============================================ */
 @media (max-width: 768px) {
+
+  /* ---------- ЗАГОЛОВКИ ---------- */
+  .section__title { font-size: 28px; gap: 10px; flex-wrap: wrap; }
+  .section__title::before, .section__title::after { font-size: 18px; }
 
   /* ---------- ШАПКА ---------- */
   .site-header__inner {
@@ -76,27 +41,14 @@ body { overflow-x: hidden; }
     padding: 10px 16px;
   }
 
-  .site-logo {
-    order: 1;
-    font-size: 20px;
-    gap: 8px;
-  }
+  .site-logo { order: 1; font-size: 20px; gap: 8px; }
+  .logo-img { width: 28px; height: auto; }
 
-  .logo-img {
-    width: 28px;
-    height: 28px;
-  }
+  /* Группа кнопок: аккаунт + корзина рядом, справа */
+  .header-actions { order: 2; margin-left: auto; }
 
-  .header-cart-btn {
-    order: 2;
-    margin-left: auto;
-  }
-
-  /* Меню — второй строкой, прокручивается вбок */
-  .site-nav {
-    order: 3;
-    width: 100%;
-  }
+  /* Меню — второй строкой */
+  .site-nav { order: 3; width: 100%; }
 
   .site-nav__list {
     display: flex;
@@ -105,38 +57,49 @@ body { overflow-x: hidden; }
     -webkit-overflow-scrolling: touch;
     padding-bottom: 4px;
   }
+  .site-nav__list::-webkit-scrollbar { display: none; }
 
-  .site-nav__list::-webkit-scrollbar {
-    display: none;
-  }
+  .site-nav__link { font-size: 14px; padding: 8px 10px; white-space: nowrap; }
 
-  .site-nav__link {
-    font-size: 14px;
-    padding: 8px 10px;
-    white-space: nowrap;
-  }
-
-  /* Выпадающее меню «Каталог» — поверх контента, карточкой */
-  .site-nav__item--dropdown {
-    position: relative;
-  }
+  /* Дропдаун карточкой поверх контента */
+  .site-nav__item--dropdown { position: relative; }
 
   .site-nav__dropdown {
     position: absolute;
     top: 100%;
     left: 0;
-    z-index: 100;
+    right: auto;
+    transform: translateY(6px);
     min-width: 220px;
     background: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
     display: none;
     padding: 6px 0;
+    margin: 0;
+    z-index: 100;
   }
 
   .site-nav__item--dropdown.is-open .site-nav__dropdown {
     display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(6px);
+  }
+
+  .site-nav__item--dropdown:hover .site-nav__dropdown {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .site-nav__item--dropdown.is-open:hover .site-nav__dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
   }
 
   .site-nav__dropdown-link {
@@ -144,75 +107,56 @@ body { overflow-x: hidden; }
     padding: 10px 14px;
     font-size: 14px;
     white-space: nowrap;
+    text-align: left;
   }
 
-  /* ---------- HERO (главная) ---------- */
+  /* Кнопка «Войти» компактнее */
+  .header-account-btn {
+    padding: 8px 10px;
+    font-size: 11px;
+    min-height: 44px;
+  }
+
+  /* ---------- HERO ---------- */
   .hero {
     flex-direction: column;
     gap: 24px;
-    padding-top: 32px;
+    padding: 40px 16px;
   }
+  .hero__title { font-size: 28px; }
+  .hero__content { padding: 30px 24px; }
+  .hero__image { width: 100%; margin: 0; }
+  .hero__image img { width: 100%; height: auto; display: block; }
 
-  .hero__title {
-    font-size: 28px;
-  }
-
-  .hero__image {
-    width: 100%;
-    margin: 0;
-  }
-
-  .hero__image img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* ---------- О НАС: фото + текст ---------- */
+  /* ---------- О НАС ---------- */
   .about-block {
     flex-direction: column;
     gap: 20px;
+    margin: 20px 0 40px;
   }
-
   .about-block__image {
     width: 100%;
-    max-width: 480px;
+    max-width: min(480px, 100%);
     margin: 0 auto;
   }
-
   .about-block__image img {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 12px;
   }
-
-  .about-block__text {
+  .about-block__content {
     width: 100%;
-    text-align: left;
+    text-align: center;
     padding: 0;
   }
 
-  /* Статистика 15+ / 5000+ / 100% — в колонку */
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  /* ---------- КОНТАКТЫ: инфо + форма ---------- */
-  .contacts-layout,
-  .contacts-grid {
-    flex-direction: column;
+  /* ---------- КОНТАКТЫ ---------- */
+  .contacts-wrapper {
     grid-template-columns: 1fr;
     gap: 24px;
   }
-
-  .contacts-info,
-  .contacts-form {
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
-  }
+  .contacts-form-wrapper { padding: 24px 20px; }
 
   .contact-form input,
   .contact-form select,
@@ -222,94 +166,124 @@ body { overflow-x: hidden; }
     box-sizing: border-box;
   }
 
-  /* Таблица доставки — скролл вбок */
-  .delivery-table {
+  .table-wrapper {
     display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Карточки доставки и оплаты — в колонку */
-  .delivery-cards,
-  .payment-cards,
-  .delivery-grid,
-  .payment-grid {
-    grid-template-columns: 1fr;
+  /* ---------- МОДАЛКА ТОВАРА ---------- */
+  .product-dialog__inner { flex-direction: column; padding: 20px; gap: 20px; }
+  .product-dialog__img { flex: none; max-height: 250px; }
+
+  .video-wrapper { margin: 10px auto 20px; }
+
+  /* ---------- КАТАЛОГ: фильтры ровно ---------- */
+  .catalog-search {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 10px;
+    flex: none;
   }
 
-  /* ---------- ОБЩИЕ СЕТКИ КАРТОЧЕК ---------- */
-  .features-grid,
-  .tips-grid,
-  .products-container {
-    grid-template-columns: 1fr;
+  .catalog-selects {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    flex: 1 1 100%;
   }
+
+  .catalog-selects select {
+    flex: 1 1 0;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  .products-count { margin: 12px 0; }
 }
 
 /* ============================================
-   2. ТЕЛЕФОНЫ (576px и меньше)
+   ТЕЛЕФОНЫ (576px и меньше)
    ============================================ */
 @media (max-width: 576px) {
 
-  /* ---------- ШАПКА компактнее ---------- */
-  .site-header__inner {
-    padding: 8px 12px;
+  .products-grid,
+  .footer-grid,
+  .features-grid,
+  .tips-grid {
+    grid-template-columns: 1fr;
   }
 
-  .site-logo {
-    font-size: 18px;
-  }
+  .hero__title { font-size: 28px; }
+  .section__title { font-size: 26px; }
+  .order-form { padding: 0; }
 
-  .site-nav__link {
-    font-size: 13px;
-    padding: 6px 8px;
-  }
+  .site-header__inner { padding: 8px 12px; }
+  .site-logo { font-size: 18px; }
+  .site-nav__link { font-size: 13px; padding: 6px 8px; }
+  .header-account-btn { padding: 7px 8px; font-size: 10px; }
 
-  /* ---------- КНОПКИ: тап-зона от 44px ---------- */
   .btn,
   .product-card__button,
   .chat-chip {
     min-height: 44px;
   }
 
-  /* ---------- СЛАЙДЕР: 1 карточка ---------- */
-  .slider__dot {
-    width: 44px;
-  }
+  /* Слайдер: 1 карточка, только точки */
+  .slider { padding: 0 10px; }
+  .slider__slide { flex: 0 0 100%; }
+  .slider__arrow { display: none; }
+  .slider__dot { width: 44px; height: 12px; border-radius: 6px; }
 
-  /* ---------- КОРЗИНА: на весь экран ---------- */
-  .cart-sidebar {
-    width: 100%;
-    max-width: 100vw;
-  }
+  /* Корзина на весь экран */
+  .cart-sidebar { width: 100%; max-width: 100vw; }
+  .cart-item { gap: 10px; }
+  .cart-item__img { width: 60px; height: 60px; }
+  .cart-item__remove { width: 40px; height: 40px; }
 
-  .cart-item__remove {
-    width: 40px;
-    height: 40px;
-  }
-
-  /* ---------- ЧАТ: не перекрывает пол-экрана ---------- */
+  /* Чат компактнее */
+  .chat-widget { left: 15px; bottom: 15px; }
   .chat-widget__window {
-    width: calc(100vw - 32px);
+    width: calc(100vw - 30px);
+    max-width: 340px;
     max-height: 70vh;
   }
+  .chat-widget__toggle { width: 52px; height: 52px; }
 
-  .chat-widget__toggle {
-    width: 52px;
-    height: 52px;
-    bottom: 16px;
-    left: 16px;
-  }
-
-  /* ---------- МОДАЛКИ: не вылезают за края ---------- */
+  /* Модалки не вылезают за края */
   .order-dialog,
+  .product-dialog,
   .success-dialog,
-  .product-dialog {
-    max-width: calc(100vw - 32px);
+  .account-dialog {
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+    padding: 20px;
     margin: auto;
   }
+}
+/* ============================================================
+   ФИКС: мобильная шапка и тач-hover
+   ============================================================ */
 
-  /* ---------- Страница не скроллится вбок ---------- */
-  body {
-    overflow-x: hidden;
+/* Кнопка «Войти» — компактная, вровень с логотипом */
+@media (max-width: 768px) {
+  .header-account-btn {
+    padding: 6px 10px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    min-height: 0;
+    line-height: 1.2;
+    border-radius: 4px;
   }
+}
+
+/* На сенсорных экранах hover не «залипает»:
+   подчёркивание и перекраска — только у активного пункта */
+@media (hover: none) {
+  .site-nav__link:hover::after { transform: scaleX(0); }
+  .site-nav__link:hover { color: #1a3c1a; }
+  .site-nav__item--dropdown:hover .site-nav__caret { transform: rotate(0deg); }
 }

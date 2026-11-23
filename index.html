@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Оранжерея Зеленый дом: 15 лет опыта, 5000+ довольных клиентов. Сами выращиваем комнатные растения без вредной химии.">
-  <meta property="og:title" content="О нашей оранжерее — Зеленый дом">
-  <meta property="og:description" content="История оранжереи Зеленый дом: собственное выращивание растений с 2011 года.">
-  <meta property="og:image" content="https://arina1306435.github.io/kr1-html-css-shop/images/greenhouse.webp">
+  <meta name="description" content="Зеленый дом — магазин комнатных растений: монстеры, фикусы, суккуленты и пальмы. Доставка по Москве, бережная упаковка.">
+  <meta property="og:title" content="Зеленый дом — комнатные растения с доставкой">
+  <meta property="og:description" content="Комнатные растения для дома и офиса: цветы, суккуленты, пальмы и крупномеры.">
+  <meta property="og:image" content="https://arina1306435.github.io/kr1-html-css-shop/images/monstera.webp">
   <meta property="og:type" content="website">
   <link rel="icon" href="images/logo.png" type="image/png">
-  <title>О нас — Зеленый дом</title>
+  <title>Зеленый дом — комнатные растения с доставкой</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
@@ -23,11 +23,12 @@
         <img src="images/logo.png" alt="Логотип Зеленый дом" class="logo-img">
         ЗЕЛЕНЫЙ ДОМ
       </a>
-      <nav class="site-nav">
+
+      <nav class="site-nav" aria-label="Главное меню">
         <ul class="site-nav__list">
           <li><a href="index.html" class="site-nav__link active" aria-current="page">Главная</a></li>
           <li class="site-nav__item site-nav__item--dropdown">
-            <a href="catalog.html" class="site-nav__link site-nav__link--dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="catalog.html" class="site-nav__link site-nav__link--dropdown" aria-haspopup="true">
               Каталог <span class="site-nav__caret" aria-hidden="true">▾</span>
             </a>
             <ul class="site-nav__dropdown">
@@ -40,163 +41,184 @@
           <li><a href="contacts.html" class="site-nav__link">Контакты</a></li>
         </ul>
       </nav>
-      <button class="header-cart-btn" id="open-cart" aria-label="Открыть корзину">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <path d="M16 10a4 4 0 0 1-8 0"></path>
-        </svg>
-        <span class="cart-count" id="cart-count">0</span>
-      </button>
+
+      <div class="header-actions">
+        <button class="header-account-btn" id="account-btn" aria-label="Войти в аккаунт">
+          <span id="account-btn-text">Войти</span>
+        </button>
+        <button class="header-cart-btn" id="open-cart" aria-label="Открыть корзину">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <main id="main">
-    <p id="js-message" class="js-message" aria-live="polite"></p>
+  <main id="main" class="container section">
 
     <!-- HERO -->
-    <section class="hero container">
+    <section class="hero">
       <div class="hero__content">
-        <h1 class="hero__title">Озелени свой дом с любовью</h1>
-        <p class="hero__text">Редкие и популярные комнатные растения с бережной доставкой до двери.</p>
-        <a href="#popular-slider" class="btn">Смотреть растения</a>
+        <h1 class="hero__title">Растения, которые наполняют дом жизнью</h1>
+        <p class="hero__text">Мы выращиваем и отбираем растения с любовью: от неприхотливых суккулентов до эффектных пальм. Доставим бережно, поможем с уходом.</p>
+        <a href="catalog.html" class="btn">Перейти в каталог</a>
       </div>
       <div class="hero__image">
-        <img src="images/plant-1.webp"
-             alt="Комнатное растение в светлом интерьере — пример озеленения дома из магазина Зеленый дом"
-             class="img-fluid">
+        <img src="images/monstera.webp" alt="Светлая комната с большим количеством зеленых растений" class="img-fluid">
       </div>
     </section>
 
-    <!-- ПОПУЛЯРНЫЕ РАСТЕНИЯ: СЛАЙДЕР -->
-    <section class="section">
-      <div class="container">
-        <h2 class="section__title">Популярные растения</h2>
-        <div class="slider" id="popular-slider">
-          <button class="slider__arrow slider__arrow--prev" type="button" aria-label="Предыдущий слайд">&#10094;</button>
-          <div class="slider__viewport">
-            <div class="slider__track" id="slider-track">
+    <!-- ХИТЫ: СЛАЙДЕР -->
+<!-- ХИТЫ: СЛАЙДЕР -->
+<section class="section">
+  <h2 class="section__title">Хиты продаж</h2>
+  <div class="slider">
+    <button class="slider__arrow slider__arrow--prev" id="slider-prev" type="button" aria-label="Предыдущий слайд">‹</button>
+    <div class="slider__viewport">
+      <div class="slider__track" id="slider-track">
 
-              <article class="product-card slider__slide">
-                <img src="images/monstera-1.webp"
-                     alt="Монстера деликатесная с крупными резными листьями в белом керамическом горшке"
-                     class="product-card__img" loading="lazy">
-                <div class="product-card__body">
-                  <h3 class="product-card__title">Монстера</h3>
-                  <p class="product-card__desc">Крупное тропическое растение.</p>
-                  <p class="product-card__price">1 500 руб.</p>
-                  <button type="button" class="btn btn--outline product-card__button" data-product="Монстера">Заказать</button>
-                </div>
-              </article>
-
-              <article class="product-card slider__slide">
-                <img src="images/plant-2.webp"
-                     alt="Фикус Бенджамина с пышной зелёной кроной "
-                     class="product-card__img" loading="lazy">
-                <div class="product-card__body">
-                  <h3 class="product-card__title">Фикус</h3>
-                  <p class="product-card__desc">Неприхотливое дерево для дома.</p>
-                  <p class="product-card__price">1 200 руб.</p>
-                  <button type="button" class="btn btn--outline product-card__button" data-product="Фикус">Заказать</button>
-                </div>
-              </article>
-
-              <article class="product-card slider__slide">
-                <img src="images/plant-3.webp"
-                     alt="Суккулент эхеверия с мясистыми серо-зелёными листьями в миниатюрном горшке"
-                     class="product-card__img" loading="lazy">
-                <div class="product-card__body">
-                  <h3 class="product-card__title">Суккулент</h3>
-                  <p class="product-card__desc">Не требует частого полива.</p>
-                  <p class="product-card__price">400 руб.</p>
-                  <button type="button" class="btn btn--outline product-card__button" data-product="Суккулент">Заказать</button>
-                </div>
-              </article>
-
-              <article class="product-card slider__slide">
-                <img src="images/sansevieria.jpg"
-                     alt="Сансевиерия, или щучий хвост, с высокими прямостоячими пёстрыми листьями — очищает воздух в комнате"
-                     class="product-card__img" loading="lazy">
-                <div class="product-card__body">
-                  <h3 class="product-card__title">Сансевиерия</h3>
-                  <p class="product-card__desc">Щучий хвост. Очищает воздух.</p>
-                  <p class="product-card__price">900 руб.</p>
-                  <button type="button" class="btn btn--outline product-card__button" data-product="Сансевиерия">Заказать</button>
-                </div>
-              </article>
-
+        <div class="slider__slide">
+          <article class="product-card">
+            <img src="images/monstera.webp" alt="Монстера в горшке" class="product-card__img">
+            <div class="product-card__body">
+              <h3 class="product-card__title">Монстера</h3>
+              <p class="product-card__desc">Эффектная лиана с резными листьями.</p>
+              <p class="product-card__price">2 490 ₽</p>
+              <button type="button" class="btn">В корзину</button>
             </div>
-          </div>
-          <button class="slider__arrow slider__arrow--next" type="button" aria-label="Следующий слайд">&#10095;</button>
-          <div class="slider__dots" id="slider-dots" role="tablist" aria-label="Навигация по слайдам"></div>
+          </article>
+        </div>
+
+        <div class="slider__slide">
+          <article class="product-card">
+            <img src="images/ficus-benjamina.webp" alt="Фикус Бенджамина" class="product-card__img">
+            <div class="product-card__body">
+              <h3 class="product-card__title">Фикус Бенджамина</h3>
+              <p class="product-card__desc">Пышный куст с мелкой глянцевой листвой.</p>
+              <p class="product-card__price">1 890 ₽</p>
+              <button type="button" class="btn">В корзину</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="slider__slide">
+          <article class="product-card">
+            <img src="images/areca.webp" alt="Пальма Арека" class="product-card__img">
+            <div class="product-card__body">
+              <h3 class="product-card__title">Пальма Арека</h3>
+              <p class="product-card__desc">Воздушная пальма для светлых комнат.</p>
+              <p class="product-card__price">3 290 ₽</p>
+              <button type="button" class="btn">В корзину</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="slider__slide">
+          <article class="product-card">
+            <img src="images/succulent.jpg" alt="Суккулент в керамическом горшке" class="product-card__img">
+            <div class="product-card__body">
+              <h3 class="product-card__title">Суккулент</h3>
+              <p class="product-card__desc">Минимум ухода, максимум уюта.</p>
+              <p class="product-card__price">690 ₽</p>
+              <button type="button" class="btn">В корзину</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="slider__slide">
+          <article class="product-card">
+            <img src="images/cactus.jpg" alt="Кактус в горшке" class="product-card__img">
+            <div class="product-card__body">
+              <h3 class="product-card__title">Кактус</h3>
+              <p class="product-card__desc">Колючий друг для занятых.</p>
+              <p class="product-card__price">540 ₽</p>
+              <button type="button" class="btn">В корзину</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="slider__slide">
+          <article class="product-card">
+            <img src="images/sansevieria.jpg" alt="Сансевиерия" class="product-card__img">
+            <div class="product-card__body">
+              <h3 class="product-card__title">Сансевиерия</h3>
+              <p class="product-card__desc">Тень, засуха и забывчивость — не помеха.</p>
+              <p class="product-card__price">1 190 ₽</p>
+              <button type="button" class="btn">В корзину</button>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </div>
+    <button class="slider__arrow slider__arrow--next" id="slider-next" type="button" aria-label="Следующий слайд">›</button>
+    <div class="slider__dots" id="slider-dots"></div>
+  </div>
+</section>
+
+
+    <!-- ПОЧЕМУ ВЫБИРАЮТ НАС -->
+    <section class="section">
+      <h2 class="section__title">Почему выбирают нас</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌿</div>
+          <h3>Только здоровые растения</h3>
+          <p>Каждое растение проходит осмотр флориста перед отправкой. Гарантия качества.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚚</div>
+          <h3>Бережная доставка</h3>
+          <p>Упаковываем так, чтобы ни один листок не пострадал. Доставка в день заказа.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Поддержка флориста</h3>
+          <p>Отвечаем на вопросы по уходу в чате и по телефону — до и после покупки.</p>
         </div>
       </div>
     </section>
 
     <!-- ВИДЕО -->
-    <section class="section container">
-      <div class="video-wrapper">
-        <video class="video-bg" autoplay muted loop playsinline preload="metadata" poster="images/poster.jpg" aria-hidden="true">
-          <source src="images/video.mp4" type="video/mp4">
-          Ваш браузер не поддерживает видео.
-        </video>
-      </div>
-    </section>
-
-    <!-- ПОЧЕМУ ВЫБИРАЮТ НАС -->
     <section class="section">
-      <div class="container">
-        <h2 class="section__title">Почему выбирают нас</h2>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
-            </div>
-            <h3>Бережная доставка</h3>
-            <p>Упакуем так, чтобы ни один листочек не пострадал в пути.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/><path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/></svg>
-            </div>
-            <h3>Гарантия 14 дней</h3>
-            <p>Если растение не приживется, мы бесплатно заменим его.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/></svg>
-            </div>
-            <h3>Советы по уходу</h3>
-            <p>Наши флористы всегда подскажут, как ухаживать за растением.</p>
-          </div>
-        </div>
+      <h2 class="section__title">Наш оранжерейный сад</h2>
+      <div class="video-wrapper">
+        <video class="video-bg" src="images/video.mp4" autoplay muted loop playsinline></video>
       </div>
     </section>
 
     <!-- ПОЛЕЗНЫЕ СОВЕТЫ -->
-    <section class="section container">
-      <h2 class="section__title">Полезные советы по уходу</h2>
+    <section class="section">
+      <h2 class="section__title">Полезные советы</h2>
       <div class="tips-grid">
-        <article class="tip-card">
-          <div class="tip-card__icon" aria-hidden="true">💧</div>
-          <h3 class="tip-card__title">Как поливать?</h3>
-          <p class="tip-card__text">Проверьте верхний слой почвы пальцем: если сухой на 2–3 см — пора поливать. Лучше недолить, чем перелить.</p>
-          <a href="catalog.html" class="tip-card__link">Перейти в каталог растений →</a>
-        </article>
-        <article class="tip-card">
-          <div class="tip-card__icon" aria-hidden="true">🌞</div>
-          <h3 class="tip-card__title">Куда поставить?</h3>
-          <p class="tip-card__text">Большинству растений нужен яркий рассеянный свет. Прямое солнце в полдень может обжечь листья.</p>
-          <a href="catalog.html" class="tip-card__link">Подобрать по освещению →</a>
-        </article>
-        <article class="tip-card">
-          <div class="tip-card__icon" aria-hidden="true">🐾</div>
-          <h3 class="tip-card__title">Безопасно для питомцев?</h3>
-          <p class="tip-card__text">Не все растения безопасны для кошек и собак. Ищите значок 🐾 Pet-Friendly в каталоге.</p>
-          <a href="catalog.html" class="tip-card__link">Безопасные растения →</a>
-        </article>
+        <div class="tip-card">
+          <div class="tip-card__icon">💧</div>
+          <h3 class="tip-card__title">Полив</h3>
+          <p class="tip-card__text">Проверяйте верхний слой почвы: сухой на 2 см — пора поливать. Лучше недолить, чем перелить.</p>
+          <a href="catalog.html#succulents" class="tip-card__link">Суккуленты →</a>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card__icon">☀️</div>
+          <h3 class="tip-card__title">Свет</h3>
+          <p class="tip-card__text">Большинству растений нужен яркий рассеянный свет. Прямое солнце обжигает листья.</p>
+          <a href="catalog.html#flowers" class="tip-card__link">Цветы →</a>
+        </div>
+        <div class="tip-card">
+          <div class="tip-card__icon">🌱</div>
+          <h3 class="tip-card__title">Пересадка</h3>
+          <p class="tip-card__text">Молодые растения пересаживают раз в год весной, взрослые — раз в 2–3 года.</p>
+          <a href="catalog.html#palms" class="tip-card__link">Пальмы →</a>
+        </div>
       </div>
     </section>
+
+    <!-- УЧЕБНОЕ СООБЩЕНИЕ (практика 15) -->
+    <div id="js-message-placeholder"></div>
+
   </main>
 
   <footer class="site-footer">
@@ -238,12 +260,11 @@
               <span><a href="mailto:hello@zelenydom.ru">hello@zelenydom.ru</a></span>
             </li>
           </ul>
-
           <div class="footer-socials">
-            <a href="https://t.me/zelenydom" target="_blank" aria-label="Telegram">
+            <a href="https://t.me/zelenydom" target="_blank" rel="noopener" aria-label="Telegram">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
             </a>
-            <a href="https://vk.com/zelenydom" target="_blank" aria-label="ВКонтакте">
+            <a href="https://vk.com/zelenydom" target="_blank" rel="noopener" aria-label="ВКонтакте">
               <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.814-.18-2.054-.302-2.748.007-1.051.469-.395 1.134.134 1.432.579.325.665.799.713 1.533.083 1.286-.093 2.417-1.256 2.417-1.32 0-2.226-1.578-3.23-4.287-.411-1.102-.734-2.063-1.94-2.063H1.155c-.855 0-1.154.471-1.154 1.031 0 .872 1.541 4.332 3.864 8.381 2.302 4.015 5.54 6.242 8.43 6.242h.867z"/></svg>
             </a>
           </div>
@@ -258,6 +279,31 @@
       </div>
     </div>
   </footer>
+
+  <!-- КНОПКА НАВЕРХ -->
+  <a href="#" class="scroll-top" id="scrollTop" aria-label="Наверх">
+    <img src="images/leaf.png" alt="" class="scroll-top__img" aria-hidden="true">
+  </a>
+
+  <!-- МОДАЛЬНОЕ ОКНО ТОВАРА -->
+  <dialog class="product-dialog" id="product-dialog" aria-labelledby="pd-title">
+    <button class="modal-close" id="close-product-dialog" type="button" aria-label="Закрыть">&times;</button>
+    <div class="product-dialog__inner">
+      <img alt="" class="product-dialog__img" id="pd-img">
+      <div class="product-dialog__content">
+        <h2 class="product-dialog__title" id="pd-title">Название</h2>
+        <p class="product-dialog__sku" id="pd-sku">Артикул: PL-000</p>
+        <p class="product-dialog__price" id="pd-price">0 руб.</p>
+        <p class="product-dialog__desc" id="pd-desc">Описание...</p>
+        <ul class="product-dialog__specs">
+          <li><strong>Освещение:</strong> Яркий рассеянный свет</li>
+          <li><strong>Полив:</strong> Умеренный</li>
+          <li><strong>Высота:</strong> Зависит от возраста</li>
+        </ul>
+        <button type="button" class="btn product-dialog__btn" id="pd-order-btn">Оформить заявку</button>
+      </div>
+    </div>
+  </dialog>
 
   <!-- МОДАЛЬНОЕ ОКНО ЗАЯВКИ -->
   <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-dialog-title">
@@ -280,9 +326,14 @@
         <label class="order-form__label" for="order-interest">Что вас интересует?</label>
         <select class="order-form__select" id="order-interest">
           <option>Монстера</option>
-          <option>Фикус</option>
+          <option>Фикус Бенджамина</option>
+          <option>Пальма Арека</option>
           <option>Суккулент</option>
+          <option>Кактус</option>
           <option>Сансевиерия</option>
+          <option>Фикус Лирата</option>
+          <option>Юкка слоновая</option>
+          <option>Драцена</option>
           <option>Другое растение</option>
           <option>Доставка / Оплата</option>
         </select>
@@ -311,7 +362,7 @@
     </form>
   </dialog>
 
-  <!-- ОКНО УСПЕХА (единственное на странице) -->
+  <!-- ОКНО УСПЕХА -->
   <dialog class="success-dialog" id="success-dialog" aria-labelledby="success-dialog-title">
     <button class="modal-close" id="close-success-dialog" type="button" aria-label="Закрыть">&times;</button>
     <div class="success-dialog__icon" aria-hidden="true">🌿</div>
@@ -320,20 +371,66 @@
     <button type="button" class="btn success-dialog__btn" id="close-success-btn">Отлично!</button>
   </dialog>
 
-  <!-- КНОПКА НАВЕРХ -->
-  <a href="#" class="scroll-top" id="scrollTop" aria-label="Наверх">
-    <img src="images/leaf.png" alt="" class="scroll-top__img" aria-hidden="true">
-  </a>
+  <!-- МОДАЛЬНОЕ ОКНО АККАУНТА -->
+  <dialog class="account-dialog" id="account-dialog" aria-labelledby="account-dialog-title">
+    <button class="modal-close" id="close-account-dialog" type="button" aria-label="Закрыть">&times;</button>
+
+    <div class="account-tabs" role="tablist">
+      <button type="button" class="account-tab is-active" id="tab-login" role="tab" aria-selected="true">Вход</button>
+      <button type="button" class="account-tab" id="tab-register" role="tab" aria-selected="false">Регистрация</button>
+    </div>
+
+    <form class="account-form" id="login-form" novalidate>
+      <h2 class="account-dialog__title" id="account-dialog-title">С возвращением!</h2>
+      <div class="account-form__group">
+        <label class="order-form__label" for="login-email">Email</label>
+        <input class="order-form__input" id="login-email" type="email" required autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="account-form__group">
+        <label class="order-form__label" for="login-password">Пароль</label>
+        <input class="order-form__input" id="login-password" type="password" required autocomplete="current-password" placeholder="Ваш пароль">
+      </div>
+      <p class="form-errors" id="login-error" hidden></p>
+      <button type="submit" class="btn" style="width: 100%;">Войти</button>
+    </form>
+
+    <form class="account-form" id="register-form" novalidate hidden>
+      <h2 class="account-dialog__title">Создать аккаунт</h2>
+      <div class="account-form__group">
+        <label class="order-form__label" for="reg-name">Имя</label>
+        <input class="order-form__input" id="reg-name" type="text" required autocomplete="name" placeholder="Анна">
+      </div>
+      <div class="account-form__group">
+        <label class="order-form__label" for="reg-email">Email</label>
+        <input class="order-form__input" id="reg-email" type="email" required autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="account-form__group">
+        <label class="order-form__label" for="reg-password">Пароль (минимум 6 символов)</label>
+        <input class="order-form__input" id="reg-password" type="password" required minlength="6" autocomplete="new-password" placeholder="••••••">
+      </div>
+      <label class="order-form__checkbox">
+        <input type="checkbox" id="reg-consent" required>
+        <span>Согласен на обработку персональных данных <span class="req">*</span></span>
+      </label>
+      <p class="form-errors" id="register-error" hidden></p>
+      <button type="submit" class="btn" style="width: 100%;">Зарегистрироваться</button>
+    </form>
+
+    <div class="account-panel" id="account-panel" hidden>
+      <div class="success-dialog__icon" aria-hidden="true">🌿</div>
+      <h2 class="account-dialog__title">Привет, <span id="account-name">друг</span>!</h2>
+      <p class="account-panel__email" id="account-email">you@example.com</p>
+      <p class="account-panel__text">Ваши заявки и корзина сохраняются на этом устройстве.</p>
+      <button type="button" class="btn btn--outline" id="logout-btn" style="width: 100%;">Выйти</button>
+    </div>
+  </dialog>
 
   <!-- ВИДЖЕТ ЧАТА -->
   <div class="chat-widget" id="chat-widget">
     <div class="chat-widget__window" id="chat-window">
-
       <div class="chat-widget__header">
         <div class="chat-widget__header-top">
-          <img src="images/florist.jpg"
-               alt="Анна — флорист магазина Зеленый дом, консультант чата поддержки"
-               class="chat-widget__avatar">
+          <img src="images/florist.jpg" alt="Анна — флорист магазина Зеленый дом, консультант чата поддержки" class="chat-widget__avatar">
           <div>
             <h4>Анна, флорист</h4>
             <p><span class="chat-widget__online"></span> Онлайн</p>
@@ -341,54 +438,49 @@
         </div>
         <button class="chat-widget__close" id="close-chat" aria-label="Закрыть">&times;</button>
       </div>
-
       <div class="chat-widget__body">
         <div class="chat-widget__messages" id="chat-messages">
           <div class="chat-widget__message">
             Привет! Добро пожаловать в «Зеленый дом». Я помогу разобраться с заказами, доставкой и нашими растениями. Что вас интересует?
           </div>
         </div>
-
         <div class="chat-widget__chips" id="chat-chips">
           <button type="button" class="chat-chip">Доставка</button>
           <button type="button" class="chat-chip">Оплата</button>
           <button type="button" class="chat-chip">Уход за растениями</button>
           <button type="button" class="chat-chip">Корзина</button>
         </div>
-
         <form class="chat-widget__input-area" id="chat-form">
-          <input type="text" placeholder="Напишите сообщение..." class="chat-widget__input" required>
+          <input type="text" placeholder="Напишите сообщение..." class="chat-widget__input" aria-label="Сообщение чата" required>
           <button type="submit" class="chat-widget__send" aria-label="Отправить">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
           </button>
         </form>
       </div>
     </div>
-
     <button class="chat-widget__toggle" id="toggle-chat" aria-label="Открыть чат">
       <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
     </button>
   </div>
 
   <!-- ВЫЕЗЖАЮЩАЯ КОРЗИНА -->
-  <div class="cart-overlay" id="cart-overlay"></div>
-  <aside class="cart-sidebar" id="cart-sidebar" aria-label="Корзина">
+  <div id="cart-overlay" class="cart-overlay"></div>
+  <aside id="cart-sidebar" class="cart-sidebar" aria-label="Корзина">
     <div class="cart-sidebar__header">
       <h2>Ваша корзина</h2>
       <button id="close-cart" class="cart-sidebar__close" type="button" aria-label="Закрыть корзину">×</button>
     </div>
-    <div class="cart-sidebar__body" id="cart-items-container"></div>
+    <div id="cart-items-container" class="cart-sidebar__body"></div>
     <div class="cart-sidebar__footer">
-      <div class="cart-total">
-        <span>Итого:</span>
-        <span id="cart-total-price">0 ₽</span>
-      </div>
-      <button class="btn" style="width: 100%;" id="checkout-btn">Оформить заказ</button>
+      <p class="cart-total">Итого: <span id="cart-total-price">0 ₽</span></p>
+      <button id="checkout-btn" class="btn" style="width: 100%;">Оформить заказ</button>
     </div>
   </aside>
 
   <script src="js/data.js" defer></script>
   <script src="js/cart.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script src="js/validation.js" defer></script>
+  <script src="js/auth.js" defer></script>
 </body>
 </html>
