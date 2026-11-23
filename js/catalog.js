@@ -1,6 +1,6 @@
 // ============================================================
-// catalog.js — логика каталога: рендер, поиск, фильтр, сортировка,
-// пустое состояние, модальное окно товара, переход к заявке
+// catalog.js — рендер каталога, поиск, фильтр, сортировка,
+// добавление в корзину, модалка товара, переход к заявке
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const emptyState = document.getElementById('empty-state');
   const resetBtn = document.getElementById('reset-filters');
 
-  // --- Элементы модального окна товара ---
+  // --- Модальное окно товара ---
   const productDialog = document.getElementById('product-dialog');
   const closeProductDialog = document.getElementById('close-product-dialog');
   const pdImg = document.getElementById('pd-img');
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const pdDesc = document.getElementById('pd-desc');
   const pdOrderBtn = document.getElementById('pd-order-btn');
 
-  // --- Элементы модального окна заявки ---
+  // --- Модальное окно заявки ---
   const orderDialog = document.getElementById('order-dialog');
   const closeOrderDialog = document.getElementById('close-order-dialog');
   const orderProductInput = document.getElementById('order-product');
@@ -68,12 +68,20 @@ document.addEventListener('DOMContentLoaded', () => {
     price.className = 'product-card__price';
     price.textContent = formatPrice(product.price);
 
+    // Кнопка добавления в корзину (как на главной)
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'btn btn--outline product-card__button';
-    btn.textContent = 'Заказать';
-    btn.setAttribute('aria-label', 'Заказать ' + product.title);
-    btn.addEventListener('click', () => openProductDialog(product));
+    btn.textContent = 'В корзину';
+    btn.setAttribute('aria-label', 'Добавить ' + product.title + ' в корзину');
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation(); // чтобы клик не открыл модалку товара
+      if (typeof window.addToCart === 'function') {
+        window.addToCart(product);
+      } else {
+        console.error('cart.js не подключён — addToCart недоступна');
+      }
+    });
 
     body.appendChild(title);
     body.appendChild(desc);
@@ -83,11 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
     card.appendChild(img);
     card.appendChild(body);
 
-    // Клик по всей карточке тоже открывает модалку товара
-    card.addEventListener('click', (e) => {
-      if (e.target === btn) return;
-      openProductDialog(product);
-    });
+    // Клик по карточке (не по кнопке) открывает модалку товара
+    card.addEventListener('click', () => openProductDialog(product));
 
     return card;
   }
@@ -99,13 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function getFilteredProducts() {
     let list = products.slice();
 
-    // Фильтр по категории (select)
     const category = filterSelect ? filterSelect.value : 'all';
     if (category && category !== 'all') {
       list = list.filter(p => p.category === category);
     }
 
-    // Поиск по названию и описанию
     const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
     if (query) {
       list = list.filter(p =>
@@ -114,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     }
 
-    // Сортировка
     const sort = sortSelect ? sortSelect.value : 'default';
     if (sort === 'price-asc') list.sort((a, b) => a.price - b.price);
     else if (sort === 'price-desc') list.sort((a, b) => b.price - a.price);
@@ -165,8 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Кнопка «Оформить заявку» в модалке товара:
-  // подставляем название товара в заявку и открываем форму
+  // «Оформить заявку» в модалке товара: подставляем товар и открываем форму
   if (pdOrderBtn) {
     pdOrderBtn.addEventListener('click', () => {
       if (orderProductInput && currentProduct) {
@@ -205,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Фильтрация по ссылке из боковой панели (#flowers, #succulents, #palms)
+  // Фильтр по хэшу из меню (#flowers, #succulents, #palms)
   function applyHashFilter() {
     if (!filterSelect) return;
     const hash = window.location.hash.replace('#', '');

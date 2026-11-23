@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://arina1306435.github.io/kr1-html-css-shop/</loc>
-  </url>
-  <url>
-    <loc>https://arina1306435.github.io/kr1-html-css-shop/catalog.html</loc>
-  </url>
-  <url>
-    <loc>https://arina1306435.github.io/kr1-html-css-shop/about.html</loc>
-  </url>
-  <url>
-    <loc>https://arina1306435.github.io/kr1-html-css-shop/contacts.html</loc>
-  </url>
-</urlset>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Контакты оранжереи Зеленый дом: Москва, ул. Ботаническая, 10. Телефон +7 (495) 123-45-67, доставка и оплата.">
+  <meta property="og:title" content="Контакты — Зеленый дом">
+  <meta property="og:description" content="Адрес, телефон, режим работы и способы доставки оранжереи Зеленый дом.">
+  <meta property="og:image" content="https://arina1306435.github.io/kr1-html-css-shop/images/logo.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <title>Контакты — Зеленый дом</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
